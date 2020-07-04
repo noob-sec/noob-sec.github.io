@@ -461,6 +461,66 @@
       </categories>
   </entry>
   <entry>
+    <title>每日漏洞 | HTTP.sys远程代码执行</title>
+    <url>/2019/01/12/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-HTTP-sys%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/</url>
+    <content><![CDATA[<h1 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h1><p>&#160; &#160; &#160; &#160;上篇文章介绍了Host头攻击，今天我们讲一讲HTTP.sys远程代码执行漏洞。</p>
+<p>&#160; &#160; &#160; &#160;HTTP.sys是Microsoft Windows处理HTTP请求的内核驱动程序，为了优化IIS服务器性能，从IIS6.0引入，IIS服务进程依赖HTTP.sys。HTTP.sys远程代码执行漏洞实质是HTTP.sys的整数溢出漏洞，当攻击者向受影响的Windows系统发送特殊设计的HTTP 请求，HTTP.sys 未正确分析时就会导致此漏洞，成功利用此漏洞的攻击者可以在系统帐户的上下文中执行任意代码。</p>
+<p>&#160; &#160; &#160; &#160;主要存在Windows+IIS的环境下，任何安装了微软IIS 6.0以上的Windows Server 2008 R2/Server 2012/Server 2012 R2以及Windows 7/8/8.1操作系统都受到这个漏洞的影响。</p>
+<h1 id="漏洞知识拓展"><a href="#漏洞知识拓展" class="headerlink" title="漏洞知识拓展"></a>漏洞知识拓展</h1><p>&#160; &#160; &#160; &#160;说到HTTP.sys远程代码执行漏洞，不得不先介绍一下Range首部字段。</p>
+<p>&#160; &#160; &#160; &#160;在“上古时代”，网络并不是很好，下载大型文件很不容易。下载途中如果网络中断，就得重头开始下。为了解决这个问题，HTTP/1.1引入了范围请求。</p>
+<div align="center">
+    ![avatar][1-http.sys]
+</div>
+
+
+<p>&#160; &#160; &#160; &#160;在请求报文的Range首部字段中指定资源的byte范围，告诉服务器，请求的是资源哪个范围的内容，让断点续传和并行下载得以实现。</p>
+<p>&#160; &#160; &#160; &#160;如果服务器支持范围请求，响应包中就会存在Accept-Ranges字段(且值不为“none”，bytes为资源范围的单位)，并在Content-Length字段中告诉客户端资源的大小范围。</p>
+<div align="center">
+    ![avatar][2-http.sys]
+</div>
+
+
+<p>&#160; &#160; &#160; &#160;如果没有Accept-Ranges字段，则服务器可能不支持范围请求，有的服务器会明确将值设为“none”。</p>
+<p>&#160; &#160; &#160; &#160;服务器面对范围请求，有三种响应：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">请求成功：</span><br><span class="line">    响应206 Partial Content</span><br><span class="line">请求范围越界：（范围超过资源的大小）</span><br><span class="line">    响应416 Requested Range Not Satisfiable</span><br><span class="line">不支持范围请求：</span><br><span class="line">    响应200 OK</span><br></pre></td></tr></table></figure>
+
+<p>&#160; &#160; &#160; &#160;而HTTP.sys远程代码执行漏洞正是利用Range字段注入恶意数据。该漏洞的检测，也是利用服务器面对范围请求时的响应特征来判断。</p>
+<p>&#160; &#160; &#160; &#160;当然，范围请求不止这些知识点，详情可查看RFC：</p>
+<p><a href="https://tools.ietf.org/html/rfc7233" target="_blank" rel="noopener">https://tools.ietf.org/html/rfc7233</a></p>
+<h1 id="漏洞检测"><a href="#漏洞检测" class="headerlink" title="漏洞检测"></a>漏洞检测</h1><p>&#160; &#160; &#160; &#160;HTTP.sys漏洞的检测比较简单，先判断目标环境是不是Windows+IIS，然后构造Range字段进行检测即可。</p>
+<p>&#160; &#160; &#160; &#160;检测时，在请求包中添加Range字段，如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Range: bytes=0-18446744073709551615</span><br></pre></td></tr></table></figure>
+
+<p>&#160; &#160; &#160; &#160;提交给服务器，查看服务器响应。</p>
+<div align="center">
+    ![avatar][3-http.sys]
+</div>
+
+<p>&#160; &#160; &#160; &#160;服务器响应400，证明不存在HTTP.sys远程代码执行漏洞。如果响应416，则证明系统存在漏洞。</p>
+<div align="center">
+    ![avatar][4-http.sys]
+</div>
+
+<p>&#160; &#160; &#160; &#160;这里简单说一下Range字段值的含义。18446744073709551615转为十六进制是 0xFFFFFFFFFFFFFFFF(16个F），是64位无符号整型所能表达的最大整数，整数溢出和这个超大整数有关。</p>
+<p>&#160; &#160; &#160; &#160;另外，Apache几个老版本存在的Apache HTTP Server畸形Range选项处理远程拒绝服务漏洞，也是通过Range字段触发的，有兴趣的校友可以去了解了解。</p>
+<h1 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h1><p>&#160; &#160; &#160; &#160;升级补丁：</p>
+<p><a href="http://technet.microsoft.com/security/bulletin/MS15-034" target="_blank" rel="noopener">http://technet.microsoft.com/security/bulletin/MS15-034</a></p>
+<p>&#160; &#160; &#160; &#160;禁用IIS内核缓存（缓解方案）：</p>
+<p><a href="https://technet.microsoft.com/en-us/library/cc731903(v=ws.10).aspx" target="_blank" rel="noopener">https://technet.microsoft.com/en-us/library/cc731903(v=ws.10).aspx</a></p>
+<h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的博客。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
+<div align="center">
+    ![avatar][5-关注公众号]
+</div>
+
+
+
+
+]]></content>
+      <categories>
+        <category>每日漏洞</category>
+      </categories>
+  </entry>
+  <entry>
     <title>网络层 | 网际协议IP(1)</title>
     <url>/2019/04/19/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-1/</url>
     <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>&#160; &#160; &#160; &#160;Internet Protocol，网际协议，是TCP/IP体系中网络层的主要协议。</p>
@@ -547,66 +607,6 @@
 ]]></content>
       <categories>
         <category>计算机网络</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>每日漏洞 | HTTP.sys远程代码执行</title>
-    <url>/2019/01/12/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-HTTP-sys%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/</url>
-    <content><![CDATA[<h1 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h1><p>&#160; &#160; &#160; &#160;上篇文章介绍了Host头攻击，今天我们讲一讲HTTP.sys远程代码执行漏洞。</p>
-<p>&#160; &#160; &#160; &#160;HTTP.sys是Microsoft Windows处理HTTP请求的内核驱动程序，为了优化IIS服务器性能，从IIS6.0引入，IIS服务进程依赖HTTP.sys。HTTP.sys远程代码执行漏洞实质是HTTP.sys的整数溢出漏洞，当攻击者向受影响的Windows系统发送特殊设计的HTTP 请求，HTTP.sys 未正确分析时就会导致此漏洞，成功利用此漏洞的攻击者可以在系统帐户的上下文中执行任意代码。</p>
-<p>&#160; &#160; &#160; &#160;主要存在Windows+IIS的环境下，任何安装了微软IIS 6.0以上的Windows Server 2008 R2/Server 2012/Server 2012 R2以及Windows 7/8/8.1操作系统都受到这个漏洞的影响。</p>
-<h1 id="漏洞知识拓展"><a href="#漏洞知识拓展" class="headerlink" title="漏洞知识拓展"></a>漏洞知识拓展</h1><p>&#160; &#160; &#160; &#160;说到HTTP.sys远程代码执行漏洞，不得不先介绍一下Range首部字段。</p>
-<p>&#160; &#160; &#160; &#160;在“上古时代”，网络并不是很好，下载大型文件很不容易。下载途中如果网络中断，就得重头开始下。为了解决这个问题，HTTP/1.1引入了范围请求。</p>
-<div align="center">
-    ![avatar][1-http.sys]
-</div>
-
-
-<p>&#160; &#160; &#160; &#160;在请求报文的Range首部字段中指定资源的byte范围，告诉服务器，请求的是资源哪个范围的内容，让断点续传和并行下载得以实现。</p>
-<p>&#160; &#160; &#160; &#160;如果服务器支持范围请求，响应包中就会存在Accept-Ranges字段(且值不为“none”，bytes为资源范围的单位)，并在Content-Length字段中告诉客户端资源的大小范围。</p>
-<div align="center">
-    ![avatar][2-http.sys]
-</div>
-
-
-<p>&#160; &#160; &#160; &#160;如果没有Accept-Ranges字段，则服务器可能不支持范围请求，有的服务器会明确将值设为“none”。</p>
-<p>&#160; &#160; &#160; &#160;服务器面对范围请求，有三种响应：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">请求成功：</span><br><span class="line">    响应206 Partial Content</span><br><span class="line">请求范围越界：（范围超过资源的大小）</span><br><span class="line">    响应416 Requested Range Not Satisfiable</span><br><span class="line">不支持范围请求：</span><br><span class="line">    响应200 OK</span><br></pre></td></tr></table></figure>
-
-<p>&#160; &#160; &#160; &#160;而HTTP.sys远程代码执行漏洞正是利用Range字段注入恶意数据。该漏洞的检测，也是利用服务器面对范围请求时的响应特征来判断。</p>
-<p>&#160; &#160; &#160; &#160;当然，范围请求不止这些知识点，详情可查看RFC：</p>
-<p><a href="https://tools.ietf.org/html/rfc7233" target="_blank" rel="noopener">https://tools.ietf.org/html/rfc7233</a></p>
-<h1 id="漏洞检测"><a href="#漏洞检测" class="headerlink" title="漏洞检测"></a>漏洞检测</h1><p>&#160; &#160; &#160; &#160;HTTP.sys漏洞的检测比较简单，先判断目标环境是不是Windows+IIS，然后构造Range字段进行检测即可。</p>
-<p>&#160; &#160; &#160; &#160;检测时，在请求包中添加Range字段，如下：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Range: bytes=0-18446744073709551615</span><br></pre></td></tr></table></figure>
-
-<p>&#160; &#160; &#160; &#160;提交给服务器，查看服务器响应。</p>
-<div align="center">
-    ![avatar][3-http.sys]
-</div>
-
-<p>&#160; &#160; &#160; &#160;服务器响应400，证明不存在HTTP.sys远程代码执行漏洞。如果响应416，则证明系统存在漏洞。</p>
-<div align="center">
-    ![avatar][4-http.sys]
-</div>
-
-<p>&#160; &#160; &#160; &#160;这里简单说一下Range字段值的含义。18446744073709551615转为十六进制是 0xFFFFFFFFFFFFFFFF(16个F），是64位无符号整型所能表达的最大整数，整数溢出和这个超大整数有关。</p>
-<p>&#160; &#160; &#160; &#160;另外，Apache几个老版本存在的Apache HTTP Server畸形Range选项处理远程拒绝服务漏洞，也是通过Range字段触发的，有兴趣的校友可以去了解了解。</p>
-<h1 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h1><p>&#160; &#160; &#160; &#160;升级补丁：</p>
-<p><a href="http://technet.microsoft.com/security/bulletin/MS15-034" target="_blank" rel="noopener">http://technet.microsoft.com/security/bulletin/MS15-034</a></p>
-<p>&#160; &#160; &#160; &#160;禁用IIS内核缓存（缓解方案）：</p>
-<p><a href="https://technet.microsoft.com/en-us/library/cc731903(v=ws.10).aspx" target="_blank" rel="noopener">https://technet.microsoft.com/en-us/library/cc731903(v=ws.10).aspx</a></p>
-<h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的博客。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
-<div align="center">
-    ![avatar][5-关注公众号]
-</div>
-
-
-
-
-]]></content>
-      <categories>
-        <category>每日漏洞</category>
       </categories>
   </entry>
   <entry>
