@@ -207,6 +207,34 @@
       </categories>
   </entry>
   <entry>
+    <title>每日漏洞 | 会话固定</title>
+    <url>/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E4%BC%9A%E8%AF%9D%E5%9B%BA%E5%AE%9A/</url>
+    <content><![CDATA[<h1 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h1><p>&#160; &#160; &#160; &#160;当用户成功验证而应用程序不更新cookie时，这个时候就存在会话固定漏洞，攻击者可利用此漏洞发起会话劫持。</p>
+<p>&#160; &#160; &#160; &#160;HTTP的无状态性，导致Web应用程序必须使用会话机制来识别用户。如果用户未登录时的会话ID和登录后的会话ID保持一致，那么攻击者可以迫使受害者使用一个已知(有效)的会话ID，当受害者通过身份验证，攻击者就可以利用这个会话ID进入验证后的会话（登录状态）。</p>
+<h1 id="漏洞检测"><a href="#漏洞检测" class="headerlink" title="漏洞检测"></a>漏洞检测</h1><p>&#160; &#160; &#160; &#160;在理解漏洞原理后，怎么检测会话固定漏洞就很明显了，只需查看登录前和登录后的会话ID是否一致即可。查看的方式有多种，如浏览器F12，抓包工具等。</p>
+<h2 id="登录前查看客户端的会话ID"><a href="#登录前查看客户端的会话ID" class="headerlink" title="登录前查看客户端的会话ID"></a>登录前查看客户端的会话ID</h2><div align="center">
+    ![avatar][1-会话固定]
+</div>
+
+<h2 id="输入账号密码通过验证后查看客户端的会话ID"><a href="#输入账号密码通过验证后查看客户端的会话ID" class="headerlink" title="输入账号密码通过验证后查看客户端的会话ID"></a>输入账号密码通过验证后查看客户端的会话ID</h2><div align="center">
+    ![avatar][2-会话固定]
+</div>
+
+<p>&#160; &#160; &#160; &#160;发现登录前后的会话ID是一样的，这样说明系统存在会话固定漏洞，利用漏洞就是水到渠成的事了。先在Web应用程序上创建一个会话并记录对应的有效会话ID，然后通过各种手段促使受害者使用这个会话ID通过服务器验证，这样攻击者就可以通过这个会话ID进入受害者的账户。</p>
+<h1 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h1><p>&#160; &#160; &#160; &#160;应用在用户验证成功后，先让原来的会话ID失效，然后提供一个新的会话ID给用户。</p>
+<h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的微信公众号。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
+<div align="center">
+    ![avatar][3-关注公众号]
+</div>
+
+
+
+]]></content>
+      <categories>
+        <category>每日漏洞</category>
+      </categories>
+  </entry>
+  <entry>
     <title>PTES | 情报搜集</title>
     <url>/PTES-%E6%83%85%E6%8A%A5%E6%90%9C%E9%9B%86/</url>
     <content><![CDATA[<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>&#160; &#160; &#160; &#160;在《PTES-渗透测试执行标准》中介绍了渗透测试的一般流程，其中简要介绍了情报搜集的目标。</p>
@@ -310,34 +338,6 @@
       </tags>
   </entry>
   <entry>
-    <title>每日漏洞 | 会话固定</title>
-    <url>/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E4%BC%9A%E8%AF%9D%E5%9B%BA%E5%AE%9A/</url>
-    <content><![CDATA[<h1 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h1><p>&#160; &#160; &#160; &#160;当用户成功验证而应用程序不更新cookie时，这个时候就存在会话固定漏洞，攻击者可利用此漏洞发起会话劫持。</p>
-<p>&#160; &#160; &#160; &#160;HTTP的无状态性，导致Web应用程序必须使用会话机制来识别用户。如果用户未登录时的会话ID和登录后的会话ID保持一致，那么攻击者可以迫使受害者使用一个已知(有效)的会话ID，当受害者通过身份验证，攻击者就可以利用这个会话ID进入验证后的会话（登录状态）。</p>
-<h1 id="漏洞检测"><a href="#漏洞检测" class="headerlink" title="漏洞检测"></a>漏洞检测</h1><p>&#160; &#160; &#160; &#160;在理解漏洞原理后，怎么检测会话固定漏洞就很明显了，只需查看登录前和登录后的会话ID是否一致即可。查看的方式有多种，如浏览器F12，抓包工具等。</p>
-<h2 id="登录前查看客户端的会话ID"><a href="#登录前查看客户端的会话ID" class="headerlink" title="登录前查看客户端的会话ID"></a>登录前查看客户端的会话ID</h2><div align="center">
-    ![avatar][1-会话固定]
-</div>
-
-<h2 id="输入账号密码通过验证后查看客户端的会话ID"><a href="#输入账号密码通过验证后查看客户端的会话ID" class="headerlink" title="输入账号密码通过验证后查看客户端的会话ID"></a>输入账号密码通过验证后查看客户端的会话ID</h2><div align="center">
-    ![avatar][2-会话固定]
-</div>
-
-<p>&#160; &#160; &#160; &#160;发现登录前后的会话ID是一样的，这样说明系统存在会话固定漏洞，利用漏洞就是水到渠成的事了。先在Web应用程序上创建一个会话并记录对应的有效会话ID，然后通过各种手段促使受害者使用这个会话ID通过服务器验证，这样攻击者就可以通过这个会话ID进入受害者的账户。</p>
-<h1 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h1><p>&#160; &#160; &#160; &#160;应用在用户验证成功后，先让原来的会话ID失效，然后提供一个新的会话ID给用户。</p>
-<h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的微信公众号。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
-<div align="center">
-    ![avatar][3-关注公众号]
-</div>
-
-
-
-]]></content>
-      <categories>
-        <category>每日漏洞</category>
-      </categories>
-  </entry>
-  <entry>
     <title>每日漏洞 | CRLF注入</title>
     <url>/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-CRLF%E6%B3%A8%E5%85%A5/</url>
     <content><![CDATA[<h1 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h1><p>&#160; &#160; &#160; &#160;在《HTTP | HTTP报文》一文中，我们介绍了HTTP报文的结构：状态行和首部中的每行以CRLF结束，首部与主体之间由一空行分隔。或者理解为首部最后一个字段有两个CRLF，首部和主体由两个CRLF分隔。</p>
@@ -409,158 +409,6 @@
       </categories>
       <tags>
         <tag>HTTP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>每日漏洞 | HTTP.sys远程代码执行</title>
-    <url>/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-HTTP-sys%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/</url>
-    <content><![CDATA[<h1 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h1><p>&#160; &#160; &#160; &#160;上篇文章介绍了Host头攻击，今天我们讲一讲HTTP.sys远程代码执行漏洞。</p>
-<p>&#160; &#160; &#160; &#160;HTTP.sys是Microsoft Windows处理HTTP请求的内核驱动程序，为了优化IIS服务器性能，从IIS6.0引入，IIS服务进程依赖HTTP.sys。HTTP.sys远程代码执行漏洞实质是HTTP.sys的整数溢出漏洞，当攻击者向受影响的Windows系统发送特殊设计的HTTP 请求，HTTP.sys 未正确分析时就会导致此漏洞，成功利用此漏洞的攻击者可以在系统帐户的上下文中执行任意代码。</p>
-<p>&#160; &#160; &#160; &#160;主要存在Windows+IIS的环境下，任何安装了微软IIS 6.0以上的Windows Server 2008 R2/Server 2012/Server 2012 R2以及Windows 7/8/8.1操作系统都受到这个漏洞的影响。</p>
-<h1 id="漏洞知识拓展"><a href="#漏洞知识拓展" class="headerlink" title="漏洞知识拓展"></a>漏洞知识拓展</h1><p>&#160; &#160; &#160; &#160;说到HTTP.sys远程代码执行漏洞，不得不先介绍一下Range首部字段。</p>
-<p>&#160; &#160; &#160; &#160;在“上古时代”，网络并不是很好，下载大型文件很不容易。下载途中如果网络中断，就得重头开始下。为了解决这个问题，HTTP/1.1引入了范围请求。</p>
-<div align="center">
-    ![avatar][1-http.sys]
-</div>
-
-
-<p>&#160; &#160; &#160; &#160;在请求报文的Range首部字段中指定资源的byte范围，告诉服务器，请求的是资源哪个范围的内容，让断点续传和并行下载得以实现。</p>
-<p>&#160; &#160; &#160; &#160;如果服务器支持范围请求，响应包中就会存在Accept-Ranges字段(且值不为“none”，bytes为资源范围的单位)，并在Content-Length字段中告诉客户端资源的大小范围。</p>
-<div align="center">
-    ![avatar][2-http.sys]
-</div>
-
-
-<p>&#160; &#160; &#160; &#160;如果没有Accept-Ranges字段，则服务器可能不支持范围请求，有的服务器会明确将值设为“none”。</p>
-<p>&#160; &#160; &#160; &#160;服务器面对范围请求，有三种响应：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">请求成功：</span><br><span class="line">    响应206 Partial Content</span><br><span class="line">请求范围越界：（范围超过资源的大小）</span><br><span class="line">    响应416 Requested Range Not Satisfiable</span><br><span class="line">不支持范围请求：</span><br><span class="line">    响应200 OK</span><br></pre></td></tr></table></figure>
-
-<p>&#160; &#160; &#160; &#160;而HTTP.sys远程代码执行漏洞正是利用Range字段注入恶意数据。该漏洞的检测，也是利用服务器面对范围请求时的响应特征来判断。</p>
-<p>&#160; &#160; &#160; &#160;当然，范围请求不止这些知识点，详情可查看RFC：</p>
-<p><a href="https://tools.ietf.org/html/rfc7233" target="_blank" rel="noopener">https://tools.ietf.org/html/rfc7233</a></p>
-<h1 id="漏洞检测"><a href="#漏洞检测" class="headerlink" title="漏洞检测"></a>漏洞检测</h1><p>&#160; &#160; &#160; &#160;HTTP.sys漏洞的检测比较简单，先判断目标环境是不是Windows+IIS，然后构造Range字段进行检测即可。</p>
-<p>&#160; &#160; &#160; &#160;检测时，在请求包中添加Range字段，如下：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Range: bytes=0-18446744073709551615</span><br></pre></td></tr></table></figure>
-
-<p>&#160; &#160; &#160; &#160;提交给服务器，查看服务器响应。</p>
-<div align="center">
-    ![avatar][3-http.sys]
-</div>
-
-<p>&#160; &#160; &#160; &#160;服务器响应400，证明不存在HTTP.sys远程代码执行漏洞。如果响应416，则证明系统存在漏洞。</p>
-<div align="center">
-    ![avatar][4-http.sys]
-</div>
-
-<p>&#160; &#160; &#160; &#160;这里简单说一下Range字段值的含义。18446744073709551615转为十六进制是 0xFFFFFFFFFFFFFFFF(16个F），是64位无符号整型所能表达的最大整数，整数溢出和这个超大整数有关。</p>
-<p>&#160; &#160; &#160; &#160;另外，Apache几个老版本存在的Apache HTTP Server畸形Range选项处理远程拒绝服务漏洞，也是通过Range字段触发的，有兴趣的校友可以去了解了解。</p>
-<h1 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h1><p>&#160; &#160; &#160; &#160;升级补丁：</p>
-<p><a href="http://technet.microsoft.com/security/bulletin/MS15-034" target="_blank" rel="noopener">http://technet.microsoft.com/security/bulletin/MS15-034</a></p>
-<p>&#160; &#160; &#160; &#160;禁用IIS内核缓存（缓解方案）：</p>
-<p><a href="https://technet.microsoft.com/en-us/library/cc731903(v=ws.10).aspx" target="_blank" rel="noopener">https://technet.microsoft.com/en-us/library/cc731903(v=ws.10).aspx</a></p>
-<h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的博客。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
-<div align="center">
-    ![avatar][5-关注公众号]
-</div>
-
-
-
-
-]]></content>
-      <categories>
-        <category>每日漏洞</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>每日漏洞 | Host头攻击</title>
-    <url>/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-Host%E5%A4%B4%E6%94%BB%E5%87%BB/</url>
-    <content><![CDATA[<h1 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h1><p>&#160; &#160; &#160; &#160;《HTTP | HTTP报文》最后一节，简单的介绍了一下首部字段，其中就包含了Host首部字段。</p>
-<p>&#160; &#160; &#160; &#160;为了方便获取网站域名，开发人员一般依赖于请求包中的Host首部字段。例如，在php里用_SERVER[“HTTP_HOST”]。但是这个Host字段值是不可信赖的(可通过HTTP代理工具篡改)，如果应用程序没有对Host字段值进行处理，就有可能造成恶意代码的传入。</p>
-<h1 id="漏洞知识拓展"><a href="#漏洞知识拓展" class="headerlink" title="漏洞知识拓展"></a>漏洞知识拓展</h1><p>&#160; &#160; &#160; &#160;Host首部字段是HTTP/1.1新增的，旨在告诉服务器，客户端请求的主机名和端口号，主要用来实现虚拟主机技术。</p>
-<p>&#160; &#160; &#160; &#160;运用虚拟主机技术，单个主机可以运行多个站点。以下图为例，hacker和usagidesign两个站点都运行在同一服务器A上，不管我们请求哪个域名，最终都会被解析成服务器A的IP地址，这个时候服务器就不知道该将请求交给哪个站点处理，因此需要Host字段指定请求的主机名。</p>
-<p>&#160; &#160; &#160; &#160;我们访问hacker域名，经DNS解析，变成了服务器A的IP，请求传达到服务器A，A接收到请求后，发现请求报文中的Host字段值为hacker，进而将请求交给hacker站点处理。（这里又涉及到计算机网络知识了，是不是觉得要学的真多？没关系，我后面都会一一介绍的）</p>
-<div align="center">
-    ![avatar][1-host]
-</div>
-
-<p>&#160; &#160; &#160; &#160;这个时候，问题就出现了。为了方便获取网站域名，开发人员一般依赖于请求包中的Host首部字段。例如，在php里用_SERVER[“HTTP_HOST”]。但是这个Host字段值是不可信赖的(可通过HTTP代理工具篡改)，如果应用程序没有对Host字段值进行处理，就有可能造成恶意代码的传入。</p>
-<h1 id="漏洞检测"><a href="#漏洞检测" class="headerlink" title="漏洞检测"></a>漏洞检测</h1><p>&#160; &#160; &#160; &#160;Host头攻击漏洞的检测比较简单，只需要抓包，修改Host字段值，提交，查看响应中是否包含修改后的Host字段值即可。</p>
-<p>&#160; &#160; &#160; &#160;下面我分三个场景，介绍一下Host头攻击漏洞存在的表现。</p>
-<h2 id="跳转"><a href="#跳转" class="headerlink" title="跳转"></a>跳转</h2><p>&#160; &#160; &#160; &#160;场景一：正常请求，响应302，Location首部字段指明跳转的地址，其中Location字段值为Host字段指定的地址。</p>
-<div align="center">
-    ![avatar][2-host]
-</div>
-
-<p>&#160; &#160; &#160; &#160;将请求包的Host字段值修改为<a href="http://www.baidu.com提交，响应包中的Location地址也被更改为www.baidu.com。" target="_blank" rel="noopener">www.baidu.com提交，响应包中的Location地址也被更改为www.baidu.com。</a></p>
-<h2 id="拼接"><a href="#拼接" class="headerlink" title="拼接"></a>拼接</h2><p>&#160; &#160; &#160; &#160;场景二：正常请求，正常响应，将Host字段值拼接到标签属性值中。</p>
-<div align="center">
-    ![avatar][3-host]
-</div>
-
-<p>&#160; &#160; &#160; &#160;将请求包的Host字段值修改为<a href="http://www.baidu.com提交，发现服务器将www.baidu.com拼接到了script标签的src属性值中。" target="_blank" rel="noopener">www.baidu.com提交，发现服务器将www.baidu.com拼接到了script标签的src属性值中。</a></p>
-<h2 id="代码注入"><a href="#代码注入" class="headerlink" title="代码注入"></a>代码注入</h2><p>&#160; &#160; &#160; &#160;场景三：这其实也属于拼接，只不过在场景二的基础上写入了恶意代码。</p>
-<div align="center">
-    ![avatar][4-host]
-</div>
-
-<p>&#160; &#160; &#160; &#160;利用Host字段写入script标签，弹出警告框。</p>
-<h1 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h1><p>&#160; &#160; &#160; &#160;对Host字段进行检测。</p>
-<p>&#160; &#160; &#160; &#160;Nginx，修改ngnix.conf文件，在server中指定一个server_name名单，并添加检测。</p>
-<p>&#160; &#160; &#160; &#160;Apache，修改httpd.conf文件，指定ServerName，并开启UseCanonicalName选项。</p>
-<p>&#160; &#160; &#160; &#160;Tomcat，修改server.xml文件，配置Host的name属性。</p>
-<h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的微信公众号。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
-<div align="center">
-    ![avatar][5-关注公众号]
-</div>
-
-
-
-]]></content>
-      <categories>
-        <category>每日漏洞</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>每日漏洞 | rsync未授权访问</title>
-    <url>/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-rsync%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE/</url>
-    <content><![CDATA[<h1 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h1><p>&#160; &#160; &#160; &#160;rsync是Linux/Unix下的一个远程数据同步工具，可通过LAN/WAN快速同步多台主机间的文件和目录，默认运行在873端口。由于配置不当，导致任何人可未授权访问rsync，上传本地文件，下载服务器文件。</p>
-<p>&#160; &#160; &#160; &#160;rsync未授权访问带来的危害主要有两个：一是造成了严重的信息泄露；二是上传脚本后门文件，远程命令执行。</p>
-<h1 id="漏洞检测"><a href="#漏洞检测" class="headerlink" title="漏洞检测"></a>漏洞检测</h1><p>&#160; &#160; &#160; &#160;rsync未授权访问漏洞只需使用rsync命令即可进行检测。首先使用nmap或其他工具对目标服务器进行端口扫描，当检测到目标服务器开放873端口后，使用rsync命令，查看是否能获取到模块名列表（需要同步的目录），然后查看模块内的文件，rsync未授权访问漏洞的检测就是如此简单。</p>
-<h2 id="查看模块名列表"><a href="#查看模块名列表" class="headerlink" title="查看模块名列表"></a>查看模块名列表</h2><p>&#160; &#160; &#160; &#160;使用如下两条命令之一，列出目标服务器的同步目录：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">rsync ip::</span><br><span class="line">rsync rsync://ip:873</span><br></pre></td></tr></table></figure>
-
-<div align="center">
-    ![avatar][1-rsync]
-</div>
-
-<p>&#160; &#160; &#160; &#160;两条命令都列出了目标服务器的同步目录，在验证的时候任意使用其中一条命令即可。</p>
-<h2 id="查看模块文件"><a href="#查看模块文件" class="headerlink" title="查看模块文件"></a>查看模块文件</h2><p>&#160; &#160; &#160; &#160;获取到目录之后，只需在路径后添加目录名即可查看目录中的文件。</p>
-<div align="center">
-    ![avatar][2-rsync]
-
-<pre><code>![avatar][3-rsync]</code></pre></div>
-
-
-
-<p>&#160; &#160; &#160; &#160;到这里，rsync未授权访问漏洞就验证成功了，之后的步骤不再赘述。</p>
-<h1 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h1><p>&#160; &#160; &#160; &#160;更改rysnc默认配置文件/etc/rsyncd.conf，添加或修改参数：</p>
-<p>&#160; &#160; &#160; &#160;访问控制；设置host allow，限制允许访问主机的IP。</p>
-<p>&#160; &#160; &#160; &#160;权限控制；设置read only，将模块设置成只读。</p>
-<p>&#160; &#160; &#160; &#160;访问认证；设置auth、secrets，认证成功才能调用服务。</p>
-<p>&#160; &#160; &#160; &#160;模块隐藏；设置list，将模块隐藏。</p>
-<p>&#160; &#160; &#160; &#160;详情可参考官方doc：<a href="https://rsync.samba.org/ftp/rsync/rsyncd.conf.html" target="_blank" rel="noopener">https://rsync.samba.org/ftp/rsync/rsyncd.conf.html</a></p>
-<h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的微信公众号。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
-<div align="center">
-    ![avatar][4-关注公众号]
-</div>
-
-
-]]></content>
-      <categories>
-        <category>每日漏洞</category>
-      </categories>
-      <tags>
-        <tag>未授权访问</tag>
       </tags>
   </entry>
   <entry>
@@ -650,6 +498,158 @@
 ]]></content>
       <categories>
         <category>计算机网络</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>每日漏洞 | HTTP.sys远程代码执行</title>
+    <url>/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-HTTP-sys%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/</url>
+    <content><![CDATA[<h1 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h1><p>&#160; &#160; &#160; &#160;上篇文章介绍了Host头攻击，今天我们讲一讲HTTP.sys远程代码执行漏洞。</p>
+<p>&#160; &#160; &#160; &#160;HTTP.sys是Microsoft Windows处理HTTP请求的内核驱动程序，为了优化IIS服务器性能，从IIS6.0引入，IIS服务进程依赖HTTP.sys。HTTP.sys远程代码执行漏洞实质是HTTP.sys的整数溢出漏洞，当攻击者向受影响的Windows系统发送特殊设计的HTTP 请求，HTTP.sys 未正确分析时就会导致此漏洞，成功利用此漏洞的攻击者可以在系统帐户的上下文中执行任意代码。</p>
+<p>&#160; &#160; &#160; &#160;主要存在Windows+IIS的环境下，任何安装了微软IIS 6.0以上的Windows Server 2008 R2/Server 2012/Server 2012 R2以及Windows 7/8/8.1操作系统都受到这个漏洞的影响。</p>
+<h1 id="漏洞知识拓展"><a href="#漏洞知识拓展" class="headerlink" title="漏洞知识拓展"></a>漏洞知识拓展</h1><p>&#160; &#160; &#160; &#160;说到HTTP.sys远程代码执行漏洞，不得不先介绍一下Range首部字段。</p>
+<p>&#160; &#160; &#160; &#160;在“上古时代”，网络并不是很好，下载大型文件很不容易。下载途中如果网络中断，就得重头开始下。为了解决这个问题，HTTP/1.1引入了范围请求。</p>
+<div align="center">
+    ![avatar][1-http.sys]
+</div>
+
+
+<p>&#160; &#160; &#160; &#160;在请求报文的Range首部字段中指定资源的byte范围，告诉服务器，请求的是资源哪个范围的内容，让断点续传和并行下载得以实现。</p>
+<p>&#160; &#160; &#160; &#160;如果服务器支持范围请求，响应包中就会存在Accept-Ranges字段(且值不为“none”，bytes为资源范围的单位)，并在Content-Length字段中告诉客户端资源的大小范围。</p>
+<div align="center">
+    ![avatar][2-http.sys]
+</div>
+
+
+<p>&#160; &#160; &#160; &#160;如果没有Accept-Ranges字段，则服务器可能不支持范围请求，有的服务器会明确将值设为“none”。</p>
+<p>&#160; &#160; &#160; &#160;服务器面对范围请求，有三种响应：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">请求成功：</span><br><span class="line">    响应206 Partial Content</span><br><span class="line">请求范围越界：（范围超过资源的大小）</span><br><span class="line">    响应416 Requested Range Not Satisfiable</span><br><span class="line">不支持范围请求：</span><br><span class="line">    响应200 OK</span><br></pre></td></tr></table></figure>
+
+<p>&#160; &#160; &#160; &#160;而HTTP.sys远程代码执行漏洞正是利用Range字段注入恶意数据。该漏洞的检测，也是利用服务器面对范围请求时的响应特征来判断。</p>
+<p>&#160; &#160; &#160; &#160;当然，范围请求不止这些知识点，详情可查看RFC：</p>
+<p><a href="https://tools.ietf.org/html/rfc7233" target="_blank" rel="noopener">https://tools.ietf.org/html/rfc7233</a></p>
+<h1 id="漏洞检测"><a href="#漏洞检测" class="headerlink" title="漏洞检测"></a>漏洞检测</h1><p>&#160; &#160; &#160; &#160;HTTP.sys漏洞的检测比较简单，先判断目标环境是不是Windows+IIS，然后构造Range字段进行检测即可。</p>
+<p>&#160; &#160; &#160; &#160;检测时，在请求包中添加Range字段，如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Range: bytes=0-18446744073709551615</span><br></pre></td></tr></table></figure>
+
+<p>&#160; &#160; &#160; &#160;提交给服务器，查看服务器响应。</p>
+<div align="center">
+    ![avatar][3-http.sys]
+</div>
+
+<p>&#160; &#160; &#160; &#160;服务器响应400，证明不存在HTTP.sys远程代码执行漏洞。如果响应416，则证明系统存在漏洞。</p>
+<div align="center">
+    ![avatar][4-http.sys]
+</div>
+
+<p>&#160; &#160; &#160; &#160;这里简单说一下Range字段值的含义。18446744073709551615转为十六进制是 0xFFFFFFFFFFFFFFFF(16个F），是64位无符号整型所能表达的最大整数，整数溢出和这个超大整数有关。</p>
+<p>&#160; &#160; &#160; &#160;另外，Apache几个老版本存在的Apache HTTP Server畸形Range选项处理远程拒绝服务漏洞，也是通过Range字段触发的，有兴趣的校友可以去了解了解。</p>
+<h1 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h1><p>&#160; &#160; &#160; &#160;升级补丁：</p>
+<p><a href="http://technet.microsoft.com/security/bulletin/MS15-034" target="_blank" rel="noopener">http://technet.microsoft.com/security/bulletin/MS15-034</a></p>
+<p>&#160; &#160; &#160; &#160;禁用IIS内核缓存（缓解方案）：</p>
+<p><a href="https://technet.microsoft.com/en-us/library/cc731903(v=ws.10).aspx" target="_blank" rel="noopener">https://technet.microsoft.com/en-us/library/cc731903(v=ws.10).aspx</a></p>
+<h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的博客。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
+<div align="center">
+    ![avatar][5-关注公众号]
+</div>
+
+
+
+
+]]></content>
+      <categories>
+        <category>每日漏洞</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>每日漏洞 | rsync未授权访问</title>
+    <url>/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-rsync%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE/</url>
+    <content><![CDATA[<h1 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h1><p>&#160; &#160; &#160; &#160;rsync是Linux/Unix下的一个远程数据同步工具，可通过LAN/WAN快速同步多台主机间的文件和目录，默认运行在873端口。由于配置不当，导致任何人可未授权访问rsync，上传本地文件，下载服务器文件。</p>
+<p>&#160; &#160; &#160; &#160;rsync未授权访问带来的危害主要有两个：一是造成了严重的信息泄露；二是上传脚本后门文件，远程命令执行。</p>
+<h1 id="漏洞检测"><a href="#漏洞检测" class="headerlink" title="漏洞检测"></a>漏洞检测</h1><p>&#160; &#160; &#160; &#160;rsync未授权访问漏洞只需使用rsync命令即可进行检测。首先使用nmap或其他工具对目标服务器进行端口扫描，当检测到目标服务器开放873端口后，使用rsync命令，查看是否能获取到模块名列表（需要同步的目录），然后查看模块内的文件，rsync未授权访问漏洞的检测就是如此简单。</p>
+<h2 id="查看模块名列表"><a href="#查看模块名列表" class="headerlink" title="查看模块名列表"></a>查看模块名列表</h2><p>&#160; &#160; &#160; &#160;使用如下两条命令之一，列出目标服务器的同步目录：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">rsync ip::</span><br><span class="line">rsync rsync://ip:873</span><br></pre></td></tr></table></figure>
+
+<div align="center">
+    ![avatar][1-rsync]
+</div>
+
+<p>&#160; &#160; &#160; &#160;两条命令都列出了目标服务器的同步目录，在验证的时候任意使用其中一条命令即可。</p>
+<h2 id="查看模块文件"><a href="#查看模块文件" class="headerlink" title="查看模块文件"></a>查看模块文件</h2><p>&#160; &#160; &#160; &#160;获取到目录之后，只需在路径后添加目录名即可查看目录中的文件。</p>
+<div align="center">
+    ![avatar][2-rsync]
+
+<pre><code>![avatar][3-rsync]</code></pre></div>
+
+
+
+<p>&#160; &#160; &#160; &#160;到这里，rsync未授权访问漏洞就验证成功了，之后的步骤不再赘述。</p>
+<h1 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h1><p>&#160; &#160; &#160; &#160;更改rysnc默认配置文件/etc/rsyncd.conf，添加或修改参数：</p>
+<p>&#160; &#160; &#160; &#160;访问控制；设置host allow，限制允许访问主机的IP。</p>
+<p>&#160; &#160; &#160; &#160;权限控制；设置read only，将模块设置成只读。</p>
+<p>&#160; &#160; &#160; &#160;访问认证；设置auth、secrets，认证成功才能调用服务。</p>
+<p>&#160; &#160; &#160; &#160;模块隐藏；设置list，将模块隐藏。</p>
+<p>&#160; &#160; &#160; &#160;详情可参考官方doc：<a href="https://rsync.samba.org/ftp/rsync/rsyncd.conf.html" target="_blank" rel="noopener">https://rsync.samba.org/ftp/rsync/rsyncd.conf.html</a></p>
+<h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的微信公众号。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
+<div align="center">
+    ![avatar][4-关注公众号]
+</div>
+
+
+]]></content>
+      <categories>
+        <category>每日漏洞</category>
+      </categories>
+      <tags>
+        <tag>未授权访问</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>每日漏洞 | Host头攻击</title>
+    <url>/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-Host%E5%A4%B4%E6%94%BB%E5%87%BB/</url>
+    <content><![CDATA[<h1 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h1><p>&#160; &#160; &#160; &#160;《HTTP | HTTP报文》最后一节，简单的介绍了一下首部字段，其中就包含了Host首部字段。</p>
+<p>&#160; &#160; &#160; &#160;为了方便获取网站域名，开发人员一般依赖于请求包中的Host首部字段。例如，在php里用_SERVER[“HTTP_HOST”]。但是这个Host字段值是不可信赖的(可通过HTTP代理工具篡改)，如果应用程序没有对Host字段值进行处理，就有可能造成恶意代码的传入。</p>
+<h1 id="漏洞知识拓展"><a href="#漏洞知识拓展" class="headerlink" title="漏洞知识拓展"></a>漏洞知识拓展</h1><p>&#160; &#160; &#160; &#160;Host首部字段是HTTP/1.1新增的，旨在告诉服务器，客户端请求的主机名和端口号，主要用来实现虚拟主机技术。</p>
+<p>&#160; &#160; &#160; &#160;运用虚拟主机技术，单个主机可以运行多个站点。以下图为例，hacker和usagidesign两个站点都运行在同一服务器A上，不管我们请求哪个域名，最终都会被解析成服务器A的IP地址，这个时候服务器就不知道该将请求交给哪个站点处理，因此需要Host字段指定请求的主机名。</p>
+<p>&#160; &#160; &#160; &#160;我们访问hacker域名，经DNS解析，变成了服务器A的IP，请求传达到服务器A，A接收到请求后，发现请求报文中的Host字段值为hacker，进而将请求交给hacker站点处理。（这里又涉及到计算机网络知识了，是不是觉得要学的真多？没关系，我后面都会一一介绍的）</p>
+<div align="center">
+    ![avatar][1-host]
+</div>
+
+<p>&#160; &#160; &#160; &#160;这个时候，问题就出现了。为了方便获取网站域名，开发人员一般依赖于请求包中的Host首部字段。例如，在php里用_SERVER[“HTTP_HOST”]。但是这个Host字段值是不可信赖的(可通过HTTP代理工具篡改)，如果应用程序没有对Host字段值进行处理，就有可能造成恶意代码的传入。</p>
+<h1 id="漏洞检测"><a href="#漏洞检测" class="headerlink" title="漏洞检测"></a>漏洞检测</h1><p>&#160; &#160; &#160; &#160;Host头攻击漏洞的检测比较简单，只需要抓包，修改Host字段值，提交，查看响应中是否包含修改后的Host字段值即可。</p>
+<p>&#160; &#160; &#160; &#160;下面我分三个场景，介绍一下Host头攻击漏洞存在的表现。</p>
+<h2 id="跳转"><a href="#跳转" class="headerlink" title="跳转"></a>跳转</h2><p>&#160; &#160; &#160; &#160;场景一：正常请求，响应302，Location首部字段指明跳转的地址，其中Location字段值为Host字段指定的地址。</p>
+<div align="center">
+    ![avatar][2-host]
+</div>
+
+<p>&#160; &#160; &#160; &#160;将请求包的Host字段值修改为<a href="http://www.baidu.com提交，响应包中的Location地址也被更改为www.baidu.com。" target="_blank" rel="noopener">www.baidu.com提交，响应包中的Location地址也被更改为www.baidu.com。</a></p>
+<h2 id="拼接"><a href="#拼接" class="headerlink" title="拼接"></a>拼接</h2><p>&#160; &#160; &#160; &#160;场景二：正常请求，正常响应，将Host字段值拼接到标签属性值中。</p>
+<div align="center">
+    ![avatar][3-host]
+</div>
+
+<p>&#160; &#160; &#160; &#160;将请求包的Host字段值修改为<a href="http://www.baidu.com提交，发现服务器将www.baidu.com拼接到了script标签的src属性值中。" target="_blank" rel="noopener">www.baidu.com提交，发现服务器将www.baidu.com拼接到了script标签的src属性值中。</a></p>
+<h2 id="代码注入"><a href="#代码注入" class="headerlink" title="代码注入"></a>代码注入</h2><p>&#160; &#160; &#160; &#160;场景三：这其实也属于拼接，只不过在场景二的基础上写入了恶意代码。</p>
+<div align="center">
+    ![avatar][4-host]
+</div>
+
+<p>&#160; &#160; &#160; &#160;利用Host字段写入script标签，弹出警告框。</p>
+<h1 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h1><p>&#160; &#160; &#160; &#160;对Host字段进行检测。</p>
+<p>&#160; &#160; &#160; &#160;Nginx，修改ngnix.conf文件，在server中指定一个server_name名单，并添加检测。</p>
+<p>&#160; &#160; &#160; &#160;Apache，修改httpd.conf文件，指定ServerName，并开启UseCanonicalName选项。</p>
+<p>&#160; &#160; &#160; &#160;Tomcat，修改server.xml文件，配置Host的name属性。</p>
+<h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的微信公众号。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
+<div align="center">
+    ![avatar][5-关注公众号]
+</div>
+
+
+
+]]></content>
+      <categories>
+        <category>每日漏洞</category>
       </categories>
   </entry>
   <entry>
@@ -935,6 +935,71 @@
       </tags>
   </entry>
   <entry>
+    <title>每日漏洞 | 跨站脚本攻击</title>
+    <url>/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/</url>
+    <content><![CDATA[<h1 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h1><p>&#160; &#160; &#160; &#160;当应用程序没有验证输入数据并产生输出时，这个时候就会产生XSS漏洞，攻击者可利用此漏洞进行Cookie窃取、会话劫持、钓鱼等攻击。</p>
+<p>&#160; &#160; &#160; &#160;“一切输入都是不安全的”，Web应用的漏洞几乎都是由一个原因造成：不能在使用前正确验证输入的数据。XSS便是其中之一，攻击者可以在网页中写入恶意脚本，用户访问或点击的时候就会被执行。通常是由JavaScript编写，偶尔也会使用ActionScript、VBScript。XSS能利用到何种程度，取决于如何编写脚本，当然，和上下文环境也有关系。</p>
+<h1 id="漏洞检测"><a href="#漏洞检测" class="headerlink" title="漏洞检测"></a>漏洞检测</h1><p>&#160; &#160; &#160; &#160;要判断系统是否存在XSS，只需要测试能否操纵应用程序参数输入，使其产生恶意输出即可，因此XSS漏洞的检测，有三大要点：输入点，输出点，以及恶意输出。</p>
+<p>&#160; &#160; &#160; &#160;输入点，数据输入的参数位置。客户端与服务器端的交互，是通过请求和响应实现的，请求的时候往往会附带一些参数，这些参数就是数据的输入点，我们需要修改这些参数的值来影响服务器端的响应，并根据响应找出输出点。</p>
+<p>&#160; &#160; &#160; &#160;输出点，输入数据的输出位置。有些数据输入后，经过服务器处理，往往会返回给客户端，可能出现在html标签中，也可能出现在script脚本中，我们需要根据位置的不同而使用不同的XSS构造方式。</p>
+<p>&#160; &#160; &#160; &#160;恶意输出，在XSS中通常是指由JavaScript编写的代码。这些代码能实现一定功能和页面效果：弹框、发送Cookie、键盘记录等。</p>
+<h2 id="寻找输入点"><a href="#寻找输入点" class="headerlink" title="寻找输入点"></a>寻找输入点</h2><div align="center">
+    ![avatar][1-xss]
+</div>
+
+
+<p>&#160; &#160; &#160; &#160;页面有两个输入框，要求输入名字和姓氏，然后点击GO，姓名就会显示在下方。我们现在来检测这个功能是否存在XSS。</p>
+<p>&#160; &#160; &#160; &#160;开启抓包工具，设置好代理，输入名字和姓氏。</p>
+<div align="center">
+    ![avatar][2-xss]
+</div>
+
+<p>&#160; &#160; &#160; &#160;点击GO，抓到如下请求包。请求行中有三个参数，其中两个参数正好对应两个输入框，这三个参数都是潜在的XSS输入点，特别是输入框对应的firstname参数和lastname参数。</p>
+<div align="center">
+    ![avatar][3-xss]
+</div>
+
+<h2 id="寻找输出点"><a href="#寻找输出点" class="headerlink" title="寻找输出点"></a>寻找输出点</h2><p>&#160; &#160; &#160; &#160;输出点我们可以通过在响应中查找输入点的值来找到。以firstname为例，我们在响应中查找bwapp这个值的位置。</p>
+<div align="center">
+    ![avatar][4-xss]
+</div>
+
+<p>&#160; &#160; &#160; &#160;发现响应中有8个匹配的值，难道有8个输出点？很多时候，为了更快速、准确的找出输出点，我们通常会将输入点的值修改为独一无二的值，如1234567，abcde等，以保证不会和系统其他参数值雷同。</p>
+<div align="center">
+    ![avatar][5-xss]
+</div>
+
+<p>&#160; &#160; &#160; &#160;这样就准确找到了firstname这个输入点的输出点。</p>
+<h2 id="恶意输出"><a href="#恶意输出" class="headerlink" title="恶意输出"></a>恶意输出</h2><p>&#160; &#160; &#160; &#160;最终XSS的检测需要结合输入点和输出点。在输入点的值中加入恶意代码，查看输出点是否会产生恶意输出。</p>
+<div align="center">
+    ![avatar][6-xss]
+</div>
+
+<div align="center">
+    ![avatar][7-xss]
+</div>
+
+
+<p>&#160; &#160; &#160; &#160;发现服务端没有对用户输入做任何处理就直接输出到页面上，弹出一个警告框。这就证明firstname参数存在XSS。依此流程检测，发现lastname同样存在XSS，但form参数不存在XSS。</p>
+<h1 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h1><p>&#160; &#160; &#160; &#160;输入过滤；对用户的输入进行检测，过滤掉输入中的非法字符。</p>
+<p>&#160; &#160; &#160; &#160;输出编码；在将输入输出到页面之前，将输入中未过滤的特殊字符进行转义，使其以文本形式展示，而不是被解析成页面结构或脚本。</p>
+<h1 id="PS"><a href="#PS" class="headerlink" title="PS"></a>PS</h1><p>&#160; &#160; &#160; &#160;在这里要申明一下，每日漏洞系列旨在告诉大家发现漏洞的最基本操作，每日学会一个漏洞的检测方法。就比如做菜，每日漏洞系列会教你第一步点火，第二步放油，第三步炒菜，第四步出锅，但不会教你用多大的火，放多少油，炒多久，这些细节我会在其他文章里深入介绍，所以如果只看这篇文章，我只能保证你会做菜，这菜能不能吃，只能交给命运了。</p>
+<h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的博客。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
+<div align="center">
+    ![avatar][8-关注公众号]
+</div>
+
+
+
+]]></content>
+      <categories>
+        <category>每日漏洞</category>
+      </categories>
+      <tags>
+        <tag>XSS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>每日命令 | pwd、cd</title>
     <url>/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-pwd%E3%80%81cd/</url>
     <content><![CDATA[<h1 id="命令简介"><a href="#命令简介" class="headerlink" title="命令简介"></a>命令简介</h1><p>&#160; &#160; &#160; &#160;上回说到《每日命令 | ls》，今天我们来说一说pwd命令和cd命令。</p>
@@ -1135,71 +1200,6 @@
       </categories>
       <tags>
         <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>每日漏洞 | 跨站脚本攻击</title>
-    <url>/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/</url>
-    <content><![CDATA[<h1 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h1><p>&#160; &#160; &#160; &#160;当应用程序没有验证输入数据并产生输出时，这个时候就会产生XSS漏洞，攻击者可利用此漏洞进行Cookie窃取、会话劫持、钓鱼等攻击。</p>
-<p>&#160; &#160; &#160; &#160;“一切输入都是不安全的”，Web应用的漏洞几乎都是由一个原因造成：不能在使用前正确验证输入的数据。XSS便是其中之一，攻击者可以在网页中写入恶意脚本，用户访问或点击的时候就会被执行。通常是由JavaScript编写，偶尔也会使用ActionScript、VBScript。XSS能利用到何种程度，取决于如何编写脚本，当然，和上下文环境也有关系。</p>
-<h1 id="漏洞检测"><a href="#漏洞检测" class="headerlink" title="漏洞检测"></a>漏洞检测</h1><p>&#160; &#160; &#160; &#160;要判断系统是否存在XSS，只需要测试能否操纵应用程序参数输入，使其产生恶意输出即可，因此XSS漏洞的检测，有三大要点：输入点，输出点，以及恶意输出。</p>
-<p>&#160; &#160; &#160; &#160;输入点，数据输入的参数位置。客户端与服务器端的交互，是通过请求和响应实现的，请求的时候往往会附带一些参数，这些参数就是数据的输入点，我们需要修改这些参数的值来影响服务器端的响应，并根据响应找出输出点。</p>
-<p>&#160; &#160; &#160; &#160;输出点，输入数据的输出位置。有些数据输入后，经过服务器处理，往往会返回给客户端，可能出现在html标签中，也可能出现在script脚本中，我们需要根据位置的不同而使用不同的XSS构造方式。</p>
-<p>&#160; &#160; &#160; &#160;恶意输出，在XSS中通常是指由JavaScript编写的代码。这些代码能实现一定功能和页面效果：弹框、发送Cookie、键盘记录等。</p>
-<h2 id="寻找输入点"><a href="#寻找输入点" class="headerlink" title="寻找输入点"></a>寻找输入点</h2><div align="center">
-    ![avatar][1-xss]
-</div>
-
-
-<p>&#160; &#160; &#160; &#160;页面有两个输入框，要求输入名字和姓氏，然后点击GO，姓名就会显示在下方。我们现在来检测这个功能是否存在XSS。</p>
-<p>&#160; &#160; &#160; &#160;开启抓包工具，设置好代理，输入名字和姓氏。</p>
-<div align="center">
-    ![avatar][2-xss]
-</div>
-
-<p>&#160; &#160; &#160; &#160;点击GO，抓到如下请求包。请求行中有三个参数，其中两个参数正好对应两个输入框，这三个参数都是潜在的XSS输入点，特别是输入框对应的firstname参数和lastname参数。</p>
-<div align="center">
-    ![avatar][3-xss]
-</div>
-
-<h2 id="寻找输出点"><a href="#寻找输出点" class="headerlink" title="寻找输出点"></a>寻找输出点</h2><p>&#160; &#160; &#160; &#160;输出点我们可以通过在响应中查找输入点的值来找到。以firstname为例，我们在响应中查找bwapp这个值的位置。</p>
-<div align="center">
-    ![avatar][4-xss]
-</div>
-
-<p>&#160; &#160; &#160; &#160;发现响应中有8个匹配的值，难道有8个输出点？很多时候，为了更快速、准确的找出输出点，我们通常会将输入点的值修改为独一无二的值，如1234567，abcde等，以保证不会和系统其他参数值雷同。</p>
-<div align="center">
-    ![avatar][5-xss]
-</div>
-
-<p>&#160; &#160; &#160; &#160;这样就准确找到了firstname这个输入点的输出点。</p>
-<h2 id="恶意输出"><a href="#恶意输出" class="headerlink" title="恶意输出"></a>恶意输出</h2><p>&#160; &#160; &#160; &#160;最终XSS的检测需要结合输入点和输出点。在输入点的值中加入恶意代码，查看输出点是否会产生恶意输出。</p>
-<div align="center">
-    ![avatar][6-xss]
-</div>
-
-<div align="center">
-    ![avatar][7-xss]
-</div>
-
-
-<p>&#160; &#160; &#160; &#160;发现服务端没有对用户输入做任何处理就直接输出到页面上，弹出一个警告框。这就证明firstname参数存在XSS。依此流程检测，发现lastname同样存在XSS，但form参数不存在XSS。</p>
-<h1 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h1><p>&#160; &#160; &#160; &#160;输入过滤；对用户的输入进行检测，过滤掉输入中的非法字符。</p>
-<p>&#160; &#160; &#160; &#160;输出编码；在将输入输出到页面之前，将输入中未过滤的特殊字符进行转义，使其以文本形式展示，而不是被解析成页面结构或脚本。</p>
-<h1 id="PS"><a href="#PS" class="headerlink" title="PS"></a>PS</h1><p>&#160; &#160; &#160; &#160;在这里要申明一下，每日漏洞系列旨在告诉大家发现漏洞的最基本操作，每日学会一个漏洞的检测方法。就比如做菜，每日漏洞系列会教你第一步点火，第二步放油，第三步炒菜，第四步出锅，但不会教你用多大的火，放多少油，炒多久，这些细节我会在其他文章里深入介绍，所以如果只看这篇文章，我只能保证你会做菜，这菜能不能吃，只能交给命运了。</p>
-<h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的博客。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
-<div align="center">
-    ![avatar][8-关注公众号]
-</div>
-
-
-
-]]></content>
-      <categories>
-        <category>每日漏洞</category>
-      </categories>
-      <tags>
-        <tag>XSS</tag>
       </tags>
   </entry>
   <entry>
