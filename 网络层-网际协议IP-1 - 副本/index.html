@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<!-- 引入googlead广告 -->
+<script data-ad-client="ca-pub-3126821263698875" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/logo.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/logo.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="安全小白团, noobsec" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="noob-sec安全小白团,小白学习基地,教你渗透测试如何从入门到放弃。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络层 | 网际协议IP(1)">
+<meta property="og:url" content="https://noob-sec.github.io/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-1%20-%20%E5%89%AF%E6%9C%AC/index.html">
+<meta property="og:site_name" content="安全小白团">
+<meta property="og:description" content="noob-sec安全小白团,小白学习基地,教你渗透测试如何从入门到放弃。">
+<meta property="article:published_time" content="2019-04-19T03:26:59.000Z">
+<meta property="article:modified_time" content="2019-05-06T02:13:40.000Z">
+<meta property="article:author" content="安全小白团">
+<meta property="article:tag" content="安全小白团，noobsec">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://noob-sec.github.io/网络层-网际协议IP-1 - 副本/"/>
+
+
+
+
+
+  <title>网络层 | 网际协议IP(1) | 安全小白团</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">安全小白团</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">安全小白团，noobsec</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://noob-sec.github.io/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-1%20-%20%E5%89%AF%E6%9C%AC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="安全小白团">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="安全小白团">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">网络层 | 网际协议IP(1)</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-19T11:26:59+08:00">
+                2019-04-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机网络</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-1%20-%20%E5%89%AF%E6%9C%AC/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-1%20-%20%E5%89%AF%E6%9C%AC/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o">本文总阅读量</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.6k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  9
+                </span>
+              
+            </div>
+          
+
+          
+              <div class="post-description">
+                  noob-sec安全小白团,小白学习基地,教你渗透测试如何从入门到放弃。
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>&#160; &#160; &#160; &#160;Internet Protocol，网际协议，是TCP/IP体系中网络层的主要协议。</p>
+<p>&#160; &#160; &#160; &#160;网络层的任务是为互联网上的不同主机提供通信服务，主要完成两件事：对传输层的数据进行封装、将封装后的数据从源地址转发到目的地址。因此IP协议的主要任务也是寻址路由、封包解包。</p>
+<p>&#160; &#160; &#160; &#160;在《网际协议IP》系列文章中，主要介绍IP地址的格式及分类、一些特殊的IP地址、划分子网、构成超网、数据报格式、路由、与网际协议IP相关的一些协议等方面的知识，旨在希望校友们能对网际协议IP有比较系统的了解。当然也不排除误写漏写的情况，如果有校友发现，请在公众号留言，我会及时修改。</p>
+<p>&#160; &#160; &#160; &#160;下面开始《网际协议IP》系列第一部分的学习。</p>
+<h1 id="IP地址详解"><a href="#IP地址详解" class="headerlink" title="IP地址详解"></a>IP地址详解</h1><p>&#160; &#160; &#160; &#160;Internet Protocol Address，互联网协议地址，又称IP地址，用于识别互联网中的设备。</p>
+<p>&#160; &#160; &#160; &#160;互联网中的设备要想正常通信，就必须配置正确的IP地址。通俗点讲：要想上网，就必须有正确的IP地址。</p>
+<h2 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h2><p>&#160; &#160; &#160; &#160;目前互联网使用IP协议有两个版本：IPv4和IPv6。在这里只介绍IPv4地址，IPv6地址后面再介绍。</p>
+<p>&#160; &#160; &#160; &#160;IPv4地址由32位二进制数组成，为了提高可读性，对人类更加友好，通常采用 “点分十进制法” 表示IP地址，具体的做法如图所示：</p>
+<div align="center">
+    ![avatar][1-点分十进制]
+</div>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">（1）每八位二进制数为一组，将32位的IP地址分为4组</span><br><span class="line">（2）将每组二进制数转换为十进制数</span><br><span class="line">（3）用“.”将四组十进制数隔开，转换成对人类友好的IP地址表现形式</span><br></pre></td></tr></table></figure>
+
+<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><p>&#160; &#160; &#160; &#160;为便于寻址和层次化构造网络，IPv4地址被设计成由网络号+主机号组成。</p>
+<p>&#160; &#160; &#160; &#160;网络号标明设备连接的网络，网络号在互联网中是唯一的。主机号标明设备本身，主机号在网络范围内是唯一的。因此，IP在整个互联网中是唯一的。</p>
+<p>&#160; &#160; &#160; &#160;打个比方，寄快递。我在某云爸爸那里买个东西，寄到北京朝阳区xxxx。快递不会直接寄到具体地址这里，正常的流程应该是这样：快递公司一看地址是北京朝阳区，那它直接把快递寄到朝阳区；寄到朝阳区后，再由快递小哥寄到xxxx。这里北京朝阳区就是网络号，xxxx就是主机号，邮编就有这种作用。</p>
+<p>&#160; &#160; &#160; &#160;早期的IPv4地址，前八位为网络号，后二十四位为主机号。随着互联网的发展，RFC 791对IPv4地址的定义做了修改，将IPv4地址分为了ABC三类单播地址。再后来，D类和E类也被定义。</p>
+<div align="center">
+    ![avatar][2-分类网络]
+</div>
+
+
+<p>&#160; &#160; &#160; &#160;ABCDE类，根据IP地址网络号中的前几位来标识（被称为类别位），定义了网络的大小和类型。其中ABC三类为单播地址，是最常用的，D类为多播地址，E类保留为今后使用。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">A类：前8位为网络号，后24位为主机号，类别位为0</span><br><span class="line">B类：前16位为网络号，后16位为主机号，类别位为10</span><br><span class="line">C类：前24位为网络号，后8位为主机号，类别位为110</span><br><span class="line">D类：没有网络号，类别位为1110</span><br><span class="line">E类：没有网络号，类别位为1111</span><br></pre></td></tr></table></figure>
+
+<p>&#160; &#160; &#160; &#160;我们可以通过类别位来判断IP地址属于哪一类，也可以通过查看IP地址处在哪个地址范围来判断。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">A类：  0.0.0.0 ~ 127.255.255.255</span><br><span class="line">B类：128.0.0.0 ~ 191.255.255.255</span><br><span class="line">C类：192.0.0.0 ~ 223.255.255.255</span><br><span class="line">D类：224.0.0.0 ~ 239.255.255.255</span><br><span class="line">E类：240.0.0.0 ~ 255.255.255.255</span><br></pre></td></tr></table></figure>
+
+<p>&#160; &#160; &#160; &#160;比如192.168.0.1，在192.0.0.0~223.255.255.255这个区间，所以这是一个C类地址；另外将其转换成二进制后，为11000000 10101000 00000000 00000001，前三位为110，这也可以判断它是一个C类地址。</p>
+<p>&#160; &#160; &#160; &#160;但是，并非所有的IP地址我们都能使用，因为有些地址有特殊的用途，我们一般不能使用。</p>
+<h2 id="特殊IP地址"><a href="#特殊IP地址" class="headerlink" title="特殊IP地址"></a>特殊IP地址</h2><p>&#160; &#160; &#160; &#160;这里我们只讨论ABC这三类单播地址。</p>
+<p>&#160; &#160; &#160; &#160;RFC3330（如今已被RFC5735淘汰）中指明了哪些IP有特殊用途，哪些不能出现在公共互联网上，哪些不能被人们使用，这里我挑几个常见的给大家介绍一下。</p>
+<p>&#160; &#160; &#160; &#160;首先要说明一下三种情况，只要符合下列情况之一的IP地址，一般都不会使用。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">网络号为全0：表示本网络</span><br><span class="line">主机号为全0：表示本主机连接的网络地址</span><br><span class="line">主机号为全1：表示这个网络中的所有主机</span><br></pre></td></tr></table></figure>
+
+<p>&#160; &#160; &#160; &#160;比如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">128.128.255.255：主机号为全1，表示网络128.128.0.0上的所有主机</span><br><span class="line">128.128.0.0：主机号为全0，表示这是网络地址128.128.0.0</span><br><span class="line">0.0.0.128：网络号为全0，表示本网络上主机号为128的主机</span><br></pre></td></tr></table></figure>
+
+<p>&#160; &#160; &#160; &#160;另外，再介绍两个特殊的IP段：127.0.0.0段和169.254.0.0段。</p>
+<p>&#160; &#160; &#160; &#160;127.0.0.0网段大家应该不陌生，特别是做开发的。这个网段中的地址被称为本地环回地址，用于同一设备不同服务之间的通信，发送给这些IP地址的数据都会返回给本机，通常都是使用127.0.0.1这个IP地址。后来在RFC6761中，将域名localhost保留了下来，用于环回，这也是为什么在电脑上搭建服务器，访问localhost和访问127.0.0.1都是同一页面的原因。</p>
+<p>&#160; &#160; &#160; &#160;169.254.0.0网段。不知道大家平时有没有注意，给自己电脑配置IP地址，有时会弹出地址冲突的提示，然后查看属性，发现IP地址变成了169.254.0.0网段中的某个IP地址。</p>
+<div align="center">
+    ![avatar][3-网络连接属性]
+</div>
+
+
+
+
+<p>&#160; &#160; &#160; &#160;RFC3927中详细介绍了169.254.0.0网段，这个网段中的IP地址被称为本地链路地址。</p>
+<p>&#160; &#160; &#160; &#160;要与其他设备通信，主机就必须配有IP地址，要么手动配置，要么自动获取，但是配置的IP地址并不总是有效的，这样就无法和其他设备通信。</p>
+<p>&#160; &#160; &#160; &#160;而本地链路地址的存在就是为了解决这个问题，即使配置的IP地址不是有效的，但依然能分配一个本地链路地址给主机，让主机和其他设备通信。但是本地链路地址只能与同一物理链路中的设备通信，这也是其称为本地链路地址的原因。</p>
+<p>&#160; &#160; &#160; &#160;最后要介绍一下0.0.0.0这个IP地址，网络号为0，主机号也为0，在服务器中，0.0.0.0可以表示“本地计算机上的所有IPv4地址”。如果主机有两个IP地址192.168.1.1和10.1.2.1，并且主机上运行的服务器配置为监听0.0.0.0，那么这两个IP地址都可以访问这台主机。</p>
+<p>&#160; &#160; &#160; &#160;当然，还有其他的一些IP段不能使用，这里就不再赘述。特殊IP的知识大家心里有个印象就行，不需死记硬背。</p>
+<div align="center">
+    ![avatar][4-可用地址范围]
+</div>
+
+
+
+
+<p>&#160; &#160; &#160; &#160;另外，为了缓解IPv4地址的耗尽，出现了各种技术：NAT、专用网络（私有地址）、DHCP、虚拟主机等，接下来我们就简单介绍一下专用网络，其他几种技术后续再讲。</p>
+<h2 id="专用网络（私有地址）"><a href="#专用网络（私有地址）" class="headerlink" title="专用网络（私有地址）"></a>专用网络（私有地址）</h2><p>&#160; &#160; &#160; &#160;RFC1918中指出，专用网络分为三个地址段，这些地址段在专用网络外不能路由，专用网络内的主机不能直接与公共网络通信，换句话说就是这些地址只能用于内部网络。但可以通过网络地址转换（NAT），实现和互联网通信。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">A类：10.0.0.0 ~ 10.255.255.255</span><br><span class="line">B类：172.16.0.0 ~ 172.31.255.255</span><br><span class="line">C类：192.168.0.0 ~ 192.168.255.255</span><br></pre></td></tr></table></figure>
+
+<p>&#160; &#160; &#160; &#160;举个最简单的例子，家里的wifi。现在家家户户基本都有wifi，手机、电脑、电视等都可以连接以获取互联网服务。这些设备想要上网，就必须配有正确的IP地址，分配工作是路由器来完成的，而路由器分配给这些设备的IP地址就是私有地址，通常都是192.168.x.x。</p>
+<p>&#160; &#160; &#160; &#160;在划分专用网络之前，全球只能有一个192.168.0.1的地址。但划分专用网络之后，每个局域网都可以有一个192.168.0.1的地址，这就缓解了IPv4地址资源的耗尽。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">IPv4地址格式：32位二进制数，通常采用“点分十进制法”来表示IP地址</span><br><span class="line">IPv4地址组成：网络号+主机号</span><br><span class="line">IPv4地址分类：ABCDE类，常用的是ABC三类单播地址，D类为多播地址，E类保留</span><br><span class="line">保留地址：有些IP地址被保留，用于特殊用途，其中包括专用网络</span><br><span class="line">A类：10.0.0.0 ~ 10.255.255.255</span><br><span class="line">B类：172.16.0.0 ~ 172.31.255.255</span><br><span class="line">C类：192.168.0.0 ~ 192.168.255.255</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的微信公众号。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
+<div align="center">
+    ![avatar][5-关注公众号]
+</div>
+
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    安全小白团
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://noob-sec.github.io/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-1%20-%20%E5%89%AF%E6%9C%AC/" title="网络层 | 网际协议IP(1)">https://noob-sec.github.io/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-1%20-%20%E5%89%AF%E6%9C%AC/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-1/" rel="next" title="网络层 | 网际协议IP(1)">
+                <i class="fa fa-chevron-left"></i> 网络层 | 网际协议IP(1)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/%E7%A7%BB%E5%8A%A8%E5%AE%89%E5%85%A8-%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%80/" rel="prev" title="移动安全  | 逆向基础">
+                移动安全  | 逆向基础 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <!--评论广告-->
+      <div class="comments_ad">
+         
+      </div>
+      
+        <div id="gitment-container"></div>
+      
+      <!--评论广告-->
+      <div class="comments_ad">
+         
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/logo.png"
+                alt="安全小白团" />
+            
+              <p class="site-author-name" itemprop="name">安全小白团</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/noob-sec" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IP地址详解"><span class="nav-number">2.</span> <span class="nav-text">IP地址详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#格式"><span class="nav-number">2.1.</span> <span class="nav-text">格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分类"><span class="nav-number">2.2.</span> <span class="nav-text">分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特殊IP地址"><span class="nav-number">2.3.</span> <span class="nav-text">特殊IP地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#专用网络（私有地址）"><span class="nav-number">2.4.</span> <span class="nav-text">专用网络（私有地址）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#免责声明"><span class="nav-number">4.</span> <span class="nav-text">免责声明</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+        <!--侧栏广告-->
+        <div class="sidebar-ad" style="height:220px">
+           
+        </div>
+    </div>
+  
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">安全小白团</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">71.8k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user">本站访客数</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye">本站总访问量</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'noob-sec',
+            repo: 'noob-sec.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '17570a46b126a4b8f596cdf9453c2cc9718acafc',
+            
+                client_id: '2597c4baaee8f21ace7e'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
