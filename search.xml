@@ -114,44 +114,6 @@
       </categories>
   </entry>
   <entry>
-    <title>每日漏洞 | 用户枚举</title>
-    <url>/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E7%94%A8%E6%88%B7%E6%9E%9A%E4%B8%BE/</url>
-    <content><![CDATA[<h1 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h1><p>&#160; &#160; &#160; &#160;由于错误配置或设计缺陷，当向系统提交有效账户和无效账户时，服务器会有不同的响应。利用响应的不同，攻击者可以获取到系统已经存在的账户，可用于暴力破解，进一步获取账户的登录密码。</p>
-<h1 id="漏洞检测"><a href="#漏洞检测" class="headerlink" title="漏洞检测"></a>漏洞检测</h1><p>&#160; &#160; &#160; &#160;用户枚举漏洞的检测比较简单，只需用不同的账户去登录，查看服务器响应是否有差异即可（查看页面、查看响应包等）。</p>
-<h2 id="有效账户"><a href="#有效账户" class="headerlink" title="有效账户"></a>有效账户</h2><p>&#160; &#160; &#160; &#160;输入系统存在的账户和任意密码，系统响应密码错误。</p>
-<div align="center">
-    ![avatar][1-用户枚举]
-</div>
-
-<h2 id="无效账户"><a href="#无效账户" class="headerlink" title="无效账户"></a>无效账户</h2><p>&#160; &#160; &#160; &#160;输入系统不存在的账户和任意密码，系统响应用户名不存在。</p>
-<div align="center">
-    ![avatar][2-用户枚举]
-</div>
-
-<p>&#160; &#160; &#160; &#160;有效账户和无效账户的系统响应存在差异，这就表示系统存在用户枚举漏洞。简单的测试，我们就获取到了系统已经存在的admin账户，而且按照国际流程，admin很可能是系统管理账户。我们可以用字典去爆破admin的登陆密码，也可以继续枚举系统存在的其他账户，进一步确定可攻击对象。<br>附带一下以前遇到过的情况。输入admin账户时，不仅会提示用户名或密码不正确，还会提示还有几次登录机会。</p>
-<div align="center">
-    ![avatar][3-用户枚举]
-</div>
-
-<p>&#160; &#160; &#160; &#160;但输入其他账户时，只会提示用户名或密码不正确。</p>
-<div align="center">
-    ![avatar][4-用户枚举]
-</div>
-
-<p>&#160; &#160; &#160; &#160;这种情况，别的不敢肯定，但admin账户一定存在。</p>
-<h1 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h1><p>&#160; &#160; &#160; &#160;统一身份验证失败时的响应，如：用户名或密码错误。</p>
-<h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的微信公众号。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
-<div align="center">
-    ![avatar][5-关注公众号]
-</div>
-
-
-]]></content>
-      <categories>
-        <category>每日漏洞</category>
-      </categories>
-  </entry>
-  <entry>
     <title>移动安全  | 逆向基础</title>
     <url>/%E7%A7%BB%E5%8A%A8%E5%AE%89%E5%85%A8-%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<h1 id="编译简介"><a href="#编译简介" class="headerlink" title="编译简介"></a>编译简介</h1><p>&#160; &#160; &#160; &#160;在学习逆向之前，我觉得很有必要了解一下编译原理。编译是将源代码转换成目标代码的过程及动作，通常是将高级语言转变成汇编语言或机器语言。</p>
@@ -207,26 +169,36 @@
       </categories>
   </entry>
   <entry>
-    <title>每日漏洞 | 会话固定</title>
-    <url>/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E4%BC%9A%E8%AF%9D%E5%9B%BA%E5%AE%9A/</url>
-    <content><![CDATA[<h1 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h1><p>&#160; &#160; &#160; &#160;当用户成功验证而应用程序不更新cookie时，这个时候就存在会话固定漏洞，攻击者可利用此漏洞发起会话劫持。</p>
-<p>&#160; &#160; &#160; &#160;HTTP的无状态性，导致Web应用程序必须使用会话机制来识别用户。如果用户未登录时的会话ID和登录后的会话ID保持一致，那么攻击者可以迫使受害者使用一个已知(有效)的会话ID，当受害者通过身份验证，攻击者就可以利用这个会话ID进入验证后的会话（登录状态）。</p>
-<h1 id="漏洞检测"><a href="#漏洞检测" class="headerlink" title="漏洞检测"></a>漏洞检测</h1><p>&#160; &#160; &#160; &#160;在理解漏洞原理后，怎么检测会话固定漏洞就很明显了，只需查看登录前和登录后的会话ID是否一致即可。查看的方式有多种，如浏览器F12，抓包工具等。</p>
-<h2 id="登录前查看客户端的会话ID"><a href="#登录前查看客户端的会话ID" class="headerlink" title="登录前查看客户端的会话ID"></a>登录前查看客户端的会话ID</h2><div align="center">
-    ![avatar][1-会话固定]
+    <title>每日漏洞 | 用户枚举</title>
+    <url>/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E7%94%A8%E6%88%B7%E6%9E%9A%E4%B8%BE/</url>
+    <content><![CDATA[<h1 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h1><p>&#160; &#160; &#160; &#160;由于错误配置或设计缺陷，当向系统提交有效账户和无效账户时，服务器会有不同的响应。利用响应的不同，攻击者可以获取到系统已经存在的账户，可用于暴力破解，进一步获取账户的登录密码。</p>
+<h1 id="漏洞检测"><a href="#漏洞检测" class="headerlink" title="漏洞检测"></a>漏洞检测</h1><p>&#160; &#160; &#160; &#160;用户枚举漏洞的检测比较简单，只需用不同的账户去登录，查看服务器响应是否有差异即可（查看页面、查看响应包等）。</p>
+<h2 id="有效账户"><a href="#有效账户" class="headerlink" title="有效账户"></a>有效账户</h2><p>&#160; &#160; &#160; &#160;输入系统存在的账户和任意密码，系统响应密码错误。</p>
+<div align="center">
+    ![avatar][1-用户枚举]
 </div>
 
-<h2 id="输入账号密码通过验证后查看客户端的会话ID"><a href="#输入账号密码通过验证后查看客户端的会话ID" class="headerlink" title="输入账号密码通过验证后查看客户端的会话ID"></a>输入账号密码通过验证后查看客户端的会话ID</h2><div align="center">
-    ![avatar][2-会话固定]
+<h2 id="无效账户"><a href="#无效账户" class="headerlink" title="无效账户"></a>无效账户</h2><p>&#160; &#160; &#160; &#160;输入系统不存在的账户和任意密码，系统响应用户名不存在。</p>
+<div align="center">
+    ![avatar][2-用户枚举]
 </div>
 
-<p>&#160; &#160; &#160; &#160;发现登录前后的会话ID是一样的，这样说明系统存在会话固定漏洞，利用漏洞就是水到渠成的事了。先在Web应用程序上创建一个会话并记录对应的有效会话ID，然后通过各种手段促使受害者使用这个会话ID通过服务器验证，这样攻击者就可以通过这个会话ID进入受害者的账户。</p>
-<h1 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h1><p>&#160; &#160; &#160; &#160;应用在用户验证成功后，先让原来的会话ID失效，然后提供一个新的会话ID给用户。</p>
+<p>&#160; &#160; &#160; &#160;有效账户和无效账户的系统响应存在差异，这就表示系统存在用户枚举漏洞。简单的测试，我们就获取到了系统已经存在的admin账户，而且按照国际流程，admin很可能是系统管理账户。我们可以用字典去爆破admin的登陆密码，也可以继续枚举系统存在的其他账户，进一步确定可攻击对象。<br>附带一下以前遇到过的情况。输入admin账户时，不仅会提示用户名或密码不正确，还会提示还有几次登录机会。</p>
+<div align="center">
+    ![avatar][3-用户枚举]
+</div>
+
+<p>&#160; &#160; &#160; &#160;但输入其他账户时，只会提示用户名或密码不正确。</p>
+<div align="center">
+    ![avatar][4-用户枚举]
+</div>
+
+<p>&#160; &#160; &#160; &#160;这种情况，别的不敢肯定，但admin账户一定存在。</p>
+<h1 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h1><p>&#160; &#160; &#160; &#160;统一身份验证失败时的响应，如：用户名或密码错误。</p>
 <h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的微信公众号。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
 <div align="center">
-    ![avatar][3-关注公众号]
+    ![avatar][5-关注公众号]
 </div>
-
 
 
 ]]></content>
@@ -336,6 +308,34 @@
       <tags>
         <tag>情报搜集</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>每日漏洞 | 会话固定</title>
+    <url>/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E4%BC%9A%E8%AF%9D%E5%9B%BA%E5%AE%9A/</url>
+    <content><![CDATA[<h1 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h1><p>&#160; &#160; &#160; &#160;当用户成功验证而应用程序不更新cookie时，这个时候就存在会话固定漏洞，攻击者可利用此漏洞发起会话劫持。</p>
+<p>&#160; &#160; &#160; &#160;HTTP的无状态性，导致Web应用程序必须使用会话机制来识别用户。如果用户未登录时的会话ID和登录后的会话ID保持一致，那么攻击者可以迫使受害者使用一个已知(有效)的会话ID，当受害者通过身份验证，攻击者就可以利用这个会话ID进入验证后的会话（登录状态）。</p>
+<h1 id="漏洞检测"><a href="#漏洞检测" class="headerlink" title="漏洞检测"></a>漏洞检测</h1><p>&#160; &#160; &#160; &#160;在理解漏洞原理后，怎么检测会话固定漏洞就很明显了，只需查看登录前和登录后的会话ID是否一致即可。查看的方式有多种，如浏览器F12，抓包工具等。</p>
+<h2 id="登录前查看客户端的会话ID"><a href="#登录前查看客户端的会话ID" class="headerlink" title="登录前查看客户端的会话ID"></a>登录前查看客户端的会话ID</h2><div align="center">
+    ![avatar][1-会话固定]
+</div>
+
+<h2 id="输入账号密码通过验证后查看客户端的会话ID"><a href="#输入账号密码通过验证后查看客户端的会话ID" class="headerlink" title="输入账号密码通过验证后查看客户端的会话ID"></a>输入账号密码通过验证后查看客户端的会话ID</h2><div align="center">
+    ![avatar][2-会话固定]
+</div>
+
+<p>&#160; &#160; &#160; &#160;发现登录前后的会话ID是一样的，这样说明系统存在会话固定漏洞，利用漏洞就是水到渠成的事了。先在Web应用程序上创建一个会话并记录对应的有效会话ID，然后通过各种手段促使受害者使用这个会话ID通过服务器验证，这样攻击者就可以通过这个会话ID进入受害者的账户。</p>
+<h1 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h1><p>&#160; &#160; &#160; &#160;应用在用户验证成功后，先让原来的会话ID失效，然后提供一个新的会话ID给用户。</p>
+<h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的微信公众号。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
+<div align="center">
+    ![avatar][3-关注公众号]
+</div>
+
+
+
+]]></content>
+      <categories>
+        <category>每日漏洞</category>
+      </categories>
   </entry>
   <entry>
     <title>每日漏洞 | CRLF注入</title>
@@ -1000,6 +1000,187 @@
       </tags>
   </entry>
   <entry>
+    <title>每日命令 | cp</title>
+    <url>/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-cp/</url>
+    <content><![CDATA[<h1 id="命令简介"><a href="#命令简介" class="headerlink" title="命令简介"></a>命令简介</h1><p>&#160; &#160; &#160; &#160;上回我们介绍了文件和目录的创建，今天我们来介绍一下文件和目录的复制。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp——复制文件或目录</span><br></pre></td></tr></table></figure>
+
+<div align="center">
+    ![avatar][1-cp]
+</div>
+
+
+
+
+
+
+
+
+
+<h1 id="命令详解"><a href="#命令详解" class="headerlink" title="命令详解"></a>命令详解</h1><h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp [选项] 参数1 参数2</span><br></pre></td></tr></table></figure>
+
+<p>&#160; &#160; &#160; &#160;以上是cp命令的语法，可以看到cp命令在使用时必须提供两个参数。</p>
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>&#160; &#160; &#160; &#160;参数1代表源文件，即要复制哪个文件或目录；参数2代表目标文件，即复制到哪个文件或目录。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp [选项] 源文件 目标文件</span><br></pre></td></tr></table></figure>
+
+<div align="center">
+    ![avatar][2-cp]
+</div>
+
+<p>&#160; &#160; &#160; &#160;复制docker.sh，只提供一个参数，系统提示缺少一个目标文件。提供两个参数后，成功将docker.sh复制到docker1.sh。</p>
+<p>&#160; &#160; &#160; &#160;cp命令有三种主要的操作模式：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">文件复制到文件</span><br><span class="line">文件复制到目录</span><br><span class="line">目录复制到目录</span><br></pre></td></tr></table></figure>
+
+<p>&#160; &#160; &#160; &#160;复制docker.sh到docker1.sh就是第一种操作模式。在执行cp命令时，如果目标文件不存在，则会创建目标文件；如果目标文件已经存在，默认会用源文件覆盖目标文件。</p>
+<div align="center">
+    ![avatar][3-cp]
+</div>
+
+
+
+
+<p>&#160; &#160; &#160; &#160;首先新建一个old_file文件，然后复制到new_file文件。在执行cp命令之前，new_file文件是不存在的，于是系统生成了new_file。</p>
+<div align="center">
+    ![avatar][4-cp]
+</div>
+
+
+
+
+<p>&#160; &#160; &#160; &#160;这个时候，new_file文件和old_file文件都是空白文件，cat命令可用来查看文件内容，后面的文章再给大家介绍。</p>
+<p>&#160; &#160; &#160; &#160;然后在old_file文件中添加一句话，保存后再执行cp命令，查看new_file文件，发现new_file文件的内容已经被old_file文件所覆盖。</p>
+<div align="center">
+    ![avatar][5-cp]
+</div>
+
+
+
+<p>&#160; &#160; &#160; &#160;以上是文件复制到文件的操作模式，接下来介绍一下文件复制到目录的操作模式。</p>
+<p>&#160; &#160; &#160; &#160;文件到文件和文件到目录，两种操作模式最大的区别是文件到目录的模式可以同时包含多个源文件，而文件到文件的模式只允许一个源文件，其他并没有什么区别。</p>
+<div align="center">
+    ![avatar][6-cp]
+</div>
+
+
+
+
+<p>&#160; &#160; &#160; &#160;可以看到，文件复制到目录的操作模式下，系统没有报错；但文件复制到文件的操作模式，提供三个参数，系统报错，提示new_file不是目录。</p>
+<p>&#160; &#160; &#160; &#160;最后介绍目录复制到目录的操作模式。这种模式，可以同时复制文件和目录，但是在复制目录的时候，必须添加“-r”选项，cp命令才会将源目录复制到目标目录。</p>
+<div align="center">
+    ![avatar][7-cp]
+</div>
+
+
+
+
+<p>&#160; &#160; &#160; &#160;添加“-r”选项前，系统提示没有提供“-r”选项，省略了目录的复制，只复制了docker.sh文件。</p>
+<div align="center">
+    ![avatar][8-cp]
+</div>
+
+
+
+
+<p>&#160; &#160; &#160; &#160;添加“-r”选项后，成功将目录复制到了目标目录。也可以使用“-R”选项，效果和“-r”选项一样。</p>
+<p>&#160; &#160; &#160; &#160;需要注意的是，在文件到目录、目录到目录的操作模式中，目标文件指定的目录必须存在，cp命令并不会为我们创建目录。</p>
+<div align="center">
+    ![avatar][9-cp]
+</div>
+
+
+<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><p>&#160; &#160; &#160; &#160;cp命令选项有点多，这里我挑几个比较常用的选项给大家介绍一下，其余的大家可以查阅相关资料来进行学习。</p>
+<p>&#160; &#160; &#160; &#160;首先是“-i”选项。在执行cp命令时，如果目标文件存在，则默认用源文件覆盖目标文件。添加“-i”选项之后，系统会在覆盖之前询问我们。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp -i 源文件 目标文件</span><br></pre></td></tr></table></figure>
+
+<p>&#160; &#160; &#160; &#160;首先我们新建old_file文件，复制到new_file文件，然后在old_file文件中添加一句话。</p>
+<div align="center">
+    ![avatar][10-cp]
+</div>
+
+
+
+
+<p>&#160; &#160; &#160; &#160;此时new_file是没有内容的，我们再执行cp命令，这个时候添加“-i”选项。</p>
+<div align="center">
+    ![avatar][11-cp]
+</div>
+
+
+
+
+<p>&#160; &#160; &#160; &#160;添加“-i”选项后，系统会询问我们是否覆盖目标文件。只有我们输入“y“的时候(Y、yes、1、Yes等也可以，能代表”是“一般都行，通常都是使用y)，系统才会覆盖，输入其他任何字符都会被认为不覆盖。</p>
+<p>&#160; &#160; &#160; &#160;添加”-i“选项后，目标文件存在时，系统都会询问我们。如果有大量的目标文件存在，那我们输入答案都要费很大功夫，特别是当我们只想复制不存在的目标文件时，这个选项显然不能很好满足我们的需求。</p>
+<div align="center">
+    ![avatar][12-cp]
+</div>
+
+
+
+
+<p>&#160; &#160; &#160; &#160;为此，Linux为我们提供了”-n“选项。添加这个选项之后，系统就默认不覆盖已经存在的目标文件，可以理解为只复制不存在的目标文件。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp -n 源文件 目标文件</span><br></pre></td></tr></table></figure>
+
+<div align="center">
+    ![avatar][13-cp]
+</div>
+
+<p>&#160; &#160; &#160; &#160;新建old_file和new_file文件，然后修改old_file文件，在执行cp命令时添加”-n“选项，查看new_file文件，依然是空白文件，说明没有用old_file覆盖new_file。</p>
+<p>&#160; &#160; &#160; &#160;除了可以选择不覆盖已经存在的目标文件，还可以选择强制复制文件，不管目标文件是否存在，这通过”-f“选项来实现。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp -f 源文件 目标文件</span><br></pre></td></tr></table></figure>
+
+<div align="center">
+    ![avatar][14-cp]
+</div>
+
+<p>&#160; &#160; &#160; &#160;另外，还可以选择只有源文件的时间属性比目标文件新或目标文件不存在的时候才复制，通过”-u“选项来实现，相当于更新。</p>
+<p>&#160; &#160; &#160; &#160;举个例子。我在桌面上新建了一个工作周报，记录了我这周的工作内容，然后我想把这个文档复制到某个文件夹内，但这个文件夹里已经存在了上周的工作周报，这个时候我肯定要拿桌面的工作周报覆盖文件夹里的工作周报才行，反之，如果文件夹的工作周报比桌面的工作周报新，则不覆盖。”-u“选项就可以执行这个工作。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp -u 源文件 目标文件</span><br></pre></td></tr></table></figure>
+
+<div align="center">
+    ![avatar][15-cp]
+</div>
+
+<p>&#160; &#160; &#160; &#160;首先将new_file文件更新，这个时候new_file文件相对old_file文件要新一些，此时添加“-u”选项复制一下，发现new_file文件内容没有改变。</p>
+<p>&#160; &#160; &#160; &#160;以上选项的复制都是不包含属性的，比如时间、权限等。如果想连同源文件的属性也复制过去，就必须使用“-p”选项。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp -p 源文件 目标文件</span><br></pre></td></tr></table></figure>
+
+<div align="center">
+    ![avatar][16-cp]
+</div>
+
+<p>&#160; &#160; &#160; &#160;首先用stat命令查看old_file和new_file的属性，然后添加“-p”选项复制，发现new_file文件的访问时间和修改时间不是当前时间，而是old_file文件的访问时间和修改时间。</p>
+<div align="center">
+    ![avatar][17-cp]
+</div>
+
+
+
+
+<p>&#160; &#160; &#160; &#160;文件权限也被复制到new_file文件。chmod命令用来修改文件和目录的权限，后面的文章会详细讲解。</p>
+<h1 id="知识总结"><a href="#知识总结" class="headerlink" title="知识总结"></a>知识总结</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">语法：</span><br><span class="line">    cp [选项] 源文件 目标文件</span><br><span class="line">用途：复制文件或目录</span><br><span class="line">选项：</span><br><span class="line">    -i————覆盖前的交互提示</span><br><span class="line">    -n————不覆盖现有文件</span><br><span class="line">    -f————强制复制</span><br><span class="line">    -u————更新</span><br><span class="line">    -p————保留源文件的属性</span><br><span class="line">    -r、-R————递归复制目录</span><br><span class="line">参数：源文件、目标文件（绝对地址和相对地址都可以）</span><br><span class="line">其他：</span><br><span class="line">    三种操作模式：文件到文件、文件到目录、目录到目录</span><br><span class="line">    文件到文件的操作模式，只允许有两个参数</span><br><span class="line">    目录到目录的操作模式，必须添加“-r”或“-R”选项</span><br><span class="line">    文件到目录、目录到目录的操作模式，目录必须存在</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+<h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的微信公众号。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
+<div align="center">
+    ![avatar][18-关注公众号]
+</div>
+
+
+]]></content>
+      <categories>
+        <category>每日命令</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>每日命令 | pwd、cd</title>
     <url>/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-pwd%E3%80%81cd/</url>
     <content><![CDATA[<h1 id="命令简介"><a href="#命令简介" class="headerlink" title="命令简介"></a>命令简介</h1><p>&#160; &#160; &#160; &#160;上回说到《每日命令 | ls》，今天我们来说一说pwd命令和cd命令。</p>
@@ -1292,187 +1473,6 @@
       </categories>
       <tags>
         <tag>CSRF</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>每日命令 | cp</title>
-    <url>/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-cp/</url>
-    <content><![CDATA[<h1 id="命令简介"><a href="#命令简介" class="headerlink" title="命令简介"></a>命令简介</h1><p>&#160; &#160; &#160; &#160;上回我们介绍了文件和目录的创建，今天我们来介绍一下文件和目录的复制。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp——复制文件或目录</span><br></pre></td></tr></table></figure>
-
-<div align="center">
-    ![avatar][1-cp]
-</div>
-
-
-
-
-
-
-
-
-
-<h1 id="命令详解"><a href="#命令详解" class="headerlink" title="命令详解"></a>命令详解</h1><h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp [选项] 参数1 参数2</span><br></pre></td></tr></table></figure>
-
-<p>&#160; &#160; &#160; &#160;以上是cp命令的语法，可以看到cp命令在使用时必须提供两个参数。</p>
-<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>&#160; &#160; &#160; &#160;参数1代表源文件，即要复制哪个文件或目录；参数2代表目标文件，即复制到哪个文件或目录。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp [选项] 源文件 目标文件</span><br></pre></td></tr></table></figure>
-
-<div align="center">
-    ![avatar][2-cp]
-</div>
-
-<p>&#160; &#160; &#160; &#160;复制docker.sh，只提供一个参数，系统提示缺少一个目标文件。提供两个参数后，成功将docker.sh复制到docker1.sh。</p>
-<p>&#160; &#160; &#160; &#160;cp命令有三种主要的操作模式：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">文件复制到文件</span><br><span class="line">文件复制到目录</span><br><span class="line">目录复制到目录</span><br></pre></td></tr></table></figure>
-
-<p>&#160; &#160; &#160; &#160;复制docker.sh到docker1.sh就是第一种操作模式。在执行cp命令时，如果目标文件不存在，则会创建目标文件；如果目标文件已经存在，默认会用源文件覆盖目标文件。</p>
-<div align="center">
-    ![avatar][3-cp]
-</div>
-
-
-
-
-<p>&#160; &#160; &#160; &#160;首先新建一个old_file文件，然后复制到new_file文件。在执行cp命令之前，new_file文件是不存在的，于是系统生成了new_file。</p>
-<div align="center">
-    ![avatar][4-cp]
-</div>
-
-
-
-
-<p>&#160; &#160; &#160; &#160;这个时候，new_file文件和old_file文件都是空白文件，cat命令可用来查看文件内容，后面的文章再给大家介绍。</p>
-<p>&#160; &#160; &#160; &#160;然后在old_file文件中添加一句话，保存后再执行cp命令，查看new_file文件，发现new_file文件的内容已经被old_file文件所覆盖。</p>
-<div align="center">
-    ![avatar][5-cp]
-</div>
-
-
-
-<p>&#160; &#160; &#160; &#160;以上是文件复制到文件的操作模式，接下来介绍一下文件复制到目录的操作模式。</p>
-<p>&#160; &#160; &#160; &#160;文件到文件和文件到目录，两种操作模式最大的区别是文件到目录的模式可以同时包含多个源文件，而文件到文件的模式只允许一个源文件，其他并没有什么区别。</p>
-<div align="center">
-    ![avatar][6-cp]
-</div>
-
-
-
-
-<p>&#160; &#160; &#160; &#160;可以看到，文件复制到目录的操作模式下，系统没有报错；但文件复制到文件的操作模式，提供三个参数，系统报错，提示new_file不是目录。</p>
-<p>&#160; &#160; &#160; &#160;最后介绍目录复制到目录的操作模式。这种模式，可以同时复制文件和目录，但是在复制目录的时候，必须添加“-r”选项，cp命令才会将源目录复制到目标目录。</p>
-<div align="center">
-    ![avatar][7-cp]
-</div>
-
-
-
-
-<p>&#160; &#160; &#160; &#160;添加“-r”选项前，系统提示没有提供“-r”选项，省略了目录的复制，只复制了docker.sh文件。</p>
-<div align="center">
-    ![avatar][8-cp]
-</div>
-
-
-
-
-<p>&#160; &#160; &#160; &#160;添加“-r”选项后，成功将目录复制到了目标目录。也可以使用“-R”选项，效果和“-r”选项一样。</p>
-<p>&#160; &#160; &#160; &#160;需要注意的是，在文件到目录、目录到目录的操作模式中，目标文件指定的目录必须存在，cp命令并不会为我们创建目录。</p>
-<div align="center">
-    ![avatar][9-cp]
-</div>
-
-
-<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><p>&#160; &#160; &#160; &#160;cp命令选项有点多，这里我挑几个比较常用的选项给大家介绍一下，其余的大家可以查阅相关资料来进行学习。</p>
-<p>&#160; &#160; &#160; &#160;首先是“-i”选项。在执行cp命令时，如果目标文件存在，则默认用源文件覆盖目标文件。添加“-i”选项之后，系统会在覆盖之前询问我们。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp -i 源文件 目标文件</span><br></pre></td></tr></table></figure>
-
-<p>&#160; &#160; &#160; &#160;首先我们新建old_file文件，复制到new_file文件，然后在old_file文件中添加一句话。</p>
-<div align="center">
-    ![avatar][10-cp]
-</div>
-
-
-
-
-<p>&#160; &#160; &#160; &#160;此时new_file是没有内容的，我们再执行cp命令，这个时候添加“-i”选项。</p>
-<div align="center">
-    ![avatar][11-cp]
-</div>
-
-
-
-
-<p>&#160; &#160; &#160; &#160;添加“-i”选项后，系统会询问我们是否覆盖目标文件。只有我们输入“y“的时候(Y、yes、1、Yes等也可以，能代表”是“一般都行，通常都是使用y)，系统才会覆盖，输入其他任何字符都会被认为不覆盖。</p>
-<p>&#160; &#160; &#160; &#160;添加”-i“选项后，目标文件存在时，系统都会询问我们。如果有大量的目标文件存在，那我们输入答案都要费很大功夫，特别是当我们只想复制不存在的目标文件时，这个选项显然不能很好满足我们的需求。</p>
-<div align="center">
-    ![avatar][12-cp]
-</div>
-
-
-
-
-<p>&#160; &#160; &#160; &#160;为此，Linux为我们提供了”-n“选项。添加这个选项之后，系统就默认不覆盖已经存在的目标文件，可以理解为只复制不存在的目标文件。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp -n 源文件 目标文件</span><br></pre></td></tr></table></figure>
-
-<div align="center">
-    ![avatar][13-cp]
-</div>
-
-<p>&#160; &#160; &#160; &#160;新建old_file和new_file文件，然后修改old_file文件，在执行cp命令时添加”-n“选项，查看new_file文件，依然是空白文件，说明没有用old_file覆盖new_file。</p>
-<p>&#160; &#160; &#160; &#160;除了可以选择不覆盖已经存在的目标文件，还可以选择强制复制文件，不管目标文件是否存在，这通过”-f“选项来实现。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp -f 源文件 目标文件</span><br></pre></td></tr></table></figure>
-
-<div align="center">
-    ![avatar][14-cp]
-</div>
-
-<p>&#160; &#160; &#160; &#160;另外，还可以选择只有源文件的时间属性比目标文件新或目标文件不存在的时候才复制，通过”-u“选项来实现，相当于更新。</p>
-<p>&#160; &#160; &#160; &#160;举个例子。我在桌面上新建了一个工作周报，记录了我这周的工作内容，然后我想把这个文档复制到某个文件夹内，但这个文件夹里已经存在了上周的工作周报，这个时候我肯定要拿桌面的工作周报覆盖文件夹里的工作周报才行，反之，如果文件夹的工作周报比桌面的工作周报新，则不覆盖。”-u“选项就可以执行这个工作。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp -u 源文件 目标文件</span><br></pre></td></tr></table></figure>
-
-<div align="center">
-    ![avatar][15-cp]
-</div>
-
-<p>&#160; &#160; &#160; &#160;首先将new_file文件更新，这个时候new_file文件相对old_file文件要新一些，此时添加“-u”选项复制一下，发现new_file文件内容没有改变。</p>
-<p>&#160; &#160; &#160; &#160;以上选项的复制都是不包含属性的，比如时间、权限等。如果想连同源文件的属性也复制过去，就必须使用“-p”选项。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cp -p 源文件 目标文件</span><br></pre></td></tr></table></figure>
-
-<div align="center">
-    ![avatar][16-cp]
-</div>
-
-<p>&#160; &#160; &#160; &#160;首先用stat命令查看old_file和new_file的属性，然后添加“-p”选项复制，发现new_file文件的访问时间和修改时间不是当前时间，而是old_file文件的访问时间和修改时间。</p>
-<div align="center">
-    ![avatar][17-cp]
-</div>
-
-
-
-
-<p>&#160; &#160; &#160; &#160;文件权限也被复制到new_file文件。chmod命令用来修改文件和目录的权限，后面的文章会详细讲解。</p>
-<h1 id="知识总结"><a href="#知识总结" class="headerlink" title="知识总结"></a>知识总结</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">语法：</span><br><span class="line">    cp [选项] 源文件 目标文件</span><br><span class="line">用途：复制文件或目录</span><br><span class="line">选项：</span><br><span class="line">    -i————覆盖前的交互提示</span><br><span class="line">    -n————不覆盖现有文件</span><br><span class="line">    -f————强制复制</span><br><span class="line">    -u————更新</span><br><span class="line">    -p————保留源文件的属性</span><br><span class="line">    -r、-R————递归复制目录</span><br><span class="line">参数：源文件、目标文件（绝对地址和相对地址都可以）</span><br><span class="line">其他：</span><br><span class="line">    三种操作模式：文件到文件、文件到目录、目录到目录</span><br><span class="line">    文件到文件的操作模式，只允许有两个参数</span><br><span class="line">    目录到目录的操作模式，必须添加“-r”或“-R”选项</span><br><span class="line">    文件到目录、目录到目录的操作模式，目录必须存在</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-<h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的微信公众号。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
-<div align="center">
-    ![avatar][18-关注公众号]
-</div>
-
-
-]]></content>
-      <categories>
-        <category>每日命令</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
@@ -2042,7 +2042,7 @@
 <p>&#160; &#160; &#160; &#160;大家只需要了解常用的首部字段即可，这些常用的字段我会在以后的文章中介绍。</p>
 <h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的博客。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
 <div align="center">
-    ![avatar][33-关注公众号]
+    ![avatar][https://imgur.com/YVuVovz]
 </div>
 
 

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://noob-sec.github.io/HTTP-HTTP%E6%8A%A5%E6%96%87/</loc>
+    <lastmod>2020-07-07</lastmod>
+  </url>  <url>
     <loc>https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-cp/</loc>
     <lastmod>2019-05-06</lastmod>
   </url>  <url>
@@ -56,9 +59,6 @@
     <lastmod>2019-04-21</lastmod>
   </url>  <url>
     <loc>https://noob-sec.github.io/PTES-%E6%83%85%E6%8A%A5%E6%90%9C%E9%9B%86/</loc>
-    <lastmod>2019-04-21</lastmod>
-  </url>  <url>
-    <loc>https://noob-sec.github.io/HTTP-HTTP%E6%8A%A5%E6%96%87/</loc>
     <lastmod>2019-04-21</lastmod>
   </url>
 </urlset>
