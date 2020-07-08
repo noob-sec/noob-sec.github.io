@@ -88,11 +88,25 @@
 <meta property="og:url" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0/index.html">
 <meta property="og:site_name" content="安全小白团">
 <meta property="og:description" content="noob-sec安全小白团,小白学习基地,教你渗透测试如何从入门到放弃。">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0/1-csrf.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0/2-csrf.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0/3-csrf.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0/4-csrf.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0/5-csrf.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0/6-csrf.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0/7-csrf.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0/8-csrf.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0/9-csrf.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0/10-csrf.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0/11-csrf.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0/12-csrf.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0/13-%E5%85%B3%E6%B3%A8%E5%85%AC%E4%BC%97%E5%8F%B7.gif">
 <meta property="article:published_time" content="2019-01-12T06:38:02.000Z">
-<meta property="article:modified_time" content="2019-05-06T02:21:20.000Z">
+<meta property="article:modified_time" content="2020-07-08T03:37:48.428Z">
 <meta property="article:author" content="安全小白团">
 <meta property="article:tag" content="CSRF">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0/1-csrf.jpg">
 
 
 
@@ -472,7 +486,7 @@
 <h1 id="漏洞检测"><a href="#漏洞检测" class="headerlink" title="漏洞检测"></a>漏洞检测</h1><p>&#160; &#160; &#160; &#160;CSRF的利用场景常常是在用户已登录的情况下，伪造用户意愿从站外发起请求。更深入剖析：请求能从站外发起(跨站)、请求的参数和值可以伪造(伪造请求)，因此，CSRF的检测也是从这两点入手。</p>
 <p>&#160; &#160; &#160; &#160;以转账为例，输入账户和金额，点击Transfer即可完成转账。我们检测该功能是否存在CSRF。</p>
 <div align="center">
-    ![avatar][1-csrf]
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0/1-csrf.jpg" class>
 </div>
 
 
@@ -480,59 +494,59 @@
 <h2 id="是否可跨站"><a href="#是否可跨站" class="headerlink" title="是否可跨站"></a>是否可跨站</h2><p>&#160; &#160; &#160; &#160;要检测是否可跨站，只需要操作请求头中的referer字段即可。referer字段记录了请求的来源，如果请求头中没有referer字段，或者删掉请求头中的referer字段，均响应成功，那么服务器就没有校验请求来源，存在“跨站”。</p>
 <p>&#160; &#160; &#160; &#160;首先正常提交请求包，发现转账成功。</p>
 <div align="center">
-    ![avatar][2-csrf]
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0/2-csrf.jpg" class>
 </div>
 
 <p>&#160; &#160; &#160; &#160;我们可以看到请求头中有个Referer字段，其中的值表示我们是从哪个页面请求过来的。我们试着将Referer字段删除并再次提交，查看账户余额有没有变化。</p>
 <div align="center">
-    ![avatar][3-csrf]
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0/3-csrf.jpg" class>
 </div>
 
 <p>&#160; &#160; &#160; &#160;发现账户余额从990变成980，说明服务器并没有验证请求来源，可以“跨站”。</p>
 <h2 id="是否可伪造请求"><a href="#是否可伪造请求" class="headerlink" title="是否可伪造请求"></a>是否可伪造请求</h2><p>&#160; &#160; &#160; &#160;伪造请求的前提是，我们知道如何去伪造请求中的参数和值，也就是说我们知道请求中包含哪些参数，知道参数的准确值或者范围。因此，检测是否可伪造请求，只需要查看请求中是否有我们无法伪造的参数和值即可。</p>
 <div align="center">
-    ![avatar][4-csrf]
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0/4-csrf.jpg" class>
 </div>
 
 <p>&#160; &#160; &#160; &#160;可以看到，请求中有4个参数，account表示账号，amount表示转账金额，这两个很好伪造，action表示执行的动作，不需要伪造，直接使用即可。token是什么东西？(Token令牌了解一下)</p>
 <p>&#160; &#160; &#160; &#160;token参数的值这么长，一看就知道不好伪造。那删掉token试试，万一和referer字段一样，服务器没有对token进行校验呢。</p>
 <div align="center">
-    ![avatar][5-csrf]
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0/5-csrf.jpg" class>
 </div>
 
 <p>&#160; &#160; &#160; &#160;反复重放了几次请求，发现账户余额保持不变，很显然，token参数必须有。那我们随便改一下token的值，看请求中是不是只要有token参数就行了，但服务器并不会校验token的值。</p>
 <div align="center">
-    ![avatar][6-csrf]
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0/6-csrf.jpg" class>
 </div>
 
 <p>&#160; &#160; &#160; &#160;反复重放几次，发现账户余额依然保持不变，说明服务器对Token做了校验，请求中不能缺失token或token错误。</p>
 <p>&#160; &#160; &#160; &#160;正打算放弃的时候，无聊的重放着原始请求包，突然发现账户余额变成了900。</p>
 <div align="center">
-    ![avatar][7-csrf]
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0/7-csrf.jpg" class>
 </div>
 
 <p>&#160; &#160; &#160; &#160;WTF，同一个token值好像可以反复使用，均能通过校验，难道这token是永久的？后来发现只要不退出重新登录，token会一直有效，了解了，这叫“韩式半永久”。</p>
 <h2 id="验证CSRF"><a href="#验证CSRF" class="headerlink" title="验证CSRF"></a>验证CSRF</h2><p>&#160; &#160; &#160; &#160;既能“跨站”，又能伪造请求，那CSRF的验证就很简单了。重新抓包，利用抓包工具生成CSRF的POC。</p>
 <div align="center">
-    ![avatar][8-csrf]
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0/8-csrf.jpg" class>
 </div>
 
 <div align="center">
-    ![avatar][9-csrf]
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0/9-csrf.jpg" class>
 </div>
 
 <p>&#160; &#160; &#160; &#160;复制其中的HTML代码，在本地新建一个HTML页面，将复制的代码保存其中，然后在同一个浏览器中打开(不懂的请gun去学习Cookie方面的知识)。</p>
 <div align="center">
-    ![avatar][10-csrf]
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0/10-csrf.jpg" class>
 </div>
 
 <div align="center">
-    ![avatar][11-csrf]
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0/11-csrf.jpg" class>
 </div>
 
 <p>&#160; &#160; &#160; &#160;点击CSRF页面中的按钮，发现会跳转到转账页面，且账户余额只有400，少了500。 </p>
 <div align="center">
-    ![avatar][12-csrf]
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0/12-csrf.jpg" class>
 </div>
 
 
@@ -545,11 +559,8 @@
 <p>文章风格，尽量简单明了，再以幽默风趣的方式给大家介绍漏洞的检测。个人觉得我的校友们应该能看懂，如果实在是忙于做菜和开挖掘机，没时间看懂，可以在公众号里留言，有时间我就会回复。新开的公众号，文章底部暂不支持留言，这个有点头疼。每日漏洞系列需要校友们有一定基础，定位也是定在如何检测，所以理论的东西不会介绍太多，校友们平时可以适当补充理论知识，这样更容易消化每日漏洞的内容。</p>
 <h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的博客。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
 <div align="center">
-    ![avatar][13-关注公众号]
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0/13-%E5%85%B3%E6%B3%A8%E5%85%AC%E4%BC%97%E5%8F%B7.gif" class>
 </div>
-
-
-
       
     </div>
     
@@ -725,7 +736,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -736,7 +747,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -839,7 +850,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">35.9k</span>
+    <span title="Site words total count">38.8k</span>
   
 </div>
 

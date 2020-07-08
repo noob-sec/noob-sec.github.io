@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="安全小白团">
 <meta property="og:description" content="noob-sec安全小白团,小白学习基地,教你渗透测试如何从入门到放弃。">
 <meta property="article:published_time" content="2019-04-19T03:26:59.000Z">
-<meta property="article:modified_time" content="2019-05-06T02:13:40.000Z">
+<meta property="article:modified_time" content="2020-07-08T04:00:09.609Z">
 <meta property="article:author" content="安全小白团">
 <meta property="article:tag" content="安全小白团，noobsec">
 <meta name="twitter:card" content="summary">
@@ -477,7 +477,7 @@
 <h2 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h2><p>&#160; &#160; &#160; &#160;目前互联网使用IP协议有两个版本：IPv4和IPv6。在这里只介绍IPv4地址，IPv6地址后面再介绍。</p>
 <p>&#160; &#160; &#160; &#160;IPv4地址由32位二进制数组成，为了提高可读性，对人类更加友好，通常采用 “点分十进制法” 表示IP地址，具体的做法如图所示：</p>
 <div align="center">
-    ![avatar][1-点分十进制]
+    
 </div>
 
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">（1）每八位二进制数为一组，将32位的IP地址分为4组</span><br><span class="line">（2）将每组二进制数转换为十进制数</span><br><span class="line">（3）用“.”将四组十进制数隔开，转换成对人类友好的IP地址表现形式</span><br></pre></td></tr></table></figure>
@@ -487,7 +487,7 @@
 <p>&#160; &#160; &#160; &#160;打个比方，寄快递。我在某云爸爸那里买个东西，寄到北京朝阳区xxxx。快递不会直接寄到具体地址这里，正常的流程应该是这样：快递公司一看地址是北京朝阳区，那它直接把快递寄到朝阳区；寄到朝阳区后，再由快递小哥寄到xxxx。这里北京朝阳区就是网络号，xxxx就是主机号，邮编就有这种作用。</p>
 <p>&#160; &#160; &#160; &#160;早期的IPv4地址，前八位为网络号，后二十四位为主机号。随着互联网的发展，RFC 791对IPv4地址的定义做了修改，将IPv4地址分为了ABC三类单播地址。再后来，D类和E类也被定义。</p>
 <div align="center">
-    ![avatar][2-分类网络]
+    
 </div>
 
 
@@ -511,7 +511,7 @@
 <p>&#160; &#160; &#160; &#160;127.0.0.0网段大家应该不陌生，特别是做开发的。这个网段中的地址被称为本地环回地址，用于同一设备不同服务之间的通信，发送给这些IP地址的数据都会返回给本机，通常都是使用127.0.0.1这个IP地址。后来在RFC6761中，将域名localhost保留了下来，用于环回，这也是为什么在电脑上搭建服务器，访问localhost和访问127.0.0.1都是同一页面的原因。</p>
 <p>&#160; &#160; &#160; &#160;169.254.0.0网段。不知道大家平时有没有注意，给自己电脑配置IP地址，有时会弹出地址冲突的提示，然后查看属性，发现IP地址变成了169.254.0.0网段中的某个IP地址。</p>
 <div align="center">
-    ![avatar][3-网络连接属性]
+    
 </div>
 
 
@@ -523,7 +523,7 @@
 <p>&#160; &#160; &#160; &#160;最后要介绍一下0.0.0.0这个IP地址，网络号为0，主机号也为0，在服务器中，0.0.0.0可以表示“本地计算机上的所有IPv4地址”。如果主机有两个IP地址192.168.1.1和10.1.2.1，并且主机上运行的服务器配置为监听0.0.0.0，那么这两个IP地址都可以访问这台主机。</p>
 <p>&#160; &#160; &#160; &#160;当然，还有其他的一些IP段不能使用，这里就不再赘述。特殊IP的知识大家心里有个印象就行，不需死记硬背。</p>
 <div align="center">
-    ![avatar][4-可用地址范围]
+    
 </div>
 
 
@@ -545,8 +545,11 @@
 
 <h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的微信公众号。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
 <div align="center">
-    ![avatar][5-关注公众号]
+    
 </div>
+
+
+
 
 
 
@@ -719,7 +722,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -730,7 +733,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -833,7 +836,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">35.9k</span>
+    <span title="Site words total count">38.8k</span>
   
 </div>
 

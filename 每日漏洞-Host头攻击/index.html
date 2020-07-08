@@ -88,11 +88,17 @@
 <meta property="og:url" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-Host%E5%A4%B4%E6%94%BB%E5%87%BB/index.html">
 <meta property="og:site_name" content="安全小白团">
 <meta property="og:description" content="noob-sec安全小白团,小白学习基地,教你渗透测试如何从入门到放弃。">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-Host%E5%A4%B4%E6%94%BB%E5%87%BB/1-host.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-Host%E5%A4%B4%E6%94%BB%E5%87%BB/2-host.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-Host%E5%A4%B4%E6%94%BB%E5%87%BB/3-host.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-Host%E5%A4%B4%E6%94%BB%E5%87%BB/4-host.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-Host%E5%A4%B4%E6%94%BB%E5%87%BB/5-%E5%85%B3%E6%B3%A8%E5%85%AC%E4%BC%97%E5%8F%B7.gif">
 <meta property="article:published_time" content="2019-01-12T06:36:00.000Z">
-<meta property="article:modified_time" content="2019-04-21T10:14:48.000Z">
+<meta property="article:modified_time" content="2020-07-08T03:25:10.894Z">
 <meta property="article:author" content="安全小白团">
 <meta property="article:tag" content="安全小白团，noobsec">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-Host%E5%A4%B4%E6%94%BB%E5%87%BB/1-host.jpg">
 
 
 
@@ -427,7 +433,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  991
+                  972
                 </span>
               
 
@@ -474,7 +480,7 @@
 <p>&#160; &#160; &#160; &#160;运用虚拟主机技术，单个主机可以运行多个站点。以下图为例，hacker和usagidesign两个站点都运行在同一服务器A上，不管我们请求哪个域名，最终都会被解析成服务器A的IP地址，这个时候服务器就不知道该将请求交给哪个站点处理，因此需要Host字段指定请求的主机名。</p>
 <p>&#160; &#160; &#160; &#160;我们访问hacker域名，经DNS解析，变成了服务器A的IP，请求传达到服务器A，A接收到请求后，发现请求报文中的Host字段值为hacker，进而将请求交给hacker站点处理。（这里又涉及到计算机网络知识了，是不是觉得要学的真多？没关系，我后面都会一一介绍的）</p>
 <div align="center">
-    ![avatar][1-host]
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-Host%E5%A4%B4%E6%94%BB%E5%87%BB/1-host.jpg" class>
 </div>
 
 <p>&#160; &#160; &#160; &#160;这个时候，问题就出现了。为了方便获取网站域名，开发人员一般依赖于请求包中的Host首部字段。例如，在php里用_SERVER[“HTTP_HOST”]。但是这个Host字段值是不可信赖的(可通过HTTP代理工具篡改)，如果应用程序没有对Host字段值进行处理，就有可能造成恶意代码的传入。</p>
@@ -482,19 +488,19 @@
 <p>&#160; &#160; &#160; &#160;下面我分三个场景，介绍一下Host头攻击漏洞存在的表现。</p>
 <h2 id="跳转"><a href="#跳转" class="headerlink" title="跳转"></a>跳转</h2><p>&#160; &#160; &#160; &#160;场景一：正常请求，响应302，Location首部字段指明跳转的地址，其中Location字段值为Host字段指定的地址。</p>
 <div align="center">
-    ![avatar][2-host]
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-Host%E5%A4%B4%E6%94%BB%E5%87%BB/2-host.jpg" class>
 </div>
 
 <p>&#160; &#160; &#160; &#160;将请求包的Host字段值修改为<a href="http://www.baidu.com提交，响应包中的Location地址也被更改为www.baidu.com。" target="_blank" rel="noopener">www.baidu.com提交，响应包中的Location地址也被更改为www.baidu.com。</a></p>
 <h2 id="拼接"><a href="#拼接" class="headerlink" title="拼接"></a>拼接</h2><p>&#160; &#160; &#160; &#160;场景二：正常请求，正常响应，将Host字段值拼接到标签属性值中。</p>
 <div align="center">
-    ![avatar][3-host]
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-Host%E5%A4%B4%E6%94%BB%E5%87%BB/3-host.jpg" class>
 </div>
 
 <p>&#160; &#160; &#160; &#160;将请求包的Host字段值修改为<a href="http://www.baidu.com提交，发现服务器将www.baidu.com拼接到了script标签的src属性值中。" target="_blank" rel="noopener">www.baidu.com提交，发现服务器将www.baidu.com拼接到了script标签的src属性值中。</a></p>
 <h2 id="代码注入"><a href="#代码注入" class="headerlink" title="代码注入"></a>代码注入</h2><p>&#160; &#160; &#160; &#160;场景三：这其实也属于拼接，只不过在场景二的基础上写入了恶意代码。</p>
 <div align="center">
-    ![avatar][4-host]
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-Host%E5%A4%B4%E6%94%BB%E5%87%BB/4-host.jpg" class>
 </div>
 
 <p>&#160; &#160; &#160; &#160;利用Host字段写入script标签，弹出警告框。</p>
@@ -504,10 +510,8 @@
 <p>&#160; &#160; &#160; &#160;Tomcat，修改server.xml文件，配置Host的name属性。</p>
 <h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的微信公众号。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
 <div align="center">
-    ![avatar][5-关注公众号]
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-Host%E5%A4%B4%E6%94%BB%E5%87%BB/5-%E5%85%B3%E6%B3%A8%E5%85%AC%E4%BC%97%E5%8F%B7.gif" class>
 </div>
-
-
 
 
       
@@ -679,7 +683,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -690,7 +694,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -793,7 +797,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">35.9k</span>
+    <span title="Site words total count">38.8k</span>
   
 </div>
 

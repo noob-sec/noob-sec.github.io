@@ -88,11 +88,20 @@
 <meta property="og:url" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-CRLF%E6%B3%A8%E5%85%A5/index.html">
 <meta property="og:site_name" content="安全小白团">
 <meta property="og:description" content="noob-sec安全小白团,小白学习基地,教你渗透测试如何从入门到放弃。">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-CRLF%E6%B3%A8%E5%85%A5/1-CRLF.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-CRLF%E6%B3%A8%E5%85%A5/2-CRLF.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-CRLF%E6%B3%A8%E5%85%A5/3-CRLF.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-CRLF%E6%B3%A8%E5%85%A5/4-CRLF.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-CRLF%E6%B3%A8%E5%85%A5/5-CRLF.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-CRLF%E6%B3%A8%E5%85%A5/6-CRLF.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-CRLF%E6%B3%A8%E5%85%A5/7-CRLF.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-CRLF%E6%B3%A8%E5%85%A5/8-%E5%85%B3%E6%B3%A8%E5%85%AC%E4%BC%97%E5%8F%B7.gif">
 <meta property="article:published_time" content="2019-01-12T06:18:55.000Z">
-<meta property="article:modified_time" content="2019-04-21T10:07:56.000Z">
+<meta property="article:modified_time" content="2020-07-08T03:22:10.943Z">
 <meta property="article:author" content="安全小白团">
 <meta property="article:tag" content="HTTP">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-CRLF%E6%B3%A8%E5%85%A5/1-CRLF.jpg">
 
 
 
@@ -443,7 +452,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  5
+                  4
                 </span>
               
             </div>
@@ -483,23 +492,23 @@
 <p>&#160; &#160; &#160; &#160;所以CRLF注入漏洞的检测也和XSS漏洞的检测差不多。通过修改HTTP参数或URL，注入恶意的CRLF，查看构造的恶意数据是否在响应头中输出。</p>
 <h2 id="找到输入点，构造恶意的CRLF字符"><a href="#找到输入点，构造恶意的CRLF字符" class="headerlink" title="找到输入点，构造恶意的CRLF字符"></a>找到输入点，构造恶意的CRLF字符</h2><p>&#160; &#160; &#160; &#160;正常请求</p>
 <div align="center">
-    ![avatar][1-CRLF]
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-CRLF%E6%B3%A8%E5%85%A5/1-CRLF.jpg" class>
 </div>
 
 
 <p>&#160; &#160; &#160; &#160;<br>&#160; &#160; &#160; &#160;抓包，在请求行的url参数中加入特殊构造的CRLF字符，如下图标记所示。</p>
 <div align="center">
-    ![avatar][2-CRLF]
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-CRLF%E6%B3%A8%E5%85%A5/2-CRLF.jpg" class>
 </div>
 
 <h2 id="查看恶意数据是否在响应头中输出"><a href="#查看恶意数据是否在响应头中输出" class="headerlink" title="查看恶意数据是否在响应头中输出"></a>查看恶意数据是否在响应头中输出</h2><p>&#160; &#160; &#160; &#160;将修改后的请求包提交给服务器端，查看服务器端的响应。发现响应首部中多了个Set-Cookie字段。这就证实了该系统存在CRLF注入漏洞，因为我们输入的恶意数据，作为响应首部字段返回给了客户端。</p>
 <div align="center">
-    ![avatar][3-CRLF]
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-CRLF%E6%B3%A8%E5%85%A5/3-CRLF.jpg" class>
 </div>
 
 <p>&#160; &#160; &#160; &#160;<br>&#160; &#160; &#160; &#160;很多人看到这里可能就想不明白，我请求包写入的恶意数据，怎么就被当成响应首部字段输出了？下面我们来看看服务器端源代码。</p>
 <div align="center">
-    ![avatar][4-CRLF]
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-CRLF%E6%B3%A8%E5%85%A5/4-CRLF.jpg" class>
 </div>
 
 <p>&#160; &#160; &#160; &#160;<br>&#160; &#160; &#160; &#160;这是其中一段代码，用PHP写的，需要大家有一定的语言基础。看不懂也没关系，我后期会写PHP系列文章。这段代码的意思是：当条件满足时，将请求包中的url参数值拼接到Location字符串中，并设置成响应头发送给客户端。</p>
@@ -508,17 +517,17 @@
 
 <p>&#160; &#160; &#160; &#160;在url参数值拼接到Location字符串中，设置成响应头后，响应包此时应该是下图这样的：</p>
 <div align="center">
-    ![avatar][5-CRLF]
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-CRLF%E6%B3%A8%E5%85%A5/5-CRLF.jpg" class>
 </div>
 
 <p>&#160; &#160; &#160; &#160;<br>&#160; &#160; &#160; &#160;%0d和%0a分别是CR和LF的URL编码。前面我们讲到，HTTP规范中，行以CRLF结束。所以当检测到%0d%0a后，就认为Location首部字段这行结束了，Set-Cookie就会被认为是下一行，如下图所示。</p>
 <div align="center">
-    ![avatar][6-CRLF]
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-CRLF%E6%B3%A8%E5%85%A5/6-CRLF.jpg" class>
 </div>
 
 <p>&#160; &#160; &#160; &#160;<br>&#160; &#160; &#160; &#160;而我们构造的Set-Cookie字符在HTTP中是一个设置Cookie的首部字段，这个时候就会将crlf=true设置成Cookie。</p>
 <div align="center">
-    ![avatar][7-CRLF]
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-CRLF%E6%B3%A8%E5%85%A5/7-CRLF.jpg" class>
 </div>
 
 <p>&#160; &#160; &#160; &#160;<br>&#160; &#160; &#160; &#160;重新请求，抓包，发现Cookie中多了crlf=true。</p>
@@ -526,11 +535,8 @@
 <h1 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h1><p>&#160; &#160; &#160; &#160;过滤 \r 、\n 之类的行结束符，避免输入的数据污染其他 HTTP 首部字段。</p>
 <h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的微信公众号。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
 <div align="center">
-    ![avatar][8-关注公众号]
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-CRLF%E6%B3%A8%E5%85%A5/8-%E5%85%B3%E6%B3%A8%E5%85%AC%E4%BC%97%E5%8F%B7.gif" class>
 </div>
-
-
-
 
       
     </div>
@@ -707,7 +713,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -718,7 +724,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -821,7 +827,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">35.9k</span>
+    <span title="Site words total count">38.8k</span>
   
 </div>
 

@@ -88,11 +88,20 @@
 <meta property="og:url" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/index.html">
 <meta property="og:site_name" content="安全小白团">
 <meta property="og:description" content="noob-sec安全小白团,小白学习基地,教你渗透测试如何从入门到放弃。">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/1-xss.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/2-xss.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/3-xss.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/4-xss.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/5-xss.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/6-xss.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/7-xss.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/8-%E5%85%B3%E6%B3%A8%E5%85%AC%E4%BC%97%E5%8F%B7.gif">
 <meta property="article:published_time" content="2019-01-12T06:38:31.000Z">
-<meta property="article:modified_time" content="2019-05-06T02:21:28.000Z">
+<meta property="article:modified_time" content="2020-07-08T03:35:46.440Z">
 <meta property="article:author" content="安全小白团">
 <meta property="article:tag" content="XSS">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://noob-sec.github.io/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/1-xss.jpg">
 
 
 
@@ -427,7 +436,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.3k
+                  1.2k
                 </span>
               
 
@@ -475,39 +484,39 @@
 <p>&#160; &#160; &#160; &#160;输出点，输入数据的输出位置。有些数据输入后，经过服务器处理，往往会返回给客户端，可能出现在html标签中，也可能出现在script脚本中，我们需要根据位置的不同而使用不同的XSS构造方式。</p>
 <p>&#160; &#160; &#160; &#160;恶意输出，在XSS中通常是指由JavaScript编写的代码。这些代码能实现一定功能和页面效果：弹框、发送Cookie、键盘记录等。</p>
 <h2 id="寻找输入点"><a href="#寻找输入点" class="headerlink" title="寻找输入点"></a>寻找输入点</h2><div align="center">
-    ![avatar][1-xss]
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/1-xss.jpg" class>
 </div>
 
 
 <p>&#160; &#160; &#160; &#160;页面有两个输入框，要求输入名字和姓氏，然后点击GO，姓名就会显示在下方。我们现在来检测这个功能是否存在XSS。</p>
 <p>&#160; &#160; &#160; &#160;开启抓包工具，设置好代理，输入名字和姓氏。</p>
 <div align="center">
-    ![avatar][2-xss]
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/2-xss.jpg" class>
 </div>
 
 <p>&#160; &#160; &#160; &#160;点击GO，抓到如下请求包。请求行中有三个参数，其中两个参数正好对应两个输入框，这三个参数都是潜在的XSS输入点，特别是输入框对应的firstname参数和lastname参数。</p>
 <div align="center">
-    ![avatar][3-xss]
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/3-xss.jpg" class>
 </div>
 
 <h2 id="寻找输出点"><a href="#寻找输出点" class="headerlink" title="寻找输出点"></a>寻找输出点</h2><p>&#160; &#160; &#160; &#160;输出点我们可以通过在响应中查找输入点的值来找到。以firstname为例，我们在响应中查找bwapp这个值的位置。</p>
 <div align="center">
-    ![avatar][4-xss]
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/4-xss.jpg" class>
 </div>
 
 <p>&#160; &#160; &#160; &#160;发现响应中有8个匹配的值，难道有8个输出点？很多时候，为了更快速、准确的找出输出点，我们通常会将输入点的值修改为独一无二的值，如1234567，abcde等，以保证不会和系统其他参数值雷同。</p>
 <div align="center">
-    ![avatar][5-xss]
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/5-xss.jpg" class>
 </div>
 
 <p>&#160; &#160; &#160; &#160;这样就准确找到了firstname这个输入点的输出点。</p>
 <h2 id="恶意输出"><a href="#恶意输出" class="headerlink" title="恶意输出"></a>恶意输出</h2><p>&#160; &#160; &#160; &#160;最终XSS的检测需要结合输入点和输出点。在输入点的值中加入恶意代码，查看输出点是否会产生恶意输出。</p>
 <div align="center">
-    ![avatar][6-xss]
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/6-xss.jpg" class>
 </div>
 
 <div align="center">
-    ![avatar][7-xss]
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/7-xss.jpg" class>
 </div>
 
 
@@ -517,12 +526,8 @@
 <h1 id="PS"><a href="#PS" class="headerlink" title="PS"></a>PS</h1><p>&#160; &#160; &#160; &#160;在这里要申明一下，每日漏洞系列旨在告诉大家发现漏洞的最基本操作，每日学会一个漏洞的检测方法。就比如做菜，每日漏洞系列会教你第一步点火，第二步放油，第三步炒菜，第四步出锅，但不会教你用多大的火，放多少油，炒多久，这些细节我会在其他文章里深入介绍，所以如果只看这篇文章，我只能保证你会做菜，这菜能不能吃，只能交给命运了。</p>
 <h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的博客。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
 <div align="center">
-    ![avatar][8-关注公众号]
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/8-%E5%85%B3%E6%B3%A8%E5%85%AC%E4%BC%97%E5%8F%B7.gif" class>
 </div>
-
-
-
-
       
     </div>
     
@@ -698,7 +703,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -709,7 +714,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -812,7 +817,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">35.9k</span>
+    <span title="Site words total count">38.8k</span>
   
 </div>
 
