@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<!-- 引入googlead广告 -->
+<script data-ad-client="ca-pub-6744915718473679" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 引入google 分析 -->
+<meta name="google-site-verification" content="Yl6s5FLbJWUZQt3yEldJX5YvASVGXJxDONAJIZTNKG4" />
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/logo.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/logo.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="安全小白团, noobsec" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="noob-sec安全小白团,小白学习基地,教你渗透测试如何从入门到放弃。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络层 | 网际协议IP(2)">
+<meta property="og:url" content="https://noob-sec.github.io/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/index.html">
+<meta property="og:site_name" content="安全小白团">
+<meta property="og:description" content="noob-sec安全小白团,小白学习基地,教你渗透测试如何从入门到放弃。">
+<meta property="og:image" content="https://noob-sec.github.io/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/1.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/2.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/3.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/4.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/5.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/6.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/7.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/8.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/9.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/10-%E5%85%B3%E6%B3%A8%E5%85%AC%E4%BC%97%E5%8F%B7.gif">
+<meta property="article:published_time" content="2019-05-01T07:08:51.000Z">
+<meta property="article:modified_time" content="2020-07-08T04:02:30.423Z">
+<meta property="article:author" content="安全小白团">
+<meta property="article:tag" content="安全小白团，noobsec">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://noob-sec.github.io/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://noob-sec.github.io/网络层-网际协议IP-2/"/>
+
+
+
+
+
+  <title>网络层 | 网际协议IP(2) | 安全小白团</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">安全小白团</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">安全小白团，noobsec</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://noob-sec.github.io/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="安全小白团">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="安全小白团">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">网络层 | 网际协议IP(2)</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-01T15:08:51+08:00">
+                2019-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机网络</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o">本文总阅读量</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  8
+                </span>
+              
+            </div>
+          
+
+          
+              <div class="post-description">
+                  noob-sec安全小白团,小白学习基地,教你渗透测试如何从入门到放弃。
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>&emsp;&emsp;在《网络层 | 网际协议IP（1）》中，我们讲了IPv4地址的格式、分类、特殊IP地址和私有地址，今天我们来讲一讲划分子网和构成超网。</p>
+<p>&emsp;&emsp;之前也提到过，早期的IP地址是没有分类的。但随着IP地址资源枯竭问题的产生，后来出现了分类网络，划分子网，无类别域间路由（CIDR）（超网）。</p>
+<h1 id="划分子网"><a href="#划分子网" class="headerlink" title="划分子网"></a>划分子网</h1><p>&emsp;&emsp;分类网络虽然缓解了IP地址资源消耗的速度，但还是存在不合理的地方。</p>
+<p>&emsp;&emsp;以一个企业为例。如果申请一个C段，最多可分配2^8-2=254个地址；如果申请一个B段，最多可分配2^16-2=65534个地址。在两者的选择中，他们通常是选择申请B类地址，以应对后续企业的发展，这就造成了IP地址的浪费。因此，很有必要提高IP地址资源的利用率。</p>
+<p>&emsp;&emsp;在提出划分子网这个概念的时候，那时候其实还没有分类网络。划分子网，将二级IP变成三级IP，更加灵活，减轻路由表负担；而且可以将一个网络划分为多个子网，而不用去获取一组网络，这样能够很好地满足组织内部需求，详情可查阅RFC950。</p>
+<p>&emsp;&emsp;在划分子网之前，IP地址=网络号+主机号；划分子网后，IP地址=网络号+子网号+主机号。</p>
+<p>&emsp;&emsp;注意，无论是否划分子网，IP地址都是32位二进制数，并不是说划分子网后，IP地址就变成了32位以上的二进制数。划分子网后，网络号是不变的，只是从主机号中借用若干位作为子网号而已。</p>
+<div align="center">
+    <img src="/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/1.jpg" class>
+</div>
+
+
+
+
+<p>&emsp;&emsp;另外，子网是相对组织内部而言的。对外部来说，IP“网络号”=网络号。</p>
+<div align="center">
+    <img src="/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/2.jpg" class>
+</div>
+
+
+
+<p>&emsp;&emsp;如上图，从外部来看，所有设备的网络号都是145.13.0.0。而当数据到达组织内部的时候，IP”网络号“=网络号+子网号。</p>
+<div align="center">
+    <img src="/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/3.jpg" class>
+</div>
+
+
+
+
+<p>&emsp;&emsp;这里要说的是，IP协议传输数据是通过IP数据报（后续会讲），但IP数据报和IP地址里并没有任何关于子网的信息。</p>
+<p>&emsp;&emsp;那么当数据到达组织内部时，如何知道该将数据发往哪个子网呢？这个时候就要借助子网掩码了。</p>
+<h2 id="子网掩码"><a href="#子网掩码" class="headerlink" title="子网掩码"></a>子网掩码</h2><p>&emsp;&emsp;子网掩码和IP地址一样，也是32位二进制数，也采用“点分十进制”记法，但子网掩码通常是由连续的1和0组成。1用来标记网络位，0用来标记主机位。</p>
+<p>&emsp;&emsp;另外，互联网标准规定所有网络都要使用子网掩码。这样做有什么好处？不管网络有没有划分子网，只要把子网掩码和IP地址进行逐位的“与”运算就可以得出网络地址。</p>
+<p>&emsp;&emsp;如果没有划分子网，则使用默认子网掩码。</p>
+<div align="center">
+    <img src="/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/4.jpg" class>
+</div>
+
+
+
+
+<p>&emsp;&emsp;如果划分了子网，则将网络号+子网号对应的位掩码置1，主机号对应的位掩码依然为0。</p>
+<div align="center">
+    <img src="/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/5.jpg" class>
+</div>
+
+
+
+<p>&emsp;&emsp;下面我们举个实例，来加深大家的理解。172.16.123.1是一个B类地址，未划分子网时网络号和主机号各16位，默认子网掩码为255.255.0.0。</p>
+<div align="center">
+    <img src="/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/6.jpg" class>
+</div>
+
+
+
+
+<p>&emsp;&emsp;如上图，我将位掩码设置为18位，也就是说有18-16=2位子网号位，那么子网掩码应该是由18个连续的1和14个连续的0组成。</p>
+<div align="center">
+    <img src="/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/7.jpg" class>
+</div>
+
+
+
+<p>&emsp;&emsp;然后我们把IP地址和子网掩码逐位“与”运算，我们就得出了该IP地址的网络地址为172.16.64.0。</p>
+<p>&emsp;&emsp;“与”运算大家应该都学过吧，和小学的算术一样，将每一位对齐。只有两个1相“与”，结果才为1；两个数中有任何一个数为0，那么结果都为0。</p>
+<p>&emsp;&emsp;得出了网络地址，那我们就很容易得出在172.16.64.0这个子网中可用的IP地址范围：172.16.64.1~172.16.127.254。</p>
+<p>&emsp;&emsp;怎么得出来的？相信大家看了之前的《网络层 | 网际协议IP（1）》应该都能明白。如果还是不明白，那只能怪我讲的不清晰：主机号全0和全1我们一般都不使用。</p>
+<p>&emsp;&emsp;另外大家有没有发现，截图中最大IP的第三个8位，两位子网号和六位主机号一同被转换为十进制的127了，所以大家不要以为点分十进制的每位数就是代表网络号或主机号。比如什么172.16.0.0是网络号，0.0.127.254是主机号；或者172.16.127.0是网络号，0.0.0.254是主机号。</p>
+<p>&emsp;&emsp;点分十进制只是为了让我们人类方便查看和记忆而已，因此大家不要有：“欸，怎么把子网号和主机号合并成八位转换成十进制了呢？“这种想法；IP地址其实质是一个32位二进制数，要得出网络号和主机号，依赖于子网掩码。</p>
+<h1 id="构成超网"><a href="#构成超网" class="headerlink" title="构成超网"></a>构成超网</h1><p>&emsp;&emsp;分类网络和划分子网等技术虽然缓解了IP地址资源消耗的速度，但依然没办法阻止IP地址资源的耗尽。因此，为了进一步提高IP地址的利用率，IETF研究出了无类别域间路由（CIDR）。详情可查阅RFC4632。</p>
+<p>&emsp;&emsp;CIDR主要有三个特点：无类、前缀、地址块。</p>
+<p>&emsp;&emsp;CIDR是基于可变长子网掩码的无类别编址方法，没有了ABC类地址，以及在主机号中借用若干位做为子网号的概念，所有IP地址都是无类别的。</p>
+<p>&emsp;&emsp;CIDR将32位的IP地址分为前后两部分，前部分称为前缀，指明将32位IP地址中的哪些位解释为网络号，哪些位用于对内部的各个终端进行编号。IP=前缀+主机号，IP地址的网络号不再限定为8位、16位以及24位，更加灵活。</p>
+<p>&emsp;&emsp;CIDR将前缀相同的连续的IP地址组成地址块，并采用“斜线记法”来表示IP地址，也称为CIDR记法。</p>
+<p>&emsp;&emsp;“斜线记法”在“点分十进制”的IP地址后跟上一条斜线“/”，然后在斜线后写上前缀所占的位数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">128.14</span><span class="number">.35</span><span class="number">.7</span>/<span class="number">20</span></span><br></pre></td></tr></table></figure>
+<p>&emsp;&emsp;如上所示，就是“斜线记法”。我们不仅能简单的识别出IP地址为128.14.35.7，网络前缀为20位（也就是网络号有20位），还可以计算出该IP属于哪个CIDR地址块，该CIDR地址块的IP地址范围。</p>
+<div align="center">
+    <img src="/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/8.jpg" class>
+</div>
+
+
+
+
+<p>&emsp;&emsp;把主机位全部置0，即可得出IP属于128.14.32.0/20这个地址块，同时可用的地址范围为128.14.32.1~128.14.47.254。</p>
+<p>&emsp;&emsp;另外，CIDR没有了划分子网这个概念，是指没有在主机位中再借用若干位作为子网号而已，使用CIDR地址块的单位依然可以在内部划分出子网。具体的做法是，在主机位中借用若干位，延长前缀的位数，IP还是=前缀+主机号。</p>
+<p>&emsp;&emsp;比如在128.14.32.0/20这个地址块中划分4个子网，那么我们需要在主机号中借用两位，将前缀延长到22位，这样128.14.32.0/20这个地址块就有了以下四个子网：</p>
+<div align="center">
+    <img src="/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/9.jpg" class>
+</div>
+
+
+
+
+<p>&emsp;&emsp;CIDR不仅提高了IP地址的利用率，同时实现了路由聚合，因为也被称为“构成超网”，路由的知识我会在后面介绍，这里我们只专注于IP地址的发展历程。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">划分子网：</span><br><span class="line">    <span class="number">1</span>、二级IP变三级IP：网络号+子网号+主机号</span><br><span class="line">    <span class="number">2</span>、网络号不变，从主机号中借用若干位做为子网号，主机号减少相同的位数</span><br><span class="line">    <span class="number">3</span>、子网相对于内部而言，对外依然是二级IP，对内才是三级IP</span><br><span class="line">    <span class="number">4</span>、根据子网掩码来判断该将数据发送到哪个子网</span><br><span class="line">    <span class="number">5</span>、子网掩码与IP地址相与即可得出IP地址的网络号</span><br><span class="line">构成超网：</span><br><span class="line">    <span class="number">1</span>、无类、前缀、地址块</span><br><span class="line">    <span class="number">2</span>、斜线记法</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的微信公众号。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
+<div align="center">
+    <img src="/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/10-%E5%85%B3%E6%B3%A8%E5%85%AC%E4%BC%97%E5%8F%B7.gif" class>
+</div>
+
+
+
+
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    安全小白团
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://noob-sec.github.io/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/" title="网络层 | 网际协议IP(2)">https://noob-sec.github.io/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+<!--谷歌广告-->
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Next评论广告 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6744915718473679"
+     data-ad-slot="1561774433"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-mv%E3%80%81rm/" rel="next" title="每日命令 | mv、rm">
+                <i class="fa fa-chevron-left"></i> 每日命令 | mv、rm
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/XSS-%E7%AE%80%E4%BB%8B-1/" rel="prev" title="XSS-简介(1)">
+                XSS-简介(1) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <!--评论广告-->
+      <div class="comments_ad">
+         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Next评论广告 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6744915718473679"
+     data-ad-slot="1561774433"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+      </div>
+      
+        <div id="gitment-container"></div>
+      
+      <!--评论广告-->
+      <div class="comments_ad">
+         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Next评论广告 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6744915718473679"
+     data-ad-slot="1561774433"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/logo.png"
+                alt="安全小白团" />
+            
+              <p class="site-author-name" itemprop="name">安全小白团</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/noob-sec" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#划分子网"><span class="nav-number">2.</span> <span class="nav-text">划分子网</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#子网掩码"><span class="nav-number">2.1.</span> <span class="nav-text">子网掩码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#构成超网"><span class="nav-number">3.</span> <span class="nav-text">构成超网</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#免责声明"><span class="nav-number">5.</span> <span class="nav-text">免责声明</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+        <!--侧栏广告-->
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Next侧栏广告 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6744915718473679"
+     data-ad-slot="1150710895"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+    </div>
+  
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">安全小白团</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">38.8k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user">本站访客数</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye">本站总访问量</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'noob-sec',
+            repo: 'noob-sec.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '17570a46b126a4b8f596cdf9453c2cc9718acafc',
+            
+                client_id: '2597c4baaee8f21ace7e'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
