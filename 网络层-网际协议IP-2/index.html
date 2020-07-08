@@ -88,11 +88,22 @@
 <meta property="og:url" content="https://noob-sec.github.io/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/index.html">
 <meta property="og:site_name" content="安全小白团">
 <meta property="og:description" content="noob-sec安全小白团,小白学习基地,教你渗透测试如何从入门到放弃。">
+<meta property="og:image" content="https://noob-sec.github.io/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/1.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/2.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/3.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/4.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/5.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/6.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/7.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/8.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/9.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/10-%E5%85%B3%E6%B3%A8%E5%85%AC%E4%BC%97%E5%8F%B7.gif">
 <meta property="article:published_time" content="2019-05-01T07:08:51.000Z">
 <meta property="article:modified_time" content="2020-07-08T04:02:30.423Z">
 <meta property="article:author" content="安全小白团">
 <meta property="article:tag" content="安全小白团，noobsec">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://noob-sec.github.io/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/1.jpg">
 
 
 
@@ -476,7 +487,7 @@
 <p>&emsp;&emsp;在划分子网之前，IP地址=网络号+主机号；划分子网后，IP地址=网络号+子网号+主机号。</p>
 <p>&emsp;&emsp;注意，无论是否划分子网，IP地址都是32位二进制数，并不是说划分子网后，IP地址就变成了32位以上的二进制数。划分子网后，网络号是不变的，只是从主机号中借用若干位作为子网号而已。</p>
 <div align="center">
-    
+    <img src="/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/1.jpg" class>
 </div>
 
 
@@ -484,14 +495,14 @@
 
 <p>&emsp;&emsp;另外，子网是相对组织内部而言的。对外部来说，IP“网络号”=网络号。</p>
 <div align="center">
-    
+    <img src="/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/2.jpg" class>
 </div>
 
 
 
 <p>&emsp;&emsp;如上图，从外部来看，所有设备的网络号都是145.13.0.0。而当数据到达组织内部的时候，IP”网络号“=网络号+子网号。</p>
 <div align="center">
-    
+    <img src="/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/3.jpg" class>
 </div>
 
 
@@ -503,7 +514,7 @@
 <p>&emsp;&emsp;另外，互联网标准规定所有网络都要使用子网掩码。这样做有什么好处？不管网络有没有划分子网，只要把子网掩码和IP地址进行逐位的“与”运算就可以得出网络地址。</p>
 <p>&emsp;&emsp;如果没有划分子网，则使用默认子网掩码。</p>
 <div align="center">
-    
+    <img src="/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/4.jpg" class>
 </div>
 
 
@@ -511,14 +522,14 @@
 
 <p>&emsp;&emsp;如果划分了子网，则将网络号+子网号对应的位掩码置1，主机号对应的位掩码依然为0。</p>
 <div align="center">
-    
+    <img src="/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/5.jpg" class>
 </div>
 
 
 
 <p>&emsp;&emsp;下面我们举个实例，来加深大家的理解。172.16.123.1是一个B类地址，未划分子网时网络号和主机号各16位，默认子网掩码为255.255.0.0。</p>
 <div align="center">
-    
+    <img src="/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/6.jpg" class>
 </div>
 
 
@@ -526,7 +537,7 @@
 
 <p>&emsp;&emsp;如上图，我将位掩码设置为18位，也就是说有18-16=2位子网号位，那么子网掩码应该是由18个连续的1和14个连续的0组成。</p>
 <div align="center">
-    
+    <img src="/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/7.jpg" class>
 </div>
 
 
@@ -546,7 +557,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">128.14</span><span class="number">.35</span><span class="number">.7</span>/<span class="number">20</span></span><br></pre></td></tr></table></figure>
 <p>&emsp;&emsp;如上所示，就是“斜线记法”。我们不仅能简单的识别出IP地址为128.14.35.7，网络前缀为20位（也就是网络号有20位），还可以计算出该IP属于哪个CIDR地址块，该CIDR地址块的IP地址范围。</p>
 <div align="center">
-    
+    <img src="/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/8.jpg" class>
 </div>
 
 
@@ -556,7 +567,7 @@
 <p>&emsp;&emsp;另外，CIDR没有了划分子网这个概念，是指没有在主机位中再借用若干位作为子网号而已，使用CIDR地址块的单位依然可以在内部划分出子网。具体的做法是，在主机位中借用若干位，延长前缀的位数，IP还是=前缀+主机号。</p>
 <p>&emsp;&emsp;比如在128.14.32.0/20这个地址块中划分4个子网，那么我们需要在主机号中借用两位，将前缀延长到22位，这样128.14.32.0/20这个地址块就有了以下四个子网：</p>
 <div align="center">
-    
+    <img src="/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/9.jpg" class>
 </div>
 
 
@@ -569,7 +580,7 @@
 
 <h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的微信公众号。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
 <div align="center">
-    
+    <img src="/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/10-%E5%85%B3%E6%B3%A8%E5%85%AC%E4%BC%97%E5%8F%B7.gif" class>
 </div>
 
 

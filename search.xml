@@ -388,6 +388,41 @@
       </categories>
   </entry>
   <entry>
+    <title>XSS-简介(1)</title>
+    <url>/XSS-%E7%AE%80%E4%BB%8B-1/</url>
+    <content><![CDATA[<h1 id="XSS是什么"><a href="#XSS是什么" class="headerlink" title="XSS是什么"></a>XSS是什么</h1><p>&emsp;&emsp;跨站脚本（Cross-Site Script），由于和层叠样式表CSS缩写一样，为避免混淆，因而缩写成XSS。</p>
+<p>&emsp;&emsp;XSS是一种常见的Web安全漏洞。由于Web应用程序对用户输入检测不严，导致攻击者可以把恶意代码（通常是HTML和JavaScript）注入到网页中。当其他用户访问时，恶意代码就会被执行。通常被利用发起Cookie窃取、会话劫持、钓鱼等攻击。</p>
+<h1 id="XSS为何如此普遍"><a href="#XSS为何如此普遍" class="headerlink" title="XSS为何如此普遍"></a>XSS为何如此普遍</h1><p>&emsp;&emsp;在工作中不难发现，几乎所有测试任务或多或少都会发现XSS的存在。为何XSS会如此普遍？都是由哪些因素造成的？</p>
+<p>&emsp;&emsp;首先Web浏览器本身的设计是不安全的。浏览器只会执行程序，它并不会去判断程序和数据是否恶意；其次是输入输出的交互过程中，没有足够完善的安全防护机制；然后触发XSS的方式简单丰富，只要注入恶意代码即可；最后是开发人员的水平不高和意识不足所导致。</p>
+<p>&emsp;&emsp;下图为2013和2017的OWASP TOP 10，尽管XSS从第3掉到第7，但依然是十大Web安全漏洞，这也能够看出XSS漏洞的普遍和流行。</p>
+<div align="center">
+    
+</div>
+
+
+
+
+<h1 id="XSS有什么危害"><a href="#XSS有什么危害" class="headerlink" title="XSS有什么危害"></a>XSS有什么危害</h1><p>&emsp;&emsp;尽管XSS如此普遍，但XSS也就能“弹个对话框而已”，能有什么危害呢？在工作中我就被开发人员这样质疑过（因为我发现的漏洞基本存在于他写的代码中，手动滑稽）。</p>
+<p>&emsp;&emsp;这里要强调的是，漏洞的验证和利用是两码事。为了验证XSS漏洞是否存在，我们通常采用弹框的方式，结果显而易见。弹框只为证明漏洞存在，证明漏洞存在后才是真正利用阶段。</p>
+<p>&emsp;&emsp;漏洞能利用到什么程度，能产生多大危害，取决于你如何编写注入的恶意代码。比如写入一个a标签，点击后跳转到钓鱼网站；又比如在留言处写段获取Cookie的代码，当系统管理员去查看的时候，就将管理员的会话信息返回，这样我们就能利用这个会话信息去登录系统。</p>
+<p>&emsp;&emsp;XSS通常被利用于Cookie窃取、会话劫持、钓鱼，也可以获取客户端信息，控制受害者浏览器执行其他操作。当然它的危害远不止这些，简单来讲，一是能获取用户的信息，二是能操作用户的设备。所以千万不要被弹框给欺骗，XSS的危害没有你想象中的那么简单。</p>
+<h1 id="XSS的分类"><a href="#XSS的分类" class="headerlink" title="XSS的分类"></a>XSS的分类</h1><p>&emsp;&emsp;根据特性和利用手法，XSS主要分为以下三种：反射型XSS、存储型XSS、DOM型XSS。</p>
+<p>&emsp;&emsp;反射型XSS也被叫做非持久型XSS、参数型XSS，是三种XSS中最常见的一种。</p>
+<p>&emsp;&emsp;对于反射型XSS的利用，攻击者一般是构造一个包含恶意代码的URL，然后通过留言、邮件或其他途径发送给受害者。当受害者点击时，恶意代码就会被执行。正因为只有在用户点击时才会触发，且只执行一次，所以才被称为非持久型、反射型。</p>
+<p>&emsp;&emsp;存储型XSS，也叫做持久型XSS。和反射型XSS不一样的是，存储型XSS不需要受害者去点击什么。攻击者事先将恶意代码存储到了服务器，每当受害者访问包含恶意代码的页面，恶意代码就会被执行。</p>
+<p>&emsp;&emsp;存储型XSS一般出现在留言、评论、修改个人信息等与数据库存储相关的地方，而反射型XSS出现在其他交互的地方，比如搜索、登录等。</p>
+<p>&emsp;&emsp;反射型XSS和存储型XSS都会和服务器产生交互，恶意代码由服务器端通过响应包返回给客户端；而DOM型XSS不会和服务器产生交互，恶意代码由前端的JavaScript处理。</p>
+<p>&emsp;&emsp;三种类型的XSS简单介绍到这里，大家先在心里留下反射型XSS、存储型XSS以及DOM型XSS的概念，后续我会通过实战的方式，更直观的展示三者之间的区别。</p>
+<h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的微信公众号。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
+<div align="center">
+    <img src="/XSS-%E7%AE%80%E4%BB%8B-1/2-%E5%85%B3%E6%B3%A8%E5%85%AC%E4%BC%97%E5%8F%B7.gif" class>
+</div>
+]]></content>
+      <categories>
+        <category>渗透测试</category>
+      </categories>
+  </entry>
+  <entry>
     <title>信息收集之js文件</title>
     <url>/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E4%B9%8Bjs%E6%96%87%E4%BB%B6/</url>
     <content><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>&emsp;&emsp;JavaScript已经成为现代Web浏览器开发中最普遍的技术之一。之前在《PTES-信息收集》中讲到源代码审计也可能获取到一些敏感信息，但有的测试人员只审计html源代码，而忽略审计js文件里的源代码，今天我们就来讲一讲审计js文件都能获取到哪些信息。</p>
@@ -428,238 +463,119 @@
       </categories>
   </entry>
   <entry>
-    <title>XSS-简介(1)</title>
-    <url>/XSS-%E7%AE%80%E4%BB%8B-1/</url>
-    <content><![CDATA[<h1 id="XSS是什么"><a href="#XSS是什么" class="headerlink" title="XSS是什么"></a>XSS是什么</h1><p>&emsp;&emsp;跨站脚本（Cross-Site Script），由于和层叠样式表CSS缩写一样，为避免混淆，因而缩写成XSS。</p>
-<p>&emsp;&emsp;XSS是一种常见的Web安全漏洞。由于Web应用程序对用户输入检测不严，导致攻击者可以把恶意代码（通常是HTML和JavaScript）注入到网页中。当其他用户访问时，恶意代码就会被执行。通常被利用发起Cookie窃取、会话劫持、钓鱼等攻击。</p>
-<h1 id="XSS为何如此普遍"><a href="#XSS为何如此普遍" class="headerlink" title="XSS为何如此普遍"></a>XSS为何如此普遍</h1><p>&emsp;&emsp;在工作中不难发现，几乎所有测试任务或多或少都会发现XSS的存在。为何XSS会如此普遍？都是由哪些因素造成的？</p>
-<p>&emsp;&emsp;首先Web浏览器本身的设计是不安全的。浏览器只会执行程序，它并不会去判断程序和数据是否恶意；其次是输入输出的交互过程中，没有足够完善的安全防护机制；然后触发XSS的方式简单丰富，只要注入恶意代码即可；最后是开发人员的水平不高和意识不足所导致。</p>
-<p>&emsp;&emsp;下图为2013和2017的OWASP TOP 10，尽管XSS从第3掉到第7，但依然是十大Web安全漏洞，这也能够看出XSS漏洞的普遍和流行。</p>
+    <title>每日命令 | ls</title>
+    <url>/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-ls/</url>
+    <content><![CDATA[<h1 id="每日命令系列导语"><a href="#每日命令系列导语" class="headerlink" title="每日命令系列导语"></a>每日命令系列导语</h1><p>&#160; &#160; &#160; &#160;安全行业，接触Linux不可避免。今天我们开启Linux学习之旅。</p>
+<p>&#160; &#160; &#160; &#160;一直在构思Linux系列文章该怎么排版，最终决定采用每日命令的形式，毕竟Linux有大量的命令需要学习。</p>
+<p>&#160; &#160; &#160; &#160;每日命令系列根据命令知识点来排版。命令知识点多，一篇就只介绍一条命令；命令知识点少，就多介绍几条命令。命令以外的知识会视情况进行排版：碎片化讲解或单独发布。</p>
+<p>&#160; &#160; &#160; &#160;争取让校友们看完一篇文章不会太累，也不会觉得学到的东西少。当然，文章主要面向小白，所以知识点都很基础，这也符合安全小白团的宗旨。已经掌握了基础的校友们，可以跳过。</p>
+<p>&#160; &#160; &#160; &#160;学习命令，无外乎学习三个方面的内容：语法+选项+参数，所以每日命令系列主要从这三个方面进行介绍。</p>
+<p>&#160; &#160; &#160; &#160;首先介绍命令的语法，然后对常用的选项进行介绍，不会介绍所有的选项(有兴趣的校友可以自己查阅资料或安装Linux实践)。最后讲讲命令的参数。当然，为了让大家更好的理解，循序渐进，我不一定会按这个顺序。</p>
+<p>&#160; &#160; &#160; &#160;秉承每日系列简单粗暴的原则，废话不多话，开始每日命令系列第一章——ls命令的学习。</p>
+<h1 id="命令简介"><a href="#命令简介" class="headerlink" title="命令简介"></a>命令简介</h1><p>&#160; &#160; &#160; &#160;ls是英文list的缩写，用于列出文件，在Unix和类Unix系统中都有实现。相当于Windows中的dir命令。</p>
+<h1 id="命令详解"><a href="#命令详解" class="headerlink" title="命令详解"></a>命令详解</h1><h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ls  [选项] [文件]</span><br></pre></td></tr></table></figure>
+
+<p>&#160; &#160; &#160; &#160;以上是ls命令的语法，比较简单。其实Linux大多数命令的语法格式都是这样。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">命令名  [选项] [参数]</span><br></pre></td></tr></table></figure>
+
+<p>&#160; &#160; &#160; &#160;有个疑问：我是怎么知道ls命令语法的？这里要给大家介绍一下”–help“选项。Linux命令都有这个选项，用于打印命令的帮助信息。</p>
+<p>&#160; &#160; &#160; &#160;当我们不知道命令是用来干嘛的，或者命令语法/选项忘了，我们可以使用这个选项来获取命令的帮助信息。</p>
 <div align="center">
-    
+<img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-ls/1-ls.jpg" class>
 </div>
 
+<p>&#160; &#160; &#160; &#160;<br>&#160; &#160; &#160; &#160;以上是ls命令的帮助信息。介绍了：ls命令的用法，也就是语法；ls命令的用途——列出文件的信息(默认是当前目录)；ls命令的选项。</p>
+<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><p>&#160; &#160; &#160; &#160;ls命令选项比较多，这里我们挑一些常用的选项来介绍。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ls</span><br></pre></td></tr></table></figure>
 
-
-
-<h1 id="XSS有什么危害"><a href="#XSS有什么危害" class="headerlink" title="XSS有什么危害"></a>XSS有什么危害</h1><p>&emsp;&emsp;尽管XSS如此普遍，但XSS也就能“弹个对话框而已”，能有什么危害呢？在工作中我就被开发人员这样质疑过（因为我发现的漏洞基本存在于他写的代码中，手动滑稽）。</p>
-<p>&emsp;&emsp;这里要强调的是，漏洞的验证和利用是两码事。为了验证XSS漏洞是否存在，我们通常采用弹框的方式，结果显而易见。弹框只为证明漏洞存在，证明漏洞存在后才是真正利用阶段。</p>
-<p>&emsp;&emsp;漏洞能利用到什么程度，能产生多大危害，取决于你如何编写注入的恶意代码。比如写入一个a标签，点击后跳转到钓鱼网站；又比如在留言处写段获取Cookie的代码，当系统管理员去查看的时候，就将管理员的会话信息返回，这样我们就能利用这个会话信息去登录系统。</p>
-<p>&emsp;&emsp;XSS通常被利用于Cookie窃取、会话劫持、钓鱼，也可以获取客户端信息，控制受害者浏览器执行其他操作。当然它的危害远不止这些，简单来讲，一是能获取用户的信息，二是能操作用户的设备。所以千万不要被弹框给欺骗，XSS的危害没有你想象中的那么简单。</p>
-<h1 id="XSS的分类"><a href="#XSS的分类" class="headerlink" title="XSS的分类"></a>XSS的分类</h1><p>&emsp;&emsp;根据特性和利用手法，XSS主要分为以下三种：反射型XSS、存储型XSS、DOM型XSS。</p>
-<p>&emsp;&emsp;反射型XSS也被叫做非持久型XSS、参数型XSS，是三种XSS中最常见的一种。</p>
-<p>&emsp;&emsp;对于反射型XSS的利用，攻击者一般是构造一个包含恶意代码的URL，然后通过留言、邮件或其他途径发送给受害者。当受害者点击时，恶意代码就会被执行。正因为只有在用户点击时才会触发，且只执行一次，所以才被称为非持久型、反射型。</p>
-<p>&emsp;&emsp;存储型XSS，也叫做持久型XSS。和反射型XSS不一样的是，存储型XSS不需要受害者去点击什么。攻击者事先将恶意代码存储到了服务器，每当受害者访问包含恶意代码的页面，恶意代码就会被执行。</p>
-<p>&emsp;&emsp;存储型XSS一般出现在留言、评论、修改个人信息等与数据库存储相关的地方，而反射型XSS出现在其他交互的地方，比如搜索、登录等。</p>
-<p>&emsp;&emsp;反射型XSS和存储型XSS都会和服务器产生交互，恶意代码由服务器端通过响应包返回给客户端；而DOM型XSS不会和服务器产生交互，恶意代码由前端的JavaScript处理。</p>
-<p>&emsp;&emsp;三种类型的XSS简单介绍到这里，大家先在心里留下反射型XSS、存储型XSS以及DOM型XSS的概念，后续我会通过实战的方式，更直观的展示三者之间的区别。</p>
-<h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的微信公众号。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
+<p>&#160; &#160; &#160; &#160;在不添加任何选项和参数运行时，ls命令默认列出当前目录下隐藏文件以外的所有文件和目录。（仅列出名字）</p>
 <div align="center">
-    <img src="/XSS-%E7%AE%80%E4%BB%8B-1/2-%E5%85%B3%E6%B3%A8%E5%85%AC%E4%BC%97%E5%8F%B7.gif" class>
-</div>
-]]></content>
-      <categories>
-        <category>渗透测试</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>每日命令 | pwd、cd</title>
-    <url>/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-pwd%E3%80%81cd/</url>
-    <content><![CDATA[<h1 id="命令简介"><a href="#命令简介" class="headerlink" title="命令简介"></a>命令简介</h1><p>&#160; &#160; &#160; &#160;上回说到《每日命令 | ls》，今天我们来说一说pwd命令和cd命令。</p>
-<p>&#160; &#160; &#160; &#160;pwd命令——返回当前工作目录名称。</p>
-<div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-pwd%E3%80%81cd/1-pwd.jpg" class>
+
+<img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-ls/2-ls.jpg" class>
 </div>
 
-
-
-
-<p>&#160; &#160; &#160; &#160;cd命令——改变工作目录。</p>
+<p>&#160; &#160; &#160; &#160;<br>&#160; &#160; &#160; &#160;当前目录为根目录“/”，因此列出了该目录下隐藏文件以外的所有文件和目录的名字。</p>
+<p>&#160; &#160; &#160; &#160;要注意的是，Linux是严格区分大小写的。所以如果将命令大写的话，系统是识别不出来的。</p>
 <div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-pwd%E3%80%81cd/2-pwd.jpg" class>
+    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-ls/3-ls.jpg" class>
 </div>
 
+<p>&#160; &#160; &#160; &#160;<br>&#160; &#160; &#160; &#160;默认情况下，只列出非隐藏的文件和目录，那有没有办法列出所有的文件和目录，包括隐藏文件和目录呢？</p>
+<p>&#160; &#160; &#160; &#160;办法当然是有的，只需要在ls命令后添加“-a”选项即可。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ls -a</span><br></pre></td></tr></table></figure>
 
-
-
-<p>&#160; &#160; &#160; &#160;什么是工作目录？</p>
-<p>&#160; &#160; &#160; &#160;举个例子：我在北京上班，那我的工作地点就是北京；后来我到上海上班去了，那我的工作地点就变成上海了。</p>
-<p>&#160; &#160; &#160; &#160;在linux中，我们当前在哪个目录下，那个目录就被称为当前的工作目录，因为我们所有的命令(工作)都是在当前目录下执行的。</p>
-<h1 id="命令详解"><a href="#命令详解" class="headerlink" title="命令详解"></a>命令详解</h1><h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pwd  [选项]</span><br><span class="line"></span><br><span class="line"> cd  [选项] [目录]</span><br></pre></td></tr></table></figure>
-
-<p>&#160; &#160; &#160; &#160;pwd命令只有选项，没有参数。因为它的作用是输出当前的工作目录名，所以不需要参数。</p>
-<p>&#160; &#160; &#160; &#160;cd命令，既有选项，也有参数。参数为想要切换到的目录名。</p>
-<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>&#160; &#160; &#160; &#160;pwd命令没有参数</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pwd</span><br></pre></td></tr></table></figure>
-
-<p>&#160; &#160; &#160; &#160;pwd命令将我们当前所在的目录名打印出来。</p>
+<p>&#160; &#160; &#160; &#160;注意，命令与选项之间，选项与参数之间，都是有空格的，千万不要将三者写在一起。</p>
 <div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-pwd%E3%80%81cd/3-pwd.jpg" class>
+    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-ls/4-ls.jpg" class>
 </div>
 
+<p>&#160; &#160; &#160; &#160;<br>&#160; &#160; &#160; &#160;可以看到，列出的文件和目录中多了以圆点“.”开头的文件和目录。Linux中，以圆点“.”开头的文件和目录默认情况下会被隐藏，在Windows中也一样。</p>
+<p>&#160; &#160; &#160; &#160;大家有没有注意到，列出的文件和目录中，有“.”和“..”。在Linux中，这分别代表当前目录和上级目录，所以大家可能经常看到以下格式的命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">./文件</span><br></pre></td></tr></table></figure>
 
-
-
-<p>&#160; &#160; &#160; &#160;可以看到，我们当前在root目录下。</p>
-<p>&#160; &#160; &#160; &#160;cd命令的参数是目录名，毕竟是用来切换工作目录的。</p>
-<p>&#160; &#160; &#160; &#160;首先介绍四个特殊的命令。</p>
-<h3 id="cd"><a href="#cd" class="headerlink" title="cd ."></a>cd .</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd .</span><br></pre></td></tr></table></figure>
-
-<p>&#160; &#160; &#160; &#160;上回我们说到“.”目录表示当前目录，所以这条命令的意思是切换到当前目录。</p>
-<div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-pwd%E3%80%81cd/4-pwd.jpg" class>
-</div>
-
-
-
-
-
-<p>&#160; &#160; &#160; &#160;在执行cd命令之前，我们在root目录下。执行“cd .”命令后，我们仍在root目录下。</p>
-<p>&#160; &#160; &#160; &#160;但我们本来就在当前目录，再切换到当前目录，有点多此一举。所以这个命令一般不会用。</p>
-<h3 id="cd-1"><a href="#cd-1" class="headerlink" title="cd .."></a>cd ..</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd ..</span><br></pre></td></tr></table></figure>
-
-<p>&#160; &#160; &#160; &#160;“..”目录表示上级目录，或者说父目录。所以这条命令的意思是切换到当前目录的上一级目录。</p>
-<div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-pwd%E3%80%81cd/5-pwd.jpg" class>
-</div>
-
-
-
-
-<p>&#160; &#160; &#160; &#160;可以看到，当前我们处在root目录。在执行“cd ..”命令后，我们从root目录进入了“/”根目录。</p>
-<p>&#160; &#160; &#160; &#160;然后利用之前介绍的ls命令，列出当前目录下的文件和目录，发现root目录静静躺在其中。说明root目录是“/”根目录的子目录，所以cd命令才会切换到根目录。</p>
-<p>&#160; &#160; &#160; &#160;那我们再切换到根目录的上级目录试试？</p>
-<div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-pwd%E3%80%81cd/6-pwd.jpg" class>
-</div>
-
-
-
-
-<p>&#160; &#160; &#160; &#160;发现切换到根目录之后，再切换到根目录的上级目录，返回的结果还是根目录。</p>
-<p>&#160; &#160; &#160; &#160;这是怎么回事？命令抽风了吗？</p>
-<p>&#160; &#160; &#160; &#160;这是因为在Linux中，“/”根目录是系统最高目录，它没有上级目录，所以不管怎么切换，上级目录都会止步“/”目录。目录方面的知识以后会给大家讲解。</p>
-<p>&#160; &#160; &#160; &#160;小技巧，要获取我们当前的工作目录名，不一定要用pwd命令，我们还可以查看shell提示符。</p>
-<p>&#160; &#160; &#160; &#160;啥是shell提示符？</p>
-<div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-pwd%E3%80%81cd/7-pwd.jpg" class>
-</div>
-
-
-
-
-<p>&#160; &#160; &#160; &#160;我们打开终端，红框中这种就是shell提示符。其默认组成一般是</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">当前登录用户名@主机名:当前目录[$|#]</span><br></pre></td></tr></table></figure>
+<p>&#160; &#160; &#160; &#160;这条命令的意思是执行当前目录下的这个文件。假如你下载了一个脚本工具，想要运行它进行漏洞检测。你可以先进入脚本所在的目录，然后输入“./脚本名”来运行脚本。</p>
+<p>&#160; &#160; &#160; &#160;如果不想打印这两个目录，可以使用“-A”选项，效果和“-a”选项一样，只是不列出“.”和“..”而已。这里再次强调，Linux严格区分大小写。</p>
+<p>&#160; &#160; &#160; &#160;这么多文件和目录密密麻麻列出来，是不是感觉看着不舒服？教你一招，使用“-l”选项，以长格式列出文件和目录的信息。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ls -l</span><br></pre></td></tr></table></figure>
 
 <div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-pwd%E3%80%81cd/8-pwd.jpg" class>
+    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-ls/5-ls.jpg" class>
 </div>
 
-<p>&#160; &#160; &#160; &#160;我们只需要看shell提示符中的目录就可以知道当前工作目录，这样是不是方便了很多？而且shell提示符是可以自定义的，我们可以根据自身习惯自定义shell提示符，方便日常工作使用。</p>
-<p>&#160; &#160; &#160; &#160;另外，shell提示符最后显示“$”还是“#”，取决于登录的用户。登录的用户如果是超级用户root，则显示为“#”，如果是普通用户，则显示“$”。Linux的超级用户root就相当于Windows的Administrator。</p>
-<p>&#160; &#160; &#160; &#160;这里我是用超级用户root登录的，所以shell提示符最后显示为“#”。</p>
-<h3 id="cd-2"><a href="#cd-2" class="headerlink" title="cd -"></a>cd -</h3><p>&#160; &#160; &#160; &#160;接下来给大家介绍一个好玩的命令。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd -</span><br></pre></td></tr></table></figure>
+<p>&#160; &#160; &#160; &#160;<br>&#160; &#160; &#160; &#160;这样看着多多少少舒服了一点。但是怎么多了一些其他的信息？这是因为“-l”选项会将文件和目录的属性打印出来，比如文件类型、权限等等。相当于Windows中右键—&gt;属性。</p>
+<p>&#160; &#160; &#160; &#160;长格式中各个字段的知识点有点多，我在以后的文章再讲，这里将重心放在命令的学习上。</p>
+<p>&#160; &#160; &#160; &#160;在“-l”选项列出的信息中，第5列表示文件/目录的大小，默认单位为字节，可使用“-h”选项，将单位转换为对人们友好的单位（K、M、G）。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ls -hl</span><br></pre></td></tr></table></figure>
 
-<p>&#160; &#160; &#160; &#160;这条命令的意思是切换到我们待过的上一个目录，或者理解为我们从哪个目录切换过来的，我们就切回哪个目录。</p>
-<p>&#160; &#160; &#160; &#160;用菩提祖师的话说：“悟空，从哪来，回哪去”。</p>
+<p>&#160; &#160; &#160; &#160;命令可以同时使用多个选项，多个选项写在一起即可。这条命令的意思是以长格式打印当前目录下的非隐藏文件和目录，并将大小显示成对人们友好的单位。</p>
 <div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-pwd%E3%80%81cd/9-pwd.jpg" class>
+    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-ls/6-ls.jpg" class>
 </div>
 
-
-
-
-<p>&#160; &#160; &#160; &#160;最开始我们在root目录，切换到根目录。然后在根目录执行“cd -”命令，切回到了root目录，因为在来根目录之前，我们待在root目录中。再在root目录运行同样的目录，切回到了根目录，因为来root目录之前，我们在根目录。</p>
-<p>&#160; &#160; &#160; &#160;有点死循环的感觉。</p>
-<h3 id="cd-3"><a href="#cd-3" class="headerlink" title="cd ~"></a>cd ~</h3><p>&#160; &#160; &#160; &#160;最后再介绍“~”目录。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd ~</span><br></pre></td></tr></table></figure>
-
-<p>&#160; &#160; &#160; &#160;在Linux中，“~”表示用户的家目录。</p>
-<p>&#160; &#160; &#160; &#160;在多用户操作系统中，系统会为每个用户分配一个目录，作为家目录，用来保存用户的文件。</p>
-<p>&#160; &#160; &#160; &#160;在Linux中，家目录分两种：普通用户的家目录和超级用户的家目录。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">普通用户：/home/用户名</span><br><span class="line">超级用户：/root</span><br></pre></td></tr></table></figure>
-
-<p>&#160; &#160; &#160; &#160;普通用户的家目录为/home/用户名。假如用户为admin，那它的家目录就是/home/admin。</p>
-<p>&#160; &#160; &#160; &#160;在Windows中也是这样的，只不过路径不一样而已。另外微信、QQ也是这样，比如QQ会以QQ号为目录，为不同用户存放文件。以前没注意过的校友可以在自己电脑操作一下。</p>
-<p>&#160; &#160; &#160; &#160;超级用户的家目录为/root。超级用户可以查看普通用户的家目录，而普通用户不能查看超级用户的家目录。</p>
+<p>&#160; &#160; &#160; &#160;<br>&#160; &#160; &#160; &#160;在这里我想提一句：命令的选项一般都有简化形式和完整形式，无论使用哪种形式的选项，都能达到相同的效果。</p>
 <div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-pwd%E3%80%81cd/10-pwd.jpg" class>
+    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-ls/7-ls.jpg" class>
 </div>
 
+<p>&#160; &#160; &#160; &#160;<br>&#160; &#160; &#160; &#160;我用“–help”选项的简化模式“-h”，依然成功打印出了命令的帮助信息。但有些命令不一定有“-h”选项，或者“-h”并不是“–help”的简化。就比如ls命令，“-h”选项不是打印帮助信息。</p>
+<p>&#160; &#160; &#160; &#160;所以查看帮助信息的时候，个人推荐使用完整选项”–help“。至于其他选项，当然使用简化形式，更方便使用和记忆。</p>
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>&#160; &#160; &#160; &#160;命令除了可以添加选项，还可以添加参数。ls命令的参数就是文件名和目录名。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ls 0</span><br></pre></td></tr></table></figure>
 
 
-
-<p>&#160; &#160; &#160; &#160;可以看到，执行“cd <del>”命令的效果和执行“cd /root”命令的效果一样。因为我是用root用户登录的，此时“</del>”目录就是root目录。</p>
-<p>&#160; &#160; &#160; &#160;另外，可以用“cd ~用户名”切换到其他用户的家目录。</p>
-<p>&#160; &#160; &#160; &#160;当然，也可以不指定目录，这种情况cd命令会切换到当前登录用户的家目录，和“cd ~”命令一样的效果。</p>
+<p>&#160; &#160; &#160; &#160;添加参数后，我们就可以列出参数指定的文件/目录的信息了。</p>
 <div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-pwd%E3%80%81cd/11-pwd.jpg" class>
+    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-ls/8-ls.jpg" class>
 </div>
 
-
-
-
-<p>&#160; &#160; &#160; &#160;四个特殊命令介绍完了，接下来给大家介绍常规目录的切换方法。</p>
-<p>&#160; &#160; &#160; &#160;常规目录的切换有两种方式：相对路径和绝对路径。</p>
-<p>&#160; &#160; &#160; &#160;在物理学习中，相信大家都接触过参照物。在Linux中，相对路径和绝对路径也和参照物有关。</p>
+<p>&#160; &#160; &#160; &#160;<br>&#160; &#160; &#160; &#160;这里我列出了当前目录下的0文件，也可以将参数设置为指定目录。这样会列出指定目录下的文件。</p>
 <div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-pwd%E3%80%81cd/12-pwd.jpg" class>
+    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-ls/9-ls.jpg" class>
 </div>
 
-
-
-
-<p>&#160; &#160; &#160; &#160;以上是tomcat目录的结构：在根目录下的root目录的vulhub-master目录中。下面我们分别用相对路径和绝对路径来进入tomcat目录。</p>
-<p>&#160; &#160; &#160; &#160;相对路径的参照物是当前的工作目录。如果使用相对路径的方式进行切换，目录路径则以当前工作目录为起点。</p>
+<p>&#160; &#160; &#160; &#160;<br>&#160; &#160; &#160; &#160;如果只想查看目录本身，不想列出目录下的文件，我们可以使用“-d”选项。</p>
 <div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-pwd%E3%80%81cd/13-pwd.jpg" class>
+    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-ls/10-ls.jpg" class>
 </div>
 
-
-
-
-
-<p>&#160; &#160; &#160; &#160;也可以“逆流而上”切换到别的目录。</p>
+<p>&#160; &#160; &#160; &#160;<br>&#160; &#160; &#160; &#160;和选项一样，也可以同时添加多个参数。注意，参数之间有空格。</p>
 <div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-pwd%E3%80%81cd/14-pwd.jpg" class>
+    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-ls/11-ls.jpg" class>
 </div>
 
-
-
-
-<p>&#160; &#160; &#160; &#160;当前我们在tomcat目录。</p>
-<p>&#160; &#160; &#160; &#160;“../../Desktop”的意思是上级目录的上级目录下的Desktop目录。</p>
-<p>&#160; &#160; &#160; &#160;tomcat目录的上级目录是vulhub-master目录，vulhub-master目录的上级目录是root目录，然后再切换到root目录下的Desktop目录。</p>
-<p>&#160; &#160; &#160; &#160;以上是使用相对路径进行切换的案例，下面介绍怎么使用绝对路径切换工作目录。</p>
-<p>&#160; &#160; &#160; &#160;之前提到，Linux的最高目录是“/”目录，Linux所有文件和目录都在“/”目录中，而绝对路径的参照物就是“/”目录。</p>
-<p>&#160; &#160; &#160; &#160;如果想使用绝对路径的方式来切换目录，很简单，只需要遵循一点，那就是目录的路径必须从“/”目录开始。</p>
+<p>&#160; &#160; &#160; &#160;<br>&#160; &#160; &#160; &#160;当然，命令也可以选项、参数同时使用。</p>
 <div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-pwd%E3%80%81cd/15-pwd.jpg" class>
+    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-ls/12-ls.jpg" class>
 </div>
 
+<p>&#160; &#160; &#160; &#160;<br>&#160; &#160; &#160; &#160;以上就是ls命令的语法、常用选项、参数。</p>
+<h1 id="知识总结"><a href="#知识总结" class="headerlink" title="知识总结"></a>知识总结</h1><p>&#160; &#160; &#160; &#160;以下是对本文知识的总结。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">语法：ls  [选项] [文件]</span><br><span class="line">用途：</span><br><span class="line">    列出文件的信息（默认情况下仅列出名字）</span><br><span class="line">    如果以目录名作为参数，则会列出该目录下的文件。</span><br><span class="line">选项：</span><br><span class="line">    -a ———— 列出所有文件和目录（包括隐藏文件和目录）</span><br><span class="line">    -A ———— 列出除当前目录“.”和上级目录“..”以外的所有文件和目录（包括隐藏文件和目录）</span><br><span class="line">    -l ———— 以长格式列出文件和目录的属性</span><br><span class="line">    -h ———— 以对人类友好的单位显示文件和目录的大小</span><br><span class="line">    -d ———— 只列出目录本身，不列出目录下的文件</span><br><span class="line">参数：文件名/目录名</span><br><span class="line">其他：</span><br><span class="line">    “--help”选项可获取命令的帮助信息</span><br><span class="line">    Linux严格区分大小写</span><br><span class="line">    命令可以同时使用多个选项，多个选项写在一起即可</span><br><span class="line">    命令也可以指定多个文件和目录作为参数，ls则会列出所有指定的文件和目录中的文件名。</span><br></pre></td></tr></table></figure>
 
-
-
-<p>&#160; &#160; &#160; &#160;无论使用那种路径，只要路径正确，都能达到同样的目的。</p>
-<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><p>&#160; &#160; &#160; &#160;pwd和cd命令都有选项，但是在日常工作中，这两条命令的选项其实用的很少。</p>
-<p>&#160; &#160; &#160; &#160;因为默认情况下，这两条命令已经足够满足我们的需求了。所以这里不再阐述，有兴趣的校友可以查阅相关资料。</p>
-<h1 id="命令选项总结"><a href="#命令选项总结" class="headerlink" title="命令选项总结"></a>命令选项总结</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">语法：</span><br><span class="line">    pwd  [选项]</span><br><span class="line">     cd  [选项] [目录]</span><br><span class="line">用途：</span><br><span class="line">    pwd————打印当前工作目录</span><br><span class="line">     cd————切换工作目录</span><br><span class="line">参数：</span><br><span class="line">    pwd命令没有参数，cd命令的参数是目录名</span><br><span class="line">其他：</span><br><span class="line">    cd .    切换到当前目录</span><br><span class="line">    cd ..   切换到上级目录</span><br><span class="line">    cd -    切换到上一目录</span><br><span class="line">    cd ~    切换到家目录</span><br><span class="line">    cd ~用户名    切换到其他用户的家目录    </span><br><span class="line">    root用户：shell提示符最后显示#;普通用户：shell提示符最后显示$</span><br><span class="line">    root可以查看其他用户的家目录,普通用户不能查看root的家目录</span><br><span class="line">    相对路径相对于当前工作目录，绝对路径相对于“/”目录。</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的微信公众号。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
+<h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的博客。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
 <div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-pwd%E3%80%81cd/16-%E5%85%B3%E6%B3%A8%E5%85%AC%E4%BC%97%E5%8F%B7.gif" class>
+    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-ls/13-%E5%85%B3%E6%B3%A8%E5%85%AC%E4%BC%97%E5%8F%B7.gif" class>
 </div>
-
-
-
-
-
-
 ]]></content>
       <categories>
         <category>每日命令</category>
@@ -1014,223 +930,203 @@
       </tags>
   </entry>
   <entry>
-    <title>每日漏洞 | Host头攻击</title>
-    <url>/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-Host%E5%A4%B4%E6%94%BB%E5%87%BB/</url>
-    <content><![CDATA[<h1 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h1><p>&#160; &#160; &#160; &#160;《HTTP | HTTP报文》最后一节，简单的介绍了一下首部字段，其中就包含了Host首部字段。</p>
-<p>&#160; &#160; &#160; &#160;为了方便获取网站域名，开发人员一般依赖于请求包中的Host首部字段。例如，在php里用_SERVER[“HTTP_HOST”]。但是这个Host字段值是不可信赖的(可通过HTTP代理工具篡改)，如果应用程序没有对Host字段值进行处理，就有可能造成恶意代码的传入。</p>
-<h1 id="漏洞知识拓展"><a href="#漏洞知识拓展" class="headerlink" title="漏洞知识拓展"></a>漏洞知识拓展</h1><p>&#160; &#160; &#160; &#160;Host首部字段是HTTP/1.1新增的，旨在告诉服务器，客户端请求的主机名和端口号，主要用来实现虚拟主机技术。</p>
-<p>&#160; &#160; &#160; &#160;运用虚拟主机技术，单个主机可以运行多个站点。以下图为例，hacker和usagidesign两个站点都运行在同一服务器A上，不管我们请求哪个域名，最终都会被解析成服务器A的IP地址，这个时候服务器就不知道该将请求交给哪个站点处理，因此需要Host字段指定请求的主机名。</p>
-<p>&#160; &#160; &#160; &#160;我们访问hacker域名，经DNS解析，变成了服务器A的IP，请求传达到服务器A，A接收到请求后，发现请求报文中的Host字段值为hacker，进而将请求交给hacker站点处理。（这里又涉及到计算机网络知识了，是不是觉得要学的真多？没关系，我后面都会一一介绍的）</p>
+    <title>每日命令 | pwd、cd</title>
+    <url>/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-pwd%E3%80%81cd/</url>
+    <content><![CDATA[<h1 id="命令简介"><a href="#命令简介" class="headerlink" title="命令简介"></a>命令简介</h1><p>&#160; &#160; &#160; &#160;上回说到《每日命令 | ls》，今天我们来说一说pwd命令和cd命令。</p>
+<p>&#160; &#160; &#160; &#160;pwd命令——返回当前工作目录名称。</p>
 <div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-Host%E5%A4%B4%E6%94%BB%E5%87%BB/1-host.jpg" class>
+    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-pwd%E3%80%81cd/1-pwd.jpg" class>
 </div>
 
-<p>&#160; &#160; &#160; &#160;这个时候，问题就出现了。为了方便获取网站域名，开发人员一般依赖于请求包中的Host首部字段。例如，在php里用_SERVER[“HTTP_HOST”]。但是这个Host字段值是不可信赖的(可通过HTTP代理工具篡改)，如果应用程序没有对Host字段值进行处理，就有可能造成恶意代码的传入。</p>
-<h1 id="漏洞检测"><a href="#漏洞检测" class="headerlink" title="漏洞检测"></a>漏洞检测</h1><p>&#160; &#160; &#160; &#160;Host头攻击漏洞的检测比较简单，只需要抓包，修改Host字段值，提交，查看响应中是否包含修改后的Host字段值即可。</p>
-<p>&#160; &#160; &#160; &#160;下面我分三个场景，介绍一下Host头攻击漏洞存在的表现。</p>
-<h2 id="跳转"><a href="#跳转" class="headerlink" title="跳转"></a>跳转</h2><p>&#160; &#160; &#160; &#160;场景一：正常请求，响应302，Location首部字段指明跳转的地址，其中Location字段值为Host字段指定的地址。</p>
+
+
+
+<p>&#160; &#160; &#160; &#160;cd命令——改变工作目录。</p>
 <div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-Host%E5%A4%B4%E6%94%BB%E5%87%BB/2-host.jpg" class>
+    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-pwd%E3%80%81cd/2-pwd.jpg" class>
 </div>
 
-<p>&#160; &#160; &#160; &#160;将请求包的Host字段值修改为<a href="http://www.baidu.com提交，响应包中的Location地址也被更改为www.baidu.com。" target="_blank" rel="noopener">www.baidu.com提交，响应包中的Location地址也被更改为www.baidu.com。</a></p>
-<h2 id="拼接"><a href="#拼接" class="headerlink" title="拼接"></a>拼接</h2><p>&#160; &#160; &#160; &#160;场景二：正常请求，正常响应，将Host字段值拼接到标签属性值中。</p>
+
+
+
+<p>&#160; &#160; &#160; &#160;什么是工作目录？</p>
+<p>&#160; &#160; &#160; &#160;举个例子：我在北京上班，那我的工作地点就是北京；后来我到上海上班去了，那我的工作地点就变成上海了。</p>
+<p>&#160; &#160; &#160; &#160;在linux中，我们当前在哪个目录下，那个目录就被称为当前的工作目录，因为我们所有的命令(工作)都是在当前目录下执行的。</p>
+<h1 id="命令详解"><a href="#命令详解" class="headerlink" title="命令详解"></a>命令详解</h1><h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pwd  [选项]</span><br><span class="line"></span><br><span class="line"> cd  [选项] [目录]</span><br></pre></td></tr></table></figure>
+
+<p>&#160; &#160; &#160; &#160;pwd命令只有选项，没有参数。因为它的作用是输出当前的工作目录名，所以不需要参数。</p>
+<p>&#160; &#160; &#160; &#160;cd命令，既有选项，也有参数。参数为想要切换到的目录名。</p>
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>&#160; &#160; &#160; &#160;pwd命令没有参数</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pwd</span><br></pre></td></tr></table></figure>
+
+<p>&#160; &#160; &#160; &#160;pwd命令将我们当前所在的目录名打印出来。</p>
 <div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-Host%E5%A4%B4%E6%94%BB%E5%87%BB/3-host.jpg" class>
+    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-pwd%E3%80%81cd/3-pwd.jpg" class>
 </div>
 
-<p>&#160; &#160; &#160; &#160;将请求包的Host字段值修改为<a href="http://www.baidu.com提交，发现服务器将www.baidu.com拼接到了script标签的src属性值中。" target="_blank" rel="noopener">www.baidu.com提交，发现服务器将www.baidu.com拼接到了script标签的src属性值中。</a></p>
-<h2 id="代码注入"><a href="#代码注入" class="headerlink" title="代码注入"></a>代码注入</h2><p>&#160; &#160; &#160; &#160;场景三：这其实也属于拼接，只不过在场景二的基础上写入了恶意代码。</p>
+
+
+
+<p>&#160; &#160; &#160; &#160;可以看到，我们当前在root目录下。</p>
+<p>&#160; &#160; &#160; &#160;cd命令的参数是目录名，毕竟是用来切换工作目录的。</p>
+<p>&#160; &#160; &#160; &#160;首先介绍四个特殊的命令。</p>
+<h3 id="cd"><a href="#cd" class="headerlink" title="cd ."></a>cd .</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd .</span><br></pre></td></tr></table></figure>
+
+<p>&#160; &#160; &#160; &#160;上回我们说到“.”目录表示当前目录，所以这条命令的意思是切换到当前目录。</p>
 <div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-Host%E5%A4%B4%E6%94%BB%E5%87%BB/4-host.jpg" class>
+    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-pwd%E3%80%81cd/4-pwd.jpg" class>
 </div>
 
-<p>&#160; &#160; &#160; &#160;利用Host字段写入script标签，弹出警告框。</p>
-<h1 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h1><p>&#160; &#160; &#160; &#160;对Host字段进行检测。</p>
-<p>&#160; &#160; &#160; &#160;Nginx，修改ngnix.conf文件，在server中指定一个server_name名单，并添加检测。</p>
-<p>&#160; &#160; &#160; &#160;Apache，修改httpd.conf文件，指定ServerName，并开启UseCanonicalName选项。</p>
-<p>&#160; &#160; &#160; &#160;Tomcat，修改server.xml文件，配置Host的name属性。</p>
+
+
+
+
+<p>&#160; &#160; &#160; &#160;在执行cd命令之前，我们在root目录下。执行“cd .”命令后，我们仍在root目录下。</p>
+<p>&#160; &#160; &#160; &#160;但我们本来就在当前目录，再切换到当前目录，有点多此一举。所以这个命令一般不会用。</p>
+<h3 id="cd-1"><a href="#cd-1" class="headerlink" title="cd .."></a>cd ..</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd ..</span><br></pre></td></tr></table></figure>
+
+<p>&#160; &#160; &#160; &#160;“..”目录表示上级目录，或者说父目录。所以这条命令的意思是切换到当前目录的上一级目录。</p>
+<div align="center">
+    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-pwd%E3%80%81cd/5-pwd.jpg" class>
+</div>
+
+
+
+
+<p>&#160; &#160; &#160; &#160;可以看到，当前我们处在root目录。在执行“cd ..”命令后，我们从root目录进入了“/”根目录。</p>
+<p>&#160; &#160; &#160; &#160;然后利用之前介绍的ls命令，列出当前目录下的文件和目录，发现root目录静静躺在其中。说明root目录是“/”根目录的子目录，所以cd命令才会切换到根目录。</p>
+<p>&#160; &#160; &#160; &#160;那我们再切换到根目录的上级目录试试？</p>
+<div align="center">
+    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-pwd%E3%80%81cd/6-pwd.jpg" class>
+</div>
+
+
+
+
+<p>&#160; &#160; &#160; &#160;发现切换到根目录之后，再切换到根目录的上级目录，返回的结果还是根目录。</p>
+<p>&#160; &#160; &#160; &#160;这是怎么回事？命令抽风了吗？</p>
+<p>&#160; &#160; &#160; &#160;这是因为在Linux中，“/”根目录是系统最高目录，它没有上级目录，所以不管怎么切换，上级目录都会止步“/”目录。目录方面的知识以后会给大家讲解。</p>
+<p>&#160; &#160; &#160; &#160;小技巧，要获取我们当前的工作目录名，不一定要用pwd命令，我们还可以查看shell提示符。</p>
+<p>&#160; &#160; &#160; &#160;啥是shell提示符？</p>
+<div align="center">
+    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-pwd%E3%80%81cd/7-pwd.jpg" class>
+</div>
+
+
+
+
+<p>&#160; &#160; &#160; &#160;我们打开终端，红框中这种就是shell提示符。其默认组成一般是</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">当前登录用户名@主机名:当前目录[$|#]</span><br></pre></td></tr></table></figure>
+
+<div align="center">
+    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-pwd%E3%80%81cd/8-pwd.jpg" class>
+</div>
+
+<p>&#160; &#160; &#160; &#160;我们只需要看shell提示符中的目录就可以知道当前工作目录，这样是不是方便了很多？而且shell提示符是可以自定义的，我们可以根据自身习惯自定义shell提示符，方便日常工作使用。</p>
+<p>&#160; &#160; &#160; &#160;另外，shell提示符最后显示“$”还是“#”，取决于登录的用户。登录的用户如果是超级用户root，则显示为“#”，如果是普通用户，则显示“$”。Linux的超级用户root就相当于Windows的Administrator。</p>
+<p>&#160; &#160; &#160; &#160;这里我是用超级用户root登录的，所以shell提示符最后显示为“#”。</p>
+<h3 id="cd-2"><a href="#cd-2" class="headerlink" title="cd -"></a>cd -</h3><p>&#160; &#160; &#160; &#160;接下来给大家介绍一个好玩的命令。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd -</span><br></pre></td></tr></table></figure>
+
+<p>&#160; &#160; &#160; &#160;这条命令的意思是切换到我们待过的上一个目录，或者理解为我们从哪个目录切换过来的，我们就切回哪个目录。</p>
+<p>&#160; &#160; &#160; &#160;用菩提祖师的话说：“悟空，从哪来，回哪去”。</p>
+<div align="center">
+    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-pwd%E3%80%81cd/9-pwd.jpg" class>
+</div>
+
+
+
+
+<p>&#160; &#160; &#160; &#160;最开始我们在root目录，切换到根目录。然后在根目录执行“cd -”命令，切回到了root目录，因为在来根目录之前，我们待在root目录中。再在root目录运行同样的目录，切回到了根目录，因为来root目录之前，我们在根目录。</p>
+<p>&#160; &#160; &#160; &#160;有点死循环的感觉。</p>
+<h3 id="cd-3"><a href="#cd-3" class="headerlink" title="cd ~"></a>cd ~</h3><p>&#160; &#160; &#160; &#160;最后再介绍“~”目录。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd ~</span><br></pre></td></tr></table></figure>
+
+<p>&#160; &#160; &#160; &#160;在Linux中，“~”表示用户的家目录。</p>
+<p>&#160; &#160; &#160; &#160;在多用户操作系统中，系统会为每个用户分配一个目录，作为家目录，用来保存用户的文件。</p>
+<p>&#160; &#160; &#160; &#160;在Linux中，家目录分两种：普通用户的家目录和超级用户的家目录。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">普通用户：/home/用户名</span><br><span class="line">超级用户：/root</span><br></pre></td></tr></table></figure>
+
+<p>&#160; &#160; &#160; &#160;普通用户的家目录为/home/用户名。假如用户为admin，那它的家目录就是/home/admin。</p>
+<p>&#160; &#160; &#160; &#160;在Windows中也是这样的，只不过路径不一样而已。另外微信、QQ也是这样，比如QQ会以QQ号为目录，为不同用户存放文件。以前没注意过的校友可以在自己电脑操作一下。</p>
+<p>&#160; &#160; &#160; &#160;超级用户的家目录为/root。超级用户可以查看普通用户的家目录，而普通用户不能查看超级用户的家目录。</p>
+<div align="center">
+    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-pwd%E3%80%81cd/10-pwd.jpg" class>
+</div>
+
+
+
+
+<p>&#160; &#160; &#160; &#160;可以看到，执行“cd <del>”命令的效果和执行“cd /root”命令的效果一样。因为我是用root用户登录的，此时“</del>”目录就是root目录。</p>
+<p>&#160; &#160; &#160; &#160;另外，可以用“cd ~用户名”切换到其他用户的家目录。</p>
+<p>&#160; &#160; &#160; &#160;当然，也可以不指定目录，这种情况cd命令会切换到当前登录用户的家目录，和“cd ~”命令一样的效果。</p>
+<div align="center">
+    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-pwd%E3%80%81cd/11-pwd.jpg" class>
+</div>
+
+
+
+
+<p>&#160; &#160; &#160; &#160;四个特殊命令介绍完了，接下来给大家介绍常规目录的切换方法。</p>
+<p>&#160; &#160; &#160; &#160;常规目录的切换有两种方式：相对路径和绝对路径。</p>
+<p>&#160; &#160; &#160; &#160;在物理学习中，相信大家都接触过参照物。在Linux中，相对路径和绝对路径也和参照物有关。</p>
+<div align="center">
+    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-pwd%E3%80%81cd/12-pwd.jpg" class>
+</div>
+
+
+
+
+<p>&#160; &#160; &#160; &#160;以上是tomcat目录的结构：在根目录下的root目录的vulhub-master目录中。下面我们分别用相对路径和绝对路径来进入tomcat目录。</p>
+<p>&#160; &#160; &#160; &#160;相对路径的参照物是当前的工作目录。如果使用相对路径的方式进行切换，目录路径则以当前工作目录为起点。</p>
+<div align="center">
+    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-pwd%E3%80%81cd/13-pwd.jpg" class>
+</div>
+
+
+
+
+
+<p>&#160; &#160; &#160; &#160;也可以“逆流而上”切换到别的目录。</p>
+<div align="center">
+    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-pwd%E3%80%81cd/14-pwd.jpg" class>
+</div>
+
+
+
+
+<p>&#160; &#160; &#160; &#160;当前我们在tomcat目录。</p>
+<p>&#160; &#160; &#160; &#160;“../../Desktop”的意思是上级目录的上级目录下的Desktop目录。</p>
+<p>&#160; &#160; &#160; &#160;tomcat目录的上级目录是vulhub-master目录，vulhub-master目录的上级目录是root目录，然后再切换到root目录下的Desktop目录。</p>
+<p>&#160; &#160; &#160; &#160;以上是使用相对路径进行切换的案例，下面介绍怎么使用绝对路径切换工作目录。</p>
+<p>&#160; &#160; &#160; &#160;之前提到，Linux的最高目录是“/”目录，Linux所有文件和目录都在“/”目录中，而绝对路径的参照物就是“/”目录。</p>
+<p>&#160; &#160; &#160; &#160;如果想使用绝对路径的方式来切换目录，很简单，只需要遵循一点，那就是目录的路径必须从“/”目录开始。</p>
+<div align="center">
+    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-pwd%E3%80%81cd/15-pwd.jpg" class>
+</div>
+
+
+
+
+<p>&#160; &#160; &#160; &#160;无论使用那种路径，只要路径正确，都能达到同样的目的。</p>
+<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><p>&#160; &#160; &#160; &#160;pwd和cd命令都有选项，但是在日常工作中，这两条命令的选项其实用的很少。</p>
+<p>&#160; &#160; &#160; &#160;因为默认情况下，这两条命令已经足够满足我们的需求了。所以这里不再阐述，有兴趣的校友可以查阅相关资料。</p>
+<h1 id="命令选项总结"><a href="#命令选项总结" class="headerlink" title="命令选项总结"></a>命令选项总结</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">语法：</span><br><span class="line">    pwd  [选项]</span><br><span class="line">     cd  [选项] [目录]</span><br><span class="line">用途：</span><br><span class="line">    pwd————打印当前工作目录</span><br><span class="line">     cd————切换工作目录</span><br><span class="line">参数：</span><br><span class="line">    pwd命令没有参数，cd命令的参数是目录名</span><br><span class="line">其他：</span><br><span class="line">    cd .    切换到当前目录</span><br><span class="line">    cd ..   切换到上级目录</span><br><span class="line">    cd -    切换到上一目录</span><br><span class="line">    cd ~    切换到家目录</span><br><span class="line">    cd ~用户名    切换到其他用户的家目录    </span><br><span class="line">    root用户：shell提示符最后显示#;普通用户：shell提示符最后显示$</span><br><span class="line">    root可以查看其他用户的家目录,普通用户不能查看root的家目录</span><br><span class="line">    相对路径相对于当前工作目录，绝对路径相对于“/”目录。</span><br></pre></td></tr></table></figure>
+
+
+
+
+
 <h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的微信公众号。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
 <div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-Host%E5%A4%B4%E6%94%BB%E5%87%BB/5-%E5%85%B3%E6%B3%A8%E5%85%AC%E4%BC%97%E5%8F%B7.gif" class>
-</div>
-
-]]></content>
-      <categories>
-        <category>每日漏洞</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>每日漏洞 | HTTP.sys远程代码执行</title>
-    <url>/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-HTTP-sys%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/</url>
-    <content><![CDATA[<h1 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h1><p>&#160; &#160; &#160; &#160;上篇文章介绍了Host头攻击，今天我们讲一讲HTTP.sys远程代码执行漏洞。</p>
-<p>&#160; &#160; &#160; &#160;HTTP.sys是Microsoft Windows处理HTTP请求的内核驱动程序，为了优化IIS服务器性能，从IIS6.0引入，IIS服务进程依赖HTTP.sys。HTTP.sys远程代码执行漏洞实质是HTTP.sys的整数溢出漏洞，当攻击者向受影响的Windows系统发送特殊设计的HTTP 请求，HTTP.sys 未正确分析时就会导致此漏洞，成功利用此漏洞的攻击者可以在系统帐户的上下文中执行任意代码。</p>
-<p>&#160; &#160; &#160; &#160;主要存在Windows+IIS的环境下，任何安装了微软IIS 6.0以上的Windows Server 2008 R2/Server 2012/Server 2012 R2以及Windows 7/8/8.1操作系统都受到这个漏洞的影响。</p>
-<h1 id="漏洞知识拓展"><a href="#漏洞知识拓展" class="headerlink" title="漏洞知识拓展"></a>漏洞知识拓展</h1><p>&#160; &#160; &#160; &#160;说到HTTP.sys远程代码执行漏洞，不得不先介绍一下Range首部字段。</p>
-<p>&#160; &#160; &#160; &#160;在“上古时代”，网络并不是很好，下载大型文件很不容易。下载途中如果网络中断，就得重头开始下。为了解决这个问题，HTTP/1.1引入了范围请求。</p>
-<div align="center">
-    
+    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-pwd%E3%80%81cd/16-%E5%85%B3%E6%B3%A8%E5%85%AC%E4%BC%97%E5%8F%B7.gif" class>
 </div>
 
 
-<p>&#160; &#160; &#160; &#160;在请求报文的Range首部字段中指定资源的byte范围，告诉服务器，请求的是资源哪个范围的内容，让断点续传和并行下载得以实现。</p>
-<p>&#160; &#160; &#160; &#160;如果服务器支持范围请求，响应包中就会存在Accept-Ranges字段(且值不为“none”，bytes为资源范围的单位)，并在Content-Length字段中告诉客户端资源的大小范围。</p>
-<div align="center">
-    
-</div>
 
 
-<p>&#160; &#160; &#160; &#160;如果没有Accept-Ranges字段，则服务器可能不支持范围请求，有的服务器会明确将值设为“none”。</p>
-<p>&#160; &#160; &#160; &#160;服务器面对范围请求，有三种响应：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">请求成功：</span><br><span class="line">    响应206 Partial Content</span><br><span class="line">请求范围越界：（范围超过资源的大小）</span><br><span class="line">    响应416 Requested Range Not Satisfiable</span><br><span class="line">不支持范围请求：</span><br><span class="line">    响应200 OK</span><br></pre></td></tr></table></figure>
-
-<p>&#160; &#160; &#160; &#160;而HTTP.sys远程代码执行漏洞正是利用Range字段注入恶意数据。该漏洞的检测，也是利用服务器面对范围请求时的响应特征来判断。</p>
-<p>&#160; &#160; &#160; &#160;当然，范围请求不止这些知识点，详情可查看RFC：</p>
-<p><a href="https://tools.ietf.org/html/rfc7233" target="_blank" rel="noopener">https://tools.ietf.org/html/rfc7233</a></p>
-<h1 id="漏洞检测"><a href="#漏洞检测" class="headerlink" title="漏洞检测"></a>漏洞检测</h1><p>&#160; &#160; &#160; &#160;HTTP.sys漏洞的检测比较简单，先判断目标环境是不是Windows+IIS，然后构造Range字段进行检测即可。</p>
-<p>&#160; &#160; &#160; &#160;检测时，在请求包中添加Range字段，如下：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Range: bytes=0-18446744073709551615</span><br></pre></td></tr></table></figure>
-
-<p>&#160; &#160; &#160; &#160;提交给服务器，查看服务器响应。</p>
-<div align="center">
-    
-</div>
-
-<p>&#160; &#160; &#160; &#160;服务器响应400，证明不存在HTTP.sys远程代码执行漏洞。如果响应416，则证明系统存在漏洞。</p>
-<div align="center">
-    
-</div>
-
-<p>&#160; &#160; &#160; &#160;这里简单说一下Range字段值的含义。18446744073709551615转为十六进制是 0xFFFFFFFFFFFFFFFF(16个F），是64位无符号整型所能表达的最大整数，整数溢出和这个超大整数有关。</p>
-<p>&#160; &#160; &#160; &#160;另外，Apache几个老版本存在的Apache HTTP Server畸形Range选项处理远程拒绝服务漏洞，也是通过Range字段触发的，有兴趣的校友可以去了解了解。</p>
-<h1 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h1><p>&#160; &#160; &#160; &#160;升级补丁：</p>
-<p><a href="http://technet.microsoft.com/security/bulletin/MS15-034" target="_blank" rel="noopener">http://technet.microsoft.com/security/bulletin/MS15-034</a></p>
-<p>&#160; &#160; &#160; &#160;禁用IIS内核缓存（缓解方案）：</p>
-<p><a href="https://technet.microsoft.com/en-us/library/cc731903(v=ws.10).aspx" target="_blank" rel="noopener">https://technet.microsoft.com/en-us/library/cc731903(v=ws.10).aspx</a></p>
-<h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的博客。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
-<div align="center">
-    
-</div>
-
-]]></content>
-      <categories>
-        <category>每日漏洞</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>每日命令 | ls</title>
-    <url>/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-ls/</url>
-    <content><![CDATA[<h1 id="每日命令系列导语"><a href="#每日命令系列导语" class="headerlink" title="每日命令系列导语"></a>每日命令系列导语</h1><p>&#160; &#160; &#160; &#160;安全行业，接触Linux不可避免。今天我们开启Linux学习之旅。</p>
-<p>&#160; &#160; &#160; &#160;一直在构思Linux系列文章该怎么排版，最终决定采用每日命令的形式，毕竟Linux有大量的命令需要学习。</p>
-<p>&#160; &#160; &#160; &#160;每日命令系列根据命令知识点来排版。命令知识点多，一篇就只介绍一条命令；命令知识点少，就多介绍几条命令。命令以外的知识会视情况进行排版：碎片化讲解或单独发布。</p>
-<p>&#160; &#160; &#160; &#160;争取让校友们看完一篇文章不会太累，也不会觉得学到的东西少。当然，文章主要面向小白，所以知识点都很基础，这也符合安全小白团的宗旨。已经掌握了基础的校友们，可以跳过。</p>
-<p>&#160; &#160; &#160; &#160;学习命令，无外乎学习三个方面的内容：语法+选项+参数，所以每日命令系列主要从这三个方面进行介绍。</p>
-<p>&#160; &#160; &#160; &#160;首先介绍命令的语法，然后对常用的选项进行介绍，不会介绍所有的选项(有兴趣的校友可以自己查阅资料或安装Linux实践)。最后讲讲命令的参数。当然，为了让大家更好的理解，循序渐进，我不一定会按这个顺序。</p>
-<p>&#160; &#160; &#160; &#160;秉承每日系列简单粗暴的原则，废话不多话，开始每日命令系列第一章——ls命令的学习。</p>
-<h1 id="命令简介"><a href="#命令简介" class="headerlink" title="命令简介"></a>命令简介</h1><p>&#160; &#160; &#160; &#160;ls是英文list的缩写，用于列出文件，在Unix和类Unix系统中都有实现。相当于Windows中的dir命令。</p>
-<h1 id="命令详解"><a href="#命令详解" class="headerlink" title="命令详解"></a>命令详解</h1><h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ls  [选项] [文件]</span><br></pre></td></tr></table></figure>
-
-<p>&#160; &#160; &#160; &#160;以上是ls命令的语法，比较简单。其实Linux大多数命令的语法格式都是这样。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">命令名  [选项] [参数]</span><br></pre></td></tr></table></figure>
-
-<p>&#160; &#160; &#160; &#160;有个疑问：我是怎么知道ls命令语法的？这里要给大家介绍一下”–help“选项。Linux命令都有这个选项，用于打印命令的帮助信息。</p>
-<p>&#160; &#160; &#160; &#160;当我们不知道命令是用来干嘛的，或者命令语法/选项忘了，我们可以使用这个选项来获取命令的帮助信息。</p>
-<div align="center">
-<img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-ls/1-ls.jpg" class>
-</div>
-
-<p>&#160; &#160; &#160; &#160;<br>&#160; &#160; &#160; &#160;以上是ls命令的帮助信息。介绍了：ls命令的用法，也就是语法；ls命令的用途——列出文件的信息(默认是当前目录)；ls命令的选项。</p>
-<h2 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h2><p>&#160; &#160; &#160; &#160;ls命令选项比较多，这里我们挑一些常用的选项来介绍。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ls</span><br></pre></td></tr></table></figure>
-
-<p>&#160; &#160; &#160; &#160;在不添加任何选项和参数运行时，ls命令默认列出当前目录下隐藏文件以外的所有文件和目录。（仅列出名字）</p>
-<div align="center">
-
-<img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-ls/2-ls.jpg" class>
-</div>
-
-<p>&#160; &#160; &#160; &#160;<br>&#160; &#160; &#160; &#160;当前目录为根目录“/”，因此列出了该目录下隐藏文件以外的所有文件和目录的名字。</p>
-<p>&#160; &#160; &#160; &#160;要注意的是，Linux是严格区分大小写的。所以如果将命令大写的话，系统是识别不出来的。</p>
-<div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-ls/3-ls.jpg" class>
-</div>
-
-<p>&#160; &#160; &#160; &#160;<br>&#160; &#160; &#160; &#160;默认情况下，只列出非隐藏的文件和目录，那有没有办法列出所有的文件和目录，包括隐藏文件和目录呢？</p>
-<p>&#160; &#160; &#160; &#160;办法当然是有的，只需要在ls命令后添加“-a”选项即可。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ls -a</span><br></pre></td></tr></table></figure>
-
-<p>&#160; &#160; &#160; &#160;注意，命令与选项之间，选项与参数之间，都是有空格的，千万不要将三者写在一起。</p>
-<div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-ls/4-ls.jpg" class>
-</div>
-
-<p>&#160; &#160; &#160; &#160;<br>&#160; &#160; &#160; &#160;可以看到，列出的文件和目录中多了以圆点“.”开头的文件和目录。Linux中，以圆点“.”开头的文件和目录默认情况下会被隐藏，在Windows中也一样。</p>
-<p>&#160; &#160; &#160; &#160;大家有没有注意到，列出的文件和目录中，有“.”和“..”。在Linux中，这分别代表当前目录和上级目录，所以大家可能经常看到以下格式的命令：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">./文件</span><br></pre></td></tr></table></figure>
-
-<p>&#160; &#160; &#160; &#160;这条命令的意思是执行当前目录下的这个文件。假如你下载了一个脚本工具，想要运行它进行漏洞检测。你可以先进入脚本所在的目录，然后输入“./脚本名”来运行脚本。</p>
-<p>&#160; &#160; &#160; &#160;如果不想打印这两个目录，可以使用“-A”选项，效果和“-a”选项一样，只是不列出“.”和“..”而已。这里再次强调，Linux严格区分大小写。</p>
-<p>&#160; &#160; &#160; &#160;这么多文件和目录密密麻麻列出来，是不是感觉看着不舒服？教你一招，使用“-l”选项，以长格式列出文件和目录的信息。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ls -l</span><br></pre></td></tr></table></figure>
-
-<div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-ls/5-ls.jpg" class>
-</div>
-
-<p>&#160; &#160; &#160; &#160;<br>&#160; &#160; &#160; &#160;这样看着多多少少舒服了一点。但是怎么多了一些其他的信息？这是因为“-l”选项会将文件和目录的属性打印出来，比如文件类型、权限等等。相当于Windows中右键—&gt;属性。</p>
-<p>&#160; &#160; &#160; &#160;长格式中各个字段的知识点有点多，我在以后的文章再讲，这里将重心放在命令的学习上。</p>
-<p>&#160; &#160; &#160; &#160;在“-l”选项列出的信息中，第5列表示文件/目录的大小，默认单位为字节，可使用“-h”选项，将单位转换为对人们友好的单位（K、M、G）。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ls -hl</span><br></pre></td></tr></table></figure>
-
-<p>&#160; &#160; &#160; &#160;命令可以同时使用多个选项，多个选项写在一起即可。这条命令的意思是以长格式打印当前目录下的非隐藏文件和目录，并将大小显示成对人们友好的单位。</p>
-<div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-ls/6-ls.jpg" class>
-</div>
-
-<p>&#160; &#160; &#160; &#160;<br>&#160; &#160; &#160; &#160;在这里我想提一句：命令的选项一般都有简化形式和完整形式，无论使用哪种形式的选项，都能达到相同的效果。</p>
-<div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-ls/7-ls.jpg" class>
-</div>
-
-<p>&#160; &#160; &#160; &#160;<br>&#160; &#160; &#160; &#160;我用“–help”选项的简化模式“-h”，依然成功打印出了命令的帮助信息。但有些命令不一定有“-h”选项，或者“-h”并不是“–help”的简化。就比如ls命令，“-h”选项不是打印帮助信息。</p>
-<p>&#160; &#160; &#160; &#160;所以查看帮助信息的时候，个人推荐使用完整选项”–help“。至于其他选项，当然使用简化形式，更方便使用和记忆。</p>
-<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>&#160; &#160; &#160; &#160;命令除了可以添加选项，还可以添加参数。ls命令的参数就是文件名和目录名。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ls 0</span><br></pre></td></tr></table></figure>
 
 
-<p>&#160; &#160; &#160; &#160;添加参数后，我们就可以列出参数指定的文件/目录的信息了。</p>
-<div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-ls/8-ls.jpg" class>
-</div>
-
-<p>&#160; &#160; &#160; &#160;<br>&#160; &#160; &#160; &#160;这里我列出了当前目录下的0文件，也可以将参数设置为指定目录。这样会列出指定目录下的文件。</p>
-<div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-ls/9-ls.jpg" class>
-</div>
-
-<p>&#160; &#160; &#160; &#160;<br>&#160; &#160; &#160; &#160;如果只想查看目录本身，不想列出目录下的文件，我们可以使用“-d”选项。</p>
-<div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-ls/10-ls.jpg" class>
-</div>
-
-<p>&#160; &#160; &#160; &#160;<br>&#160; &#160; &#160; &#160;和选项一样，也可以同时添加多个参数。注意，参数之间有空格。</p>
-<div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-ls/11-ls.jpg" class>
-</div>
-
-<p>&#160; &#160; &#160; &#160;<br>&#160; &#160; &#160; &#160;当然，命令也可以选项、参数同时使用。</p>
-<div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-ls/12-ls.jpg" class>
-</div>
-
-<p>&#160; &#160; &#160; &#160;<br>&#160; &#160; &#160; &#160;以上就是ls命令的语法、常用选项、参数。</p>
-<h1 id="知识总结"><a href="#知识总结" class="headerlink" title="知识总结"></a>知识总结</h1><p>&#160; &#160; &#160; &#160;以下是对本文知识的总结。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">语法：ls  [选项] [文件]</span><br><span class="line">用途：</span><br><span class="line">    列出文件的信息（默认情况下仅列出名字）</span><br><span class="line">    如果以目录名作为参数，则会列出该目录下的文件。</span><br><span class="line">选项：</span><br><span class="line">    -a ———— 列出所有文件和目录（包括隐藏文件和目录）</span><br><span class="line">    -A ———— 列出除当前目录“.”和上级目录“..”以外的所有文件和目录（包括隐藏文件和目录）</span><br><span class="line">    -l ———— 以长格式列出文件和目录的属性</span><br><span class="line">    -h ———— 以对人类友好的单位显示文件和目录的大小</span><br><span class="line">    -d ———— 只列出目录本身，不列出目录下的文件</span><br><span class="line">参数：文件名/目录名</span><br><span class="line">其他：</span><br><span class="line">    “--help”选项可获取命令的帮助信息</span><br><span class="line">    Linux严格区分大小写</span><br><span class="line">    命令可以同时使用多个选项，多个选项写在一起即可</span><br><span class="line">    命令也可以指定多个文件和目录作为参数，ls则会列出所有指定的文件和目录中的文件名。</span><br></pre></td></tr></table></figure>
-
-<h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的博客。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
-<div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E5%91%BD%E4%BB%A4-ls/13-%E5%85%B3%E6%B3%A8%E5%85%AC%E4%BC%97%E5%8F%B7.gif" class>
-</div>
 ]]></content>
       <categories>
         <category>每日命令</category>
@@ -1238,90 +1134,6 @@
       <tags>
         <tag>Linux</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>每日漏洞 | 不安全的HTTP方法</title>
-    <url>/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84HTTP%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<h1 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h1><p>&#160; &#160; &#160; &#160;《HTTP | HTTP报文》中介绍了HTTP的请求方法。在这些方法中，HTTP定义了一组被称为安全方法的方法：GET、HEAD、OPTIONS、TRACE，这些方法不会产生什么动作，不会在服务器上产生结果，只是简单获取信息。相对的，能产生动作的方法就会被认为是不安全的HTTP方法。</p>
-<p>&#160; &#160; &#160; &#160;注意，安全方法不一定什么动作都不执行，比如在登陆时用GET方法传输数据，这个时候GET方法也会产生动作。就比如钱是用来花的，你硬要用来擦屁屁，这也没办法。</p>
-<div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84HTTP%E6%96%B9%E6%B3%95/1-%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84http%E6%96%B9%E6%B3%95.jpg" class>
-</div>
-
-<p>&#160; &#160; &#160; &#160;在HTTP认为的那些不安全的HTTP方法中，安全界认为PUT、DELETE、TRACE是不安全的，另外WebDAV中的几个方法，RFC 5789中的PATCH方法也被认为是不安全的。（TRACE容易引发XST攻击，PATCH修改资源的部分内容，PUT/DELETE没有认证机制等原因，不仅仅因为它们会产生结果）</p>
-<div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84HTTP%E6%96%B9%E6%B3%95/2-%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84http%E6%96%B9%E6%B3%95.jpg" class>
-</div>
-
-
-
-
-
-
-
-<h1 id="漏洞检测"><a href="#漏洞检测" class="headerlink" title="漏洞检测"></a>漏洞检测</h1><p>&#160; &#160; &#160; &#160;不安全的HTTP方法漏洞检测，分为两步：查询资源支持的方法、验证方法是否真的支持。</p>
-<h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><p>&#160; &#160; &#160; &#160;在之前的文章里提到过，OPTIONS请求方法可以查询URL指定的资源支持哪些方法。</p>
-<p>&#160; &#160; &#160; &#160;首先正常请求，抓包，然后将请求包中的请求方法修改为OPTIONS，提交，如果成功，响应包中就会出现一个Allow首部字段，里面列出了URL指定资源所支持的方法列表。</p>
-<div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84HTTP%E6%96%B9%E6%B3%95/3-%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84http%E6%96%B9%E6%B3%95.jpg" class>
-</div>
-
-<p>&#160; &#160; &#160; &#160;执行到这一步，就出现这么一种现象，有的校友在执行OPTIONS请求后，发现响应包的Allow字段中包含了PUT、DELETE等不安全方法，就直接认定系统存在漏洞。在我看来，这是不严谨的。有时候Allow字段提示支持，但实际上并不支持，因此需要进一步验证该资源是否真的支持不安全的HTTP方法。</p>
-<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><p>&#160; &#160; &#160; &#160;查询阶段显示，支持TRACE方法。那我们将OPTIONS方法修改为TRACE方法试试，如果响应包主体中包含接收到的请求，则证明支持TRACE方法，系统存在漏洞。</p>
-<div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84HTTP%E6%96%B9%E6%B3%95/4-%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84http%E6%96%B9%E6%B3%95.jpg" class>
-
-<pre><code>{% asset_img 5-不安全的http方法.jpg %}</code></pre></div>
-
-
-
-<p>&#160; &#160; &#160; &#160;发现服务器报错，证明并不支持TRACE方法。(不支持一般会报405)</p>
-<p>&#160; &#160; &#160; &#160;不安全HTTP方法漏洞的检测大概就是这个流程，其余不安全方法在《HTTP | HTTP报文》中介绍过，检测的时候只是利用方法的特性而已，这里就不再赘述。</p>
-<p>&#160; &#160; &#160; &#160;不过要注意的是，在验证PUT和DELETE的时候，不要在原有资源上进行操作，一定要指定一个不存在的资源，比如先PUT一个文件上去，然后DELETE刚才创建的文件，只要证明支持不安全的HTTP方法即可，切记不可修改和删除服务器原有文件。</p>
-<p>&#160; &#160; &#160; &#160;另外，PUT还可以和WebDAV扩展中的COPY/MOVE配合，PUT上传文件，COPY/MOVE修改文件位置和类型。</p>
-<div align="center">
-    {% asset_img 6-不安全的http方法.jpg %}
-
-<pre><code>{% asset_img 7-不安全的http方法.jpg %}</code></pre></div>
-
-
-
-<p>&#160; &#160; &#160; &#160;具体怎么用，请自行百度，点到即止。</p>
-<h1 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h1><p>&#160; &#160; &#160; &#160;修改配置文件，禁用不安全的HTTP方法。</p>
-<h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的博客。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
-<div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84HTTP%E6%96%B9%E6%B3%95/8-%E5%85%B3%E6%B3%A8%E5%85%AC%E4%BC%97%E5%8F%B7.gif" class>
-</div>]]></content>
-      <categories>
-        <category>每日漏洞</category>
-      </categories>
-      <tags>
-        <tag>HTTP</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>每日漏洞 | 会话固定</title>
-    <url>/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E4%BC%9A%E8%AF%9D%E5%9B%BA%E5%AE%9A/</url>
-    <content><![CDATA[<h1 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h1><p>&#160; &#160; &#160; &#160;当用户成功验证而应用程序不更新cookie时，这个时候就存在会话固定漏洞，攻击者可利用此漏洞发起会话劫持。</p>
-<p>&#160; &#160; &#160; &#160;HTTP的无状态性，导致Web应用程序必须使用会话机制来识别用户。如果用户未登录时的会话ID和登录后的会话ID保持一致，那么攻击者可以迫使受害者使用一个已知(有效)的会话ID，当受害者通过身份验证，攻击者就可以利用这个会话ID进入验证后的会话（登录状态）。</p>
-<h1 id="漏洞检测"><a href="#漏洞检测" class="headerlink" title="漏洞检测"></a>漏洞检测</h1><p>&#160; &#160; &#160; &#160;在理解漏洞原理后，怎么检测会话固定漏洞就很明显了，只需查看登录前和登录后的会话ID是否一致即可。查看的方式有多种，如浏览器F12，抓包工具等。</p>
-<h2 id="登录前查看客户端的会话ID"><a href="#登录前查看客户端的会话ID" class="headerlink" title="登录前查看客户端的会话ID"></a>登录前查看客户端的会话ID</h2><div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E4%BC%9A%E8%AF%9D%E5%9B%BA%E5%AE%9A/1-%E4%BC%9A%E8%AF%9D%E5%9B%BA%E5%AE%9A.jpg" class>
-</div>
-
-<h2 id="输入账号密码通过验证后查看客户端的会话ID"><a href="#输入账号密码通过验证后查看客户端的会话ID" class="headerlink" title="输入账号密码通过验证后查看客户端的会话ID"></a>输入账号密码通过验证后查看客户端的会话ID</h2><div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E4%BC%9A%E8%AF%9D%E5%9B%BA%E5%AE%9A/2-%E4%BC%9A%E8%AF%9D%E5%9B%BA%E5%AE%9A.jpg" class>
-</div>
-
-<p>&#160; &#160; &#160; &#160;发现登录前后的会话ID是一样的，这样说明系统存在会话固定漏洞，利用漏洞就是水到渠成的事了。先在Web应用程序上创建一个会话并记录对应的有效会话ID，然后通过各种手段促使受害者使用这个会话ID通过服务器验证，这样攻击者就可以通过这个会话ID进入受害者的账户。</p>
-<h1 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h1><p>&#160; &#160; &#160; &#160;应用在用户验证成功后，先让原来的会话ID失效，然后提供一个新的会话ID给用户。</p>
-<h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的微信公众号。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
-<div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E4%BC%9A%E8%AF%9D%E5%9B%BA%E5%AE%9A/3-%E5%85%B3%E6%B3%A8%E5%85%AC%E4%BC%97%E5%8F%B7.gif" class>
-</div>]]></content>
-      <categories>
-        <category>每日漏洞</category>
-      </categories>
   </entry>
   <entry>
     <title>每日命令 | touch、mkdir</title>
@@ -1618,99 +1430,167 @@
       </tags>
   </entry>
   <entry>
-    <title>每日漏洞 | 用户枚举</title>
-    <url>/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E7%94%A8%E6%88%B7%E6%9E%9A%E4%B8%BE/</url>
-    <content><![CDATA[<h1 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h1><p>&#160; &#160; &#160; &#160;由于错误配置或设计缺陷，当向系统提交有效账户和无效账户时，服务器会有不同的响应。利用响应的不同，攻击者可以获取到系统已经存在的账户，可用于暴力破解，进一步获取账户的登录密码。</p>
-<h1 id="漏洞检测"><a href="#漏洞检测" class="headerlink" title="漏洞检测"></a>漏洞检测</h1><p>&#160; &#160; &#160; &#160;用户枚举漏洞的检测比较简单，只需用不同的账户去登录，查看服务器响应是否有差异即可（查看页面、查看响应包等）。</p>
-<h2 id="有效账户"><a href="#有效账户" class="headerlink" title="有效账户"></a>有效账户</h2><p>&#160; &#160; &#160; &#160;输入系统存在的账户和任意密码，系统响应密码错误。</p>
+    <title>每日漏洞 | HTTP.sys远程代码执行</title>
+    <url>/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-HTTP-sys%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/</url>
+    <content><![CDATA[<h1 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h1><p>&#160; &#160; &#160; &#160;上篇文章介绍了Host头攻击，今天我们讲一讲HTTP.sys远程代码执行漏洞。</p>
+<p>&#160; &#160; &#160; &#160;HTTP.sys是Microsoft Windows处理HTTP请求的内核驱动程序，为了优化IIS服务器性能，从IIS6.0引入，IIS服务进程依赖HTTP.sys。HTTP.sys远程代码执行漏洞实质是HTTP.sys的整数溢出漏洞，当攻击者向受影响的Windows系统发送特殊设计的HTTP 请求，HTTP.sys 未正确分析时就会导致此漏洞，成功利用此漏洞的攻击者可以在系统帐户的上下文中执行任意代码。</p>
+<p>&#160; &#160; &#160; &#160;主要存在Windows+IIS的环境下，任何安装了微软IIS 6.0以上的Windows Server 2008 R2/Server 2012/Server 2012 R2以及Windows 7/8/8.1操作系统都受到这个漏洞的影响。</p>
+<h1 id="漏洞知识拓展"><a href="#漏洞知识拓展" class="headerlink" title="漏洞知识拓展"></a>漏洞知识拓展</h1><p>&#160; &#160; &#160; &#160;说到HTTP.sys远程代码执行漏洞，不得不先介绍一下Range首部字段。</p>
+<p>&#160; &#160; &#160; &#160;在“上古时代”，网络并不是很好，下载大型文件很不容易。下载途中如果网络中断，就得重头开始下。为了解决这个问题，HTTP/1.1引入了范围请求。</p>
 <div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E7%94%A8%E6%88%B7%E6%9E%9A%E4%B8%BE/1-%E7%94%A8%E6%88%B7%E6%9E%9A%E4%B8%BE.jpg" class>
+    
 </div>
 
-<h2 id="无效账户"><a href="#无效账户" class="headerlink" title="无效账户"></a>无效账户</h2><p>&#160; &#160; &#160; &#160;输入系统不存在的账户和任意密码，系统响应用户名不存在。</p>
+
+<p>&#160; &#160; &#160; &#160;在请求报文的Range首部字段中指定资源的byte范围，告诉服务器，请求的是资源哪个范围的内容，让断点续传和并行下载得以实现。</p>
+<p>&#160; &#160; &#160; &#160;如果服务器支持范围请求，响应包中就会存在Accept-Ranges字段(且值不为“none”，bytes为资源范围的单位)，并在Content-Length字段中告诉客户端资源的大小范围。</p>
 <div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E7%94%A8%E6%88%B7%E6%9E%9A%E4%B8%BE/2-%E7%94%A8%E6%88%B7%E6%9E%9A%E4%B8%BE.jpg" class>
+    
 </div>
 
-<p>&#160; &#160; &#160; &#160;有效账户和无效账户的系统响应存在差异，这就表示系统存在用户枚举漏洞。简单的测试，我们就获取到了系统已经存在的admin账户，而且按照国际流程，admin很可能是系统管理账户。我们可以用字典去爆破admin的登陆密码，也可以继续枚举系统存在的其他账户，进一步确定可攻击对象。<br>附带一下以前遇到过的情况。输入admin账户时，不仅会提示用户名或密码不正确，还会提示还有几次登录机会。</p>
+
+<p>&#160; &#160; &#160; &#160;如果没有Accept-Ranges字段，则服务器可能不支持范围请求，有的服务器会明确将值设为“none”。</p>
+<p>&#160; &#160; &#160; &#160;服务器面对范围请求，有三种响应：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">请求成功：</span><br><span class="line">    响应206 Partial Content</span><br><span class="line">请求范围越界：（范围超过资源的大小）</span><br><span class="line">    响应416 Requested Range Not Satisfiable</span><br><span class="line">不支持范围请求：</span><br><span class="line">    响应200 OK</span><br></pre></td></tr></table></figure>
+
+<p>&#160; &#160; &#160; &#160;而HTTP.sys远程代码执行漏洞正是利用Range字段注入恶意数据。该漏洞的检测，也是利用服务器面对范围请求时的响应特征来判断。</p>
+<p>&#160; &#160; &#160; &#160;当然，范围请求不止这些知识点，详情可查看RFC：</p>
+<p><a href="https://tools.ietf.org/html/rfc7233" target="_blank" rel="noopener">https://tools.ietf.org/html/rfc7233</a></p>
+<h1 id="漏洞检测"><a href="#漏洞检测" class="headerlink" title="漏洞检测"></a>漏洞检测</h1><p>&#160; &#160; &#160; &#160;HTTP.sys漏洞的检测比较简单，先判断目标环境是不是Windows+IIS，然后构造Range字段进行检测即可。</p>
+<p>&#160; &#160; &#160; &#160;检测时，在请求包中添加Range字段，如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Range: bytes=0-18446744073709551615</span><br></pre></td></tr></table></figure>
+
+<p>&#160; &#160; &#160; &#160;提交给服务器，查看服务器响应。</p>
 <div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E7%94%A8%E6%88%B7%E6%9E%9A%E4%B8%BE/3-%E7%94%A8%E6%88%B7%E6%9E%9A%E4%B8%BE.jpg" class>
+    
 </div>
 
-<p>&#160; &#160; &#160; &#160;但输入其他账户时，只会提示用户名或密码不正确。</p>
+<p>&#160; &#160; &#160; &#160;服务器响应400，证明不存在HTTP.sys远程代码执行漏洞。如果响应416，则证明系统存在漏洞。</p>
 <div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E7%94%A8%E6%88%B7%E6%9E%9A%E4%B8%BE/4-%E7%94%A8%E6%88%B7%E6%9E%9A%E4%B8%BE.jpg" class>
+    
 </div>
 
-<p>&#160; &#160; &#160; &#160;这种情况，别的不敢肯定，但admin账户一定存在。</p>
-<h1 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h1><p>&#160; &#160; &#160; &#160;统一身份验证失败时的响应，如：用户名或密码错误。</p>
-<h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的微信公众号。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
+<p>&#160; &#160; &#160; &#160;这里简单说一下Range字段值的含义。18446744073709551615转为十六进制是 0xFFFFFFFFFFFFFFFF(16个F），是64位无符号整型所能表达的最大整数，整数溢出和这个超大整数有关。</p>
+<p>&#160; &#160; &#160; &#160;另外，Apache几个老版本存在的Apache HTTP Server畸形Range选项处理远程拒绝服务漏洞，也是通过Range字段触发的，有兴趣的校友可以去了解了解。</p>
+<h1 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h1><p>&#160; &#160; &#160; &#160;升级补丁：</p>
+<p><a href="http://technet.microsoft.com/security/bulletin/MS15-034" target="_blank" rel="noopener">http://technet.microsoft.com/security/bulletin/MS15-034</a></p>
+<p>&#160; &#160; &#160; &#160;禁用IIS内核缓存（缓解方案）：</p>
+<p><a href="https://technet.microsoft.com/en-us/library/cc731903(v=ws.10).aspx" target="_blank" rel="noopener">https://technet.microsoft.com/en-us/library/cc731903(v=ws.10).aspx</a></p>
+<h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的博客。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
 <div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E7%94%A8%E6%88%B7%E6%9E%9A%E4%B8%BE/5-%E5%85%B3%E6%B3%A8%E5%85%AC%E4%BC%97%E5%8F%B7.gif" class>
-</div>]]></content>
+    
+</div>
+
+]]></content>
       <categories>
         <category>每日漏洞</category>
       </categories>
   </entry>
   <entry>
-    <title>每日漏洞 | 跨站脚本攻击</title>
-    <url>/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/</url>
-    <content><![CDATA[<h1 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h1><p>&#160; &#160; &#160; &#160;当应用程序没有验证输入数据并产生输出时，这个时候就会产生XSS漏洞，攻击者可利用此漏洞进行Cookie窃取、会话劫持、钓鱼等攻击。</p>
-<p>&#160; &#160; &#160; &#160;“一切输入都是不安全的”，Web应用的漏洞几乎都是由一个原因造成：不能在使用前正确验证输入的数据。XSS便是其中之一，攻击者可以在网页中写入恶意脚本，用户访问或点击的时候就会被执行。通常是由JavaScript编写，偶尔也会使用ActionScript、VBScript。XSS能利用到何种程度，取决于如何编写脚本，当然，和上下文环境也有关系。</p>
-<h1 id="漏洞检测"><a href="#漏洞检测" class="headerlink" title="漏洞检测"></a>漏洞检测</h1><p>&#160; &#160; &#160; &#160;要判断系统是否存在XSS，只需要测试能否操纵应用程序参数输入，使其产生恶意输出即可，因此XSS漏洞的检测，有三大要点：输入点，输出点，以及恶意输出。</p>
-<p>&#160; &#160; &#160; &#160;输入点，数据输入的参数位置。客户端与服务器端的交互，是通过请求和响应实现的，请求的时候往往会附带一些参数，这些参数就是数据的输入点，我们需要修改这些参数的值来影响服务器端的响应，并根据响应找出输出点。</p>
-<p>&#160; &#160; &#160; &#160;输出点，输入数据的输出位置。有些数据输入后，经过服务器处理，往往会返回给客户端，可能出现在html标签中，也可能出现在script脚本中，我们需要根据位置的不同而使用不同的XSS构造方式。</p>
-<p>&#160; &#160; &#160; &#160;恶意输出，在XSS中通常是指由JavaScript编写的代码。这些代码能实现一定功能和页面效果：弹框、发送Cookie、键盘记录等。</p>
-<h2 id="寻找输入点"><a href="#寻找输入点" class="headerlink" title="寻找输入点"></a>寻找输入点</h2><div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/1-xss.jpg" class>
-</div>
-
-
-<p>&#160; &#160; &#160; &#160;页面有两个输入框，要求输入名字和姓氏，然后点击GO，姓名就会显示在下方。我们现在来检测这个功能是否存在XSS。</p>
-<p>&#160; &#160; &#160; &#160;开启抓包工具，设置好代理，输入名字和姓氏。</p>
+    <title>每日漏洞 | Host头攻击</title>
+    <url>/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-Host%E5%A4%B4%E6%94%BB%E5%87%BB/</url>
+    <content><![CDATA[<h1 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h1><p>&#160; &#160; &#160; &#160;《HTTP | HTTP报文》最后一节，简单的介绍了一下首部字段，其中就包含了Host首部字段。</p>
+<p>&#160; &#160; &#160; &#160;为了方便获取网站域名，开发人员一般依赖于请求包中的Host首部字段。例如，在php里用_SERVER[“HTTP_HOST”]。但是这个Host字段值是不可信赖的(可通过HTTP代理工具篡改)，如果应用程序没有对Host字段值进行处理，就有可能造成恶意代码的传入。</p>
+<h1 id="漏洞知识拓展"><a href="#漏洞知识拓展" class="headerlink" title="漏洞知识拓展"></a>漏洞知识拓展</h1><p>&#160; &#160; &#160; &#160;Host首部字段是HTTP/1.1新增的，旨在告诉服务器，客户端请求的主机名和端口号，主要用来实现虚拟主机技术。</p>
+<p>&#160; &#160; &#160; &#160;运用虚拟主机技术，单个主机可以运行多个站点。以下图为例，hacker和usagidesign两个站点都运行在同一服务器A上，不管我们请求哪个域名，最终都会被解析成服务器A的IP地址，这个时候服务器就不知道该将请求交给哪个站点处理，因此需要Host字段指定请求的主机名。</p>
+<p>&#160; &#160; &#160; &#160;我们访问hacker域名，经DNS解析，变成了服务器A的IP，请求传达到服务器A，A接收到请求后，发现请求报文中的Host字段值为hacker，进而将请求交给hacker站点处理。（这里又涉及到计算机网络知识了，是不是觉得要学的真多？没关系，我后面都会一一介绍的）</p>
 <div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/2-xss.jpg" class>
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-Host%E5%A4%B4%E6%94%BB%E5%87%BB/1-host.jpg" class>
 </div>
 
-<p>&#160; &#160; &#160; &#160;点击GO，抓到如下请求包。请求行中有三个参数，其中两个参数正好对应两个输入框，这三个参数都是潜在的XSS输入点，特别是输入框对应的firstname参数和lastname参数。</p>
+<p>&#160; &#160; &#160; &#160;这个时候，问题就出现了。为了方便获取网站域名，开发人员一般依赖于请求包中的Host首部字段。例如，在php里用_SERVER[“HTTP_HOST”]。但是这个Host字段值是不可信赖的(可通过HTTP代理工具篡改)，如果应用程序没有对Host字段值进行处理，就有可能造成恶意代码的传入。</p>
+<h1 id="漏洞检测"><a href="#漏洞检测" class="headerlink" title="漏洞检测"></a>漏洞检测</h1><p>&#160; &#160; &#160; &#160;Host头攻击漏洞的检测比较简单，只需要抓包，修改Host字段值，提交，查看响应中是否包含修改后的Host字段值即可。</p>
+<p>&#160; &#160; &#160; &#160;下面我分三个场景，介绍一下Host头攻击漏洞存在的表现。</p>
+<h2 id="跳转"><a href="#跳转" class="headerlink" title="跳转"></a>跳转</h2><p>&#160; &#160; &#160; &#160;场景一：正常请求，响应302，Location首部字段指明跳转的地址，其中Location字段值为Host字段指定的地址。</p>
 <div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/3-xss.jpg" class>
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-Host%E5%A4%B4%E6%94%BB%E5%87%BB/2-host.jpg" class>
 </div>
 
-<h2 id="寻找输出点"><a href="#寻找输出点" class="headerlink" title="寻找输出点"></a>寻找输出点</h2><p>&#160; &#160; &#160; &#160;输出点我们可以通过在响应中查找输入点的值来找到。以firstname为例，我们在响应中查找bwapp这个值的位置。</p>
+<p>&#160; &#160; &#160; &#160;将请求包的Host字段值修改为<a href="http://www.baidu.com提交，响应包中的Location地址也被更改为www.baidu.com。" target="_blank" rel="noopener">www.baidu.com提交，响应包中的Location地址也被更改为www.baidu.com。</a></p>
+<h2 id="拼接"><a href="#拼接" class="headerlink" title="拼接"></a>拼接</h2><p>&#160; &#160; &#160; &#160;场景二：正常请求，正常响应，将Host字段值拼接到标签属性值中。</p>
 <div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/4-xss.jpg" class>
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-Host%E5%A4%B4%E6%94%BB%E5%87%BB/3-host.jpg" class>
 </div>
 
-<p>&#160; &#160; &#160; &#160;发现响应中有8个匹配的值，难道有8个输出点？很多时候，为了更快速、准确的找出输出点，我们通常会将输入点的值修改为独一无二的值，如1234567，abcde等，以保证不会和系统其他参数值雷同。</p>
+<p>&#160; &#160; &#160; &#160;将请求包的Host字段值修改为<a href="http://www.baidu.com提交，发现服务器将www.baidu.com拼接到了script标签的src属性值中。" target="_blank" rel="noopener">www.baidu.com提交，发现服务器将www.baidu.com拼接到了script标签的src属性值中。</a></p>
+<h2 id="代码注入"><a href="#代码注入" class="headerlink" title="代码注入"></a>代码注入</h2><p>&#160; &#160; &#160; &#160;场景三：这其实也属于拼接，只不过在场景二的基础上写入了恶意代码。</p>
 <div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/5-xss.jpg" class>
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-Host%E5%A4%B4%E6%94%BB%E5%87%BB/4-host.jpg" class>
 </div>
 
-<p>&#160; &#160; &#160; &#160;这样就准确找到了firstname这个输入点的输出点。</p>
-<h2 id="恶意输出"><a href="#恶意输出" class="headerlink" title="恶意输出"></a>恶意输出</h2><p>&#160; &#160; &#160; &#160;最终XSS的检测需要结合输入点和输出点。在输入点的值中加入恶意代码，查看输出点是否会产生恶意输出。</p>
+<p>&#160; &#160; &#160; &#160;利用Host字段写入script标签，弹出警告框。</p>
+<h1 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h1><p>&#160; &#160; &#160; &#160;对Host字段进行检测。</p>
+<p>&#160; &#160; &#160; &#160;Nginx，修改ngnix.conf文件，在server中指定一个server_name名单，并添加检测。</p>
+<p>&#160; &#160; &#160; &#160;Apache，修改httpd.conf文件，指定ServerName，并开启UseCanonicalName选项。</p>
+<p>&#160; &#160; &#160; &#160;Tomcat，修改server.xml文件，配置Host的name属性。</p>
+<h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的微信公众号。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
 <div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/6-xss.jpg" class>
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-Host%E5%A4%B4%E6%94%BB%E5%87%BB/5-%E5%85%B3%E6%B3%A8%E5%85%AC%E4%BC%97%E5%8F%B7.gif" class>
 </div>
 
+]]></content>
+      <categories>
+        <category>每日漏洞</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>每日漏洞 | 不安全的HTTP方法</title>
+    <url>/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84HTTP%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<h1 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h1><p>&#160; &#160; &#160; &#160;《HTTP | HTTP报文》中介绍了HTTP的请求方法。在这些方法中，HTTP定义了一组被称为安全方法的方法：GET、HEAD、OPTIONS、TRACE，这些方法不会产生什么动作，不会在服务器上产生结果，只是简单获取信息。相对的，能产生动作的方法就会被认为是不安全的HTTP方法。</p>
+<p>&#160; &#160; &#160; &#160;注意，安全方法不一定什么动作都不执行，比如在登陆时用GET方法传输数据，这个时候GET方法也会产生动作。就比如钱是用来花的，你硬要用来擦屁屁，这也没办法。</p>
 <div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/7-xss.jpg" class>
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84HTTP%E6%96%B9%E6%B3%95/1-%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84http%E6%96%B9%E6%B3%95.jpg" class>
+</div>
+
+<p>&#160; &#160; &#160; &#160;在HTTP认为的那些不安全的HTTP方法中，安全界认为PUT、DELETE、TRACE是不安全的，另外WebDAV中的几个方法，RFC 5789中的PATCH方法也被认为是不安全的。（TRACE容易引发XST攻击，PATCH修改资源的部分内容，PUT/DELETE没有认证机制等原因，不仅仅因为它们会产生结果）</p>
+<div align="center">
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84HTTP%E6%96%B9%E6%B3%95/2-%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84http%E6%96%B9%E6%B3%95.jpg" class>
 </div>
 
 
-<p>&#160; &#160; &#160; &#160;发现服务端没有对用户输入做任何处理就直接输出到页面上，弹出一个警告框。这就证明firstname参数存在XSS。依此流程检测，发现lastname同样存在XSS，但form参数不存在XSS。</p>
-<h1 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h1><p>&#160; &#160; &#160; &#160;输入过滤；对用户的输入进行检测，过滤掉输入中的非法字符。</p>
-<p>&#160; &#160; &#160; &#160;输出编码；在将输入输出到页面之前，将输入中未过滤的特殊字符进行转义，使其以文本形式展示，而不是被解析成页面结构或脚本。</p>
-<h1 id="PS"><a href="#PS" class="headerlink" title="PS"></a>PS</h1><p>&#160; &#160; &#160; &#160;在这里要申明一下，每日漏洞系列旨在告诉大家发现漏洞的最基本操作，每日学会一个漏洞的检测方法。就比如做菜，每日漏洞系列会教你第一步点火，第二步放油，第三步炒菜，第四步出锅，但不会教你用多大的火，放多少油，炒多久，这些细节我会在其他文章里深入介绍，所以如果只看这篇文章，我只能保证你会做菜，这菜能不能吃，只能交给命运了。</p>
+
+
+
+
+
+<h1 id="漏洞检测"><a href="#漏洞检测" class="headerlink" title="漏洞检测"></a>漏洞检测</h1><p>&#160; &#160; &#160; &#160;不安全的HTTP方法漏洞检测，分为两步：查询资源支持的方法、验证方法是否真的支持。</p>
+<h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><p>&#160; &#160; &#160; &#160;在之前的文章里提到过，OPTIONS请求方法可以查询URL指定的资源支持哪些方法。</p>
+<p>&#160; &#160; &#160; &#160;首先正常请求，抓包，然后将请求包中的请求方法修改为OPTIONS，提交，如果成功，响应包中就会出现一个Allow首部字段，里面列出了URL指定资源所支持的方法列表。</p>
+<div align="center">
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84HTTP%E6%96%B9%E6%B3%95/3-%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84http%E6%96%B9%E6%B3%95.jpg" class>
+</div>
+
+<p>&#160; &#160; &#160; &#160;执行到这一步，就出现这么一种现象，有的校友在执行OPTIONS请求后，发现响应包的Allow字段中包含了PUT、DELETE等不安全方法，就直接认定系统存在漏洞。在我看来，这是不严谨的。有时候Allow字段提示支持，但实际上并不支持，因此需要进一步验证该资源是否真的支持不安全的HTTP方法。</p>
+<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><p>&#160; &#160; &#160; &#160;查询阶段显示，支持TRACE方法。那我们将OPTIONS方法修改为TRACE方法试试，如果响应包主体中包含接收到的请求，则证明支持TRACE方法，系统存在漏洞。</p>
+<div align="center">
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84HTTP%E6%96%B9%E6%B3%95/4-%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84http%E6%96%B9%E6%B3%95.jpg" class>
+
+<pre><code>{% asset_img 5-不安全的http方法.jpg %}</code></pre></div>
+
+
+
+<p>&#160; &#160; &#160; &#160;发现服务器报错，证明并不支持TRACE方法。(不支持一般会报405)</p>
+<p>&#160; &#160; &#160; &#160;不安全HTTP方法漏洞的检测大概就是这个流程，其余不安全方法在《HTTP | HTTP报文》中介绍过，检测的时候只是利用方法的特性而已，这里就不再赘述。</p>
+<p>&#160; &#160; &#160; &#160;不过要注意的是，在验证PUT和DELETE的时候，不要在原有资源上进行操作，一定要指定一个不存在的资源，比如先PUT一个文件上去，然后DELETE刚才创建的文件，只要证明支持不安全的HTTP方法即可，切记不可修改和删除服务器原有文件。</p>
+<p>&#160; &#160; &#160; &#160;另外，PUT还可以和WebDAV扩展中的COPY/MOVE配合，PUT上传文件，COPY/MOVE修改文件位置和类型。</p>
+<div align="center">
+    {% asset_img 6-不安全的http方法.jpg %}
+
+<pre><code>{% asset_img 7-不安全的http方法.jpg %}</code></pre></div>
+
+
+
+<p>&#160; &#160; &#160; &#160;具体怎么用，请自行百度，点到即止。</p>
+<h1 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h1><p>&#160; &#160; &#160; &#160;修改配置文件，禁用不安全的HTTP方法。</p>
 <h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的博客。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
 <div align="center">
-    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/8-%E5%85%B3%E6%B3%A8%E5%85%AC%E4%BC%97%E5%8F%B7.gif" class>
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84HTTP%E6%96%B9%E6%B3%95/8-%E5%85%B3%E6%B3%A8%E5%85%AC%E4%BC%97%E5%8F%B7.gif" class>
 </div>]]></content>
       <categories>
         <category>每日漏洞</category>
       </categories>
       <tags>
-        <tag>XSS</tag>
+        <tag>HTTP</tag>
       </tags>
   </entry>
   <entry>
@@ -1752,6 +1632,65 @@
       <tags>
         <tag>未授权访问</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>每日漏洞 | 会话固定</title>
+    <url>/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E4%BC%9A%E8%AF%9D%E5%9B%BA%E5%AE%9A/</url>
+    <content><![CDATA[<h1 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h1><p>&#160; &#160; &#160; &#160;当用户成功验证而应用程序不更新cookie时，这个时候就存在会话固定漏洞，攻击者可利用此漏洞发起会话劫持。</p>
+<p>&#160; &#160; &#160; &#160;HTTP的无状态性，导致Web应用程序必须使用会话机制来识别用户。如果用户未登录时的会话ID和登录后的会话ID保持一致，那么攻击者可以迫使受害者使用一个已知(有效)的会话ID，当受害者通过身份验证，攻击者就可以利用这个会话ID进入验证后的会话（登录状态）。</p>
+<h1 id="漏洞检测"><a href="#漏洞检测" class="headerlink" title="漏洞检测"></a>漏洞检测</h1><p>&#160; &#160; &#160; &#160;在理解漏洞原理后，怎么检测会话固定漏洞就很明显了，只需查看登录前和登录后的会话ID是否一致即可。查看的方式有多种，如浏览器F12，抓包工具等。</p>
+<h2 id="登录前查看客户端的会话ID"><a href="#登录前查看客户端的会话ID" class="headerlink" title="登录前查看客户端的会话ID"></a>登录前查看客户端的会话ID</h2><div align="center">
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E4%BC%9A%E8%AF%9D%E5%9B%BA%E5%AE%9A/1-%E4%BC%9A%E8%AF%9D%E5%9B%BA%E5%AE%9A.jpg" class>
+</div>
+
+<h2 id="输入账号密码通过验证后查看客户端的会话ID"><a href="#输入账号密码通过验证后查看客户端的会话ID" class="headerlink" title="输入账号密码通过验证后查看客户端的会话ID"></a>输入账号密码通过验证后查看客户端的会话ID</h2><div align="center">
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E4%BC%9A%E8%AF%9D%E5%9B%BA%E5%AE%9A/2-%E4%BC%9A%E8%AF%9D%E5%9B%BA%E5%AE%9A.jpg" class>
+</div>
+
+<p>&#160; &#160; &#160; &#160;发现登录前后的会话ID是一样的，这样说明系统存在会话固定漏洞，利用漏洞就是水到渠成的事了。先在Web应用程序上创建一个会话并记录对应的有效会话ID，然后通过各种手段促使受害者使用这个会话ID通过服务器验证，这样攻击者就可以通过这个会话ID进入受害者的账户。</p>
+<h1 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h1><p>&#160; &#160; &#160; &#160;应用在用户验证成功后，先让原来的会话ID失效，然后提供一个新的会话ID给用户。</p>
+<h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的微信公众号。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
+<div align="center">
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E4%BC%9A%E8%AF%9D%E5%9B%BA%E5%AE%9A/3-%E5%85%B3%E6%B3%A8%E5%85%AC%E4%BC%97%E5%8F%B7.gif" class>
+</div>]]></content>
+      <categories>
+        <category>每日漏洞</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>每日漏洞 | 用户枚举</title>
+    <url>/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E7%94%A8%E6%88%B7%E6%9E%9A%E4%B8%BE/</url>
+    <content><![CDATA[<h1 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h1><p>&#160; &#160; &#160; &#160;由于错误配置或设计缺陷，当向系统提交有效账户和无效账户时，服务器会有不同的响应。利用响应的不同，攻击者可以获取到系统已经存在的账户，可用于暴力破解，进一步获取账户的登录密码。</p>
+<h1 id="漏洞检测"><a href="#漏洞检测" class="headerlink" title="漏洞检测"></a>漏洞检测</h1><p>&#160; &#160; &#160; &#160;用户枚举漏洞的检测比较简单，只需用不同的账户去登录，查看服务器响应是否有差异即可（查看页面、查看响应包等）。</p>
+<h2 id="有效账户"><a href="#有效账户" class="headerlink" title="有效账户"></a>有效账户</h2><p>&#160; &#160; &#160; &#160;输入系统存在的账户和任意密码，系统响应密码错误。</p>
+<div align="center">
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E7%94%A8%E6%88%B7%E6%9E%9A%E4%B8%BE/1-%E7%94%A8%E6%88%B7%E6%9E%9A%E4%B8%BE.jpg" class>
+</div>
+
+<h2 id="无效账户"><a href="#无效账户" class="headerlink" title="无效账户"></a>无效账户</h2><p>&#160; &#160; &#160; &#160;输入系统不存在的账户和任意密码，系统响应用户名不存在。</p>
+<div align="center">
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E7%94%A8%E6%88%B7%E6%9E%9A%E4%B8%BE/2-%E7%94%A8%E6%88%B7%E6%9E%9A%E4%B8%BE.jpg" class>
+</div>
+
+<p>&#160; &#160; &#160; &#160;有效账户和无效账户的系统响应存在差异，这就表示系统存在用户枚举漏洞。简单的测试，我们就获取到了系统已经存在的admin账户，而且按照国际流程，admin很可能是系统管理账户。我们可以用字典去爆破admin的登陆密码，也可以继续枚举系统存在的其他账户，进一步确定可攻击对象。<br>附带一下以前遇到过的情况。输入admin账户时，不仅会提示用户名或密码不正确，还会提示还有几次登录机会。</p>
+<div align="center">
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E7%94%A8%E6%88%B7%E6%9E%9A%E4%B8%BE/3-%E7%94%A8%E6%88%B7%E6%9E%9A%E4%B8%BE.jpg" class>
+</div>
+
+<p>&#160; &#160; &#160; &#160;但输入其他账户时，只会提示用户名或密码不正确。</p>
+<div align="center">
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E7%94%A8%E6%88%B7%E6%9E%9A%E4%B8%BE/4-%E7%94%A8%E6%88%B7%E6%9E%9A%E4%B8%BE.jpg" class>
+</div>
+
+<p>&#160; &#160; &#160; &#160;这种情况，别的不敢肯定，但admin账户一定存在。</p>
+<h1 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h1><p>&#160; &#160; &#160; &#160;统一身份验证失败时的响应，如：用户名或密码错误。</p>
+<h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的微信公众号。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
+<div align="center">
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E7%94%A8%E6%88%B7%E6%9E%9A%E4%B8%BE/5-%E5%85%B3%E6%B3%A8%E5%85%AC%E4%BC%97%E5%8F%B7.gif" class>
+</div>]]></content>
+      <categories>
+        <category>每日漏洞</category>
+      </categories>
   </entry>
   <entry>
     <title>每日漏洞 | 跨站请求伪造</title>
@@ -1843,6 +1782,67 @@
       </tags>
   </entry>
   <entry>
+    <title>每日漏洞 | 跨站脚本攻击</title>
+    <url>/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/</url>
+    <content><![CDATA[<h1 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h1><p>&#160; &#160; &#160; &#160;当应用程序没有验证输入数据并产生输出时，这个时候就会产生XSS漏洞，攻击者可利用此漏洞进行Cookie窃取、会话劫持、钓鱼等攻击。</p>
+<p>&#160; &#160; &#160; &#160;“一切输入都是不安全的”，Web应用的漏洞几乎都是由一个原因造成：不能在使用前正确验证输入的数据。XSS便是其中之一，攻击者可以在网页中写入恶意脚本，用户访问或点击的时候就会被执行。通常是由JavaScript编写，偶尔也会使用ActionScript、VBScript。XSS能利用到何种程度，取决于如何编写脚本，当然，和上下文环境也有关系。</p>
+<h1 id="漏洞检测"><a href="#漏洞检测" class="headerlink" title="漏洞检测"></a>漏洞检测</h1><p>&#160; &#160; &#160; &#160;要判断系统是否存在XSS，只需要测试能否操纵应用程序参数输入，使其产生恶意输出即可，因此XSS漏洞的检测，有三大要点：输入点，输出点，以及恶意输出。</p>
+<p>&#160; &#160; &#160; &#160;输入点，数据输入的参数位置。客户端与服务器端的交互，是通过请求和响应实现的，请求的时候往往会附带一些参数，这些参数就是数据的输入点，我们需要修改这些参数的值来影响服务器端的响应，并根据响应找出输出点。</p>
+<p>&#160; &#160; &#160; &#160;输出点，输入数据的输出位置。有些数据输入后，经过服务器处理，往往会返回给客户端，可能出现在html标签中，也可能出现在script脚本中，我们需要根据位置的不同而使用不同的XSS构造方式。</p>
+<p>&#160; &#160; &#160; &#160;恶意输出，在XSS中通常是指由JavaScript编写的代码。这些代码能实现一定功能和页面效果：弹框、发送Cookie、键盘记录等。</p>
+<h2 id="寻找输入点"><a href="#寻找输入点" class="headerlink" title="寻找输入点"></a>寻找输入点</h2><div align="center">
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/1-xss.jpg" class>
+</div>
+
+
+<p>&#160; &#160; &#160; &#160;页面有两个输入框，要求输入名字和姓氏，然后点击GO，姓名就会显示在下方。我们现在来检测这个功能是否存在XSS。</p>
+<p>&#160; &#160; &#160; &#160;开启抓包工具，设置好代理，输入名字和姓氏。</p>
+<div align="center">
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/2-xss.jpg" class>
+</div>
+
+<p>&#160; &#160; &#160; &#160;点击GO，抓到如下请求包。请求行中有三个参数，其中两个参数正好对应两个输入框，这三个参数都是潜在的XSS输入点，特别是输入框对应的firstname参数和lastname参数。</p>
+<div align="center">
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/3-xss.jpg" class>
+</div>
+
+<h2 id="寻找输出点"><a href="#寻找输出点" class="headerlink" title="寻找输出点"></a>寻找输出点</h2><p>&#160; &#160; &#160; &#160;输出点我们可以通过在响应中查找输入点的值来找到。以firstname为例，我们在响应中查找bwapp这个值的位置。</p>
+<div align="center">
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/4-xss.jpg" class>
+</div>
+
+<p>&#160; &#160; &#160; &#160;发现响应中有8个匹配的值，难道有8个输出点？很多时候，为了更快速、准确的找出输出点，我们通常会将输入点的值修改为独一无二的值，如1234567，abcde等，以保证不会和系统其他参数值雷同。</p>
+<div align="center">
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/5-xss.jpg" class>
+</div>
+
+<p>&#160; &#160; &#160; &#160;这样就准确找到了firstname这个输入点的输出点。</p>
+<h2 id="恶意输出"><a href="#恶意输出" class="headerlink" title="恶意输出"></a>恶意输出</h2><p>&#160; &#160; &#160; &#160;最终XSS的检测需要结合输入点和输出点。在输入点的值中加入恶意代码，查看输出点是否会产生恶意输出。</p>
+<div align="center">
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/6-xss.jpg" class>
+</div>
+
+<div align="center">
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/7-xss.jpg" class>
+</div>
+
+
+<p>&#160; &#160; &#160; &#160;发现服务端没有对用户输入做任何处理就直接输出到页面上，弹出一个警告框。这就证明firstname参数存在XSS。依此流程检测，发现lastname同样存在XSS，但form参数不存在XSS。</p>
+<h1 id="漏洞修复"><a href="#漏洞修复" class="headerlink" title="漏洞修复"></a>漏洞修复</h1><p>&#160; &#160; &#160; &#160;输入过滤；对用户的输入进行检测，过滤掉输入中的非法字符。</p>
+<p>&#160; &#160; &#160; &#160;输出编码；在将输入输出到页面之前，将输入中未过滤的特殊字符进行转义，使其以文本形式展示，而不是被解析成页面结构或脚本。</p>
+<h1 id="PS"><a href="#PS" class="headerlink" title="PS"></a>PS</h1><p>&#160; &#160; &#160; &#160;在这里要申明一下，每日漏洞系列旨在告诉大家发现漏洞的最基本操作，每日学会一个漏洞的检测方法。就比如做菜，每日漏洞系列会教你第一步点火，第二步放油，第三步炒菜，第四步出锅，但不会教你用多大的火，放多少油，炒多久，这些细节我会在其他文章里深入介绍，所以如果只看这篇文章，我只能保证你会做菜，这菜能不能吃，只能交给命运了。</p>
+<h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的博客。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
+<div align="center">
+    <img src="/%E6%AF%8F%E6%97%A5%E6%BC%8F%E6%B4%9E-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB/8-%E5%85%B3%E6%B3%A8%E5%85%AC%E4%BC%97%E5%8F%B7.gif" class>
+</div>]]></content>
+      <categories>
+        <category>每日漏洞</category>
+      </categories>
+      <tags>
+        <tag>XSS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>移动安全  | 逆向基础</title>
     <url>/%E7%A7%BB%E5%8A%A8%E5%AE%89%E5%85%A8-%E9%80%86%E5%90%91%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<h1 id="编译简介"><a href="#编译简介" class="headerlink" title="编译简介"></a>编译简介</h1><p>&#160; &#160; &#160; &#160;在学习逆向之前，我觉得很有必要了解一下编译原理。编译是将源代码转换成目标代码的过程及动作，通常是将高级语言转变成汇编语言或机器语言。</p>
@@ -1912,7 +1912,7 @@
 <h2 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h2><p>&#160; &#160; &#160; &#160;目前互联网使用IP协议有两个版本：IPv4和IPv6。在这里只介绍IPv4地址，IPv6地址后面再介绍。</p>
 <p>&#160; &#160; &#160; &#160;IPv4地址由32位二进制数组成，为了提高可读性，对人类更加友好，通常采用 “点分十进制法” 表示IP地址，具体的做法如图所示：</p>
 <div align="center">
-    
+    <img src="/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-1/1-%E7%82%B9%E5%88%86%E5%8D%81%E8%BF%9B%E5%88%B6.jpg" class>
 </div>
 
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">（1）每八位二进制数为一组，将32位的IP地址分为4组</span><br><span class="line">（2）将每组二进制数转换为十进制数</span><br><span class="line">（3）用“.”将四组十进制数隔开，转换成对人类友好的IP地址表现形式</span><br></pre></td></tr></table></figure>
@@ -1922,7 +1922,7 @@
 <p>&#160; &#160; &#160; &#160;打个比方，寄快递。我在某云爸爸那里买个东西，寄到北京朝阳区xxxx。快递不会直接寄到具体地址这里，正常的流程应该是这样：快递公司一看地址是北京朝阳区，那它直接把快递寄到朝阳区；寄到朝阳区后，再由快递小哥寄到xxxx。这里北京朝阳区就是网络号，xxxx就是主机号，邮编就有这种作用。</p>
 <p>&#160; &#160; &#160; &#160;早期的IPv4地址，前八位为网络号，后二十四位为主机号。随着互联网的发展，RFC 791对IPv4地址的定义做了修改，将IPv4地址分为了ABC三类单播地址。再后来，D类和E类也被定义。</p>
 <div align="center">
-    
+    <img src="/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-1/2-%E5%88%86%E7%B1%BB%E7%BD%91%E7%BB%9C.jpg" class>
 </div>
 
 
@@ -1946,7 +1946,7 @@
 <p>&#160; &#160; &#160; &#160;127.0.0.0网段大家应该不陌生，特别是做开发的。这个网段中的地址被称为本地环回地址，用于同一设备不同服务之间的通信，发送给这些IP地址的数据都会返回给本机，通常都是使用127.0.0.1这个IP地址。后来在RFC6761中，将域名localhost保留了下来，用于环回，这也是为什么在电脑上搭建服务器，访问localhost和访问127.0.0.1都是同一页面的原因。</p>
 <p>&#160; &#160; &#160; &#160;169.254.0.0网段。不知道大家平时有没有注意，给自己电脑配置IP地址，有时会弹出地址冲突的提示，然后查看属性，发现IP地址变成了169.254.0.0网段中的某个IP地址。</p>
 <div align="center">
-    
+    <img src="/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-1/3-%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E5%B1%9E%E6%80%A7.jpg" class>
 </div>
 
 
@@ -1958,7 +1958,7 @@
 <p>&#160; &#160; &#160; &#160;最后要介绍一下0.0.0.0这个IP地址，网络号为0，主机号也为0，在服务器中，0.0.0.0可以表示“本地计算机上的所有IPv4地址”。如果主机有两个IP地址192.168.1.1和10.1.2.1，并且主机上运行的服务器配置为监听0.0.0.0，那么这两个IP地址都可以访问这台主机。</p>
 <p>&#160; &#160; &#160; &#160;当然，还有其他的一些IP段不能使用，这里就不再赘述。特殊IP的知识大家心里有个印象就行，不需死记硬背。</p>
 <div align="center">
-    
+    <img src="/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-1/4-%E5%8F%AF%E7%94%A8%E5%9C%B0%E5%9D%80%E8%8C%83%E5%9B%B4.jpg" class>
 </div>
 
 
@@ -1980,7 +1980,7 @@
 
 <h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的微信公众号。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
 <div align="center">
-    
+    <img src="/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-1/5-%E5%85%B3%E6%B3%A8%E5%85%AC%E4%BC%97%E5%8F%B7.gif" class>
 </div>
 
 
@@ -2003,7 +2003,7 @@
 <p>&emsp;&emsp;在划分子网之前，IP地址=网络号+主机号；划分子网后，IP地址=网络号+子网号+主机号。</p>
 <p>&emsp;&emsp;注意，无论是否划分子网，IP地址都是32位二进制数，并不是说划分子网后，IP地址就变成了32位以上的二进制数。划分子网后，网络号是不变的，只是从主机号中借用若干位作为子网号而已。</p>
 <div align="center">
-    
+    <img src="/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/1.jpg" class>
 </div>
 
 
@@ -2011,14 +2011,14 @@
 
 <p>&emsp;&emsp;另外，子网是相对组织内部而言的。对外部来说，IP“网络号”=网络号。</p>
 <div align="center">
-    
+    <img src="/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/2.jpg" class>
 </div>
 
 
 
 <p>&emsp;&emsp;如上图，从外部来看，所有设备的网络号都是145.13.0.0。而当数据到达组织内部的时候，IP”网络号“=网络号+子网号。</p>
 <div align="center">
-    
+    <img src="/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/3.jpg" class>
 </div>
 
 
@@ -2030,7 +2030,7 @@
 <p>&emsp;&emsp;另外，互联网标准规定所有网络都要使用子网掩码。这样做有什么好处？不管网络有没有划分子网，只要把子网掩码和IP地址进行逐位的“与”运算就可以得出网络地址。</p>
 <p>&emsp;&emsp;如果没有划分子网，则使用默认子网掩码。</p>
 <div align="center">
-    
+    <img src="/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/4.jpg" class>
 </div>
 
 
@@ -2038,14 +2038,14 @@
 
 <p>&emsp;&emsp;如果划分了子网，则将网络号+子网号对应的位掩码置1，主机号对应的位掩码依然为0。</p>
 <div align="center">
-    
+    <img src="/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/5.jpg" class>
 </div>
 
 
 
 <p>&emsp;&emsp;下面我们举个实例，来加深大家的理解。172.16.123.1是一个B类地址，未划分子网时网络号和主机号各16位，默认子网掩码为255.255.0.0。</p>
 <div align="center">
-    
+    <img src="/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/6.jpg" class>
 </div>
 
 
@@ -2053,7 +2053,7 @@
 
 <p>&emsp;&emsp;如上图，我将位掩码设置为18位，也就是说有18-16=2位子网号位，那么子网掩码应该是由18个连续的1和14个连续的0组成。</p>
 <div align="center">
-    
+    <img src="/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/7.jpg" class>
 </div>
 
 
@@ -2073,7 +2073,7 @@
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="number">128.14</span><span class="number">.35</span><span class="number">.7</span>/<span class="number">20</span></span><br></pre></td></tr></table></figure>
 <p>&emsp;&emsp;如上所示，就是“斜线记法”。我们不仅能简单的识别出IP地址为128.14.35.7，网络前缀为20位（也就是网络号有20位），还可以计算出该IP属于哪个CIDR地址块，该CIDR地址块的IP地址范围。</p>
 <div align="center">
-    
+    <img src="/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/8.jpg" class>
 </div>
 
 
@@ -2083,7 +2083,7 @@
 <p>&emsp;&emsp;另外，CIDR没有了划分子网这个概念，是指没有在主机位中再借用若干位作为子网号而已，使用CIDR地址块的单位依然可以在内部划分出子网。具体的做法是，在主机位中借用若干位，延长前缀的位数，IP还是=前缀+主机号。</p>
 <p>&emsp;&emsp;比如在128.14.32.0/20这个地址块中划分4个子网，那么我们需要在主机号中借用两位，将前缀延长到22位，这样128.14.32.0/20这个地址块就有了以下四个子网：</p>
 <div align="center">
-    
+    <img src="/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/9.jpg" class>
 </div>
 
 
@@ -2096,7 +2096,7 @@
 
 <h1 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h1><p>&#160; &#160; &#160; &#160;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的微信公众号。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
 <div align="center">
-    
+    <img src="/%E7%BD%91%E7%BB%9C%E5%B1%82-%E7%BD%91%E9%99%85%E5%8D%8F%E8%AE%AEIP-2/10-%E5%85%B3%E6%B3%A8%E5%85%AC%E4%BC%97%E5%8F%B7.gif" class>
 </div>
 
 
