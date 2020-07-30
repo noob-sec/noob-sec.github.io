@@ -71,7 +71,7 @@
 
 
 
-  <meta name="keywords" content="安全小白团, noobsec" />
+  <meta name="keywords" content="红蓝对抗," />
 
 
 
@@ -82,15 +82,28 @@
 
 
 
-<meta name="description" content="关注微信公众号noobsec，安全小白团，博客https:&#x2F;&#x2F;noob-sec.github.io，分享自己的成长过程">
-<meta property="og:type" content="website">
-<meta property="og:title" content="安全小白团">
-<meta property="og:url" content="https://noob-sec.github.io/archives/2020/07/index.html">
+<meta name="description" content="noob-sec安全小白团,小白学习基地,教你渗透测试如何从入门到放弃。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="权限维持-SSH软链接后门">
+<meta property="og:url" content="https://noob-sec.github.io/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81-SSH%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%90%8E%E9%97%A8/index.html">
 <meta property="og:site_name" content="安全小白团">
-<meta property="og:description" content="关注微信公众号noobsec，安全小白团，博客https:&#x2F;&#x2F;noob-sec.github.io，分享自己的成长过程">
+<meta property="og:description" content="noob-sec安全小白团,小白学习基地,教你渗透测试如何从入门到放弃。">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81-SSH%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%90%8E%E9%97%A8/1.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81-SSH%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%90%8E%E9%97%A8/2.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81-SSH%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%90%8E%E9%97%A8/3.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81-SSH%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%90%8E%E9%97%A8/4.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81-SSH%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%90%8E%E9%97%A8/5.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81-SSH%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%90%8E%E9%97%A8/6.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81-SSH%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%90%8E%E9%97%A8/7.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81-SSH%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%90%8E%E9%97%A8/8.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81-SSH%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%90%8E%E9%97%A8/9.jpg">
+<meta property="og:image" content="https://noob-sec.github.io/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81-SSH%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%90%8E%E9%97%A8/10.gif">
+<meta property="article:published_time" content="2020-07-30T01:30:14.000Z">
+<meta property="article:modified_time" content="2020-07-30T01:38:50.524Z">
 <meta property="article:author" content="安全小白团">
-<meta property="article:tag" content="安全小白团，noobsec">
+<meta property="article:tag" content="红蓝对抗">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://noob-sec.github.io/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81-SSH%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%90%8E%E9%97%A8/1.jpg">
 
 
 
@@ -120,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="https://noob-sec.github.io/archives/2020/07/"/>
+  <link rel="canonical" href="https://noob-sec.github.io/权限维持-SSH软链接后门/"/>
 
 
 
 
 
-  <title>归档 | 安全小白团</title>
+  <title>权限维持-SSH软链接后门 | 安全小白团</title>
   
 
 
@@ -145,7 +158,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -313,148 +326,334 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://noob-sec.github.io/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81-SSH%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%90%8E%E9%97%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="安全小白团">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/logo.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="安全小白团">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h2 class="post-title" itemprop="name headline">权限维持-SSH软链接后门</h2>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-30T09:30:14+08:00">
+                2020-07-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 23 篇日志。 继续努力。
-      </span>
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/" itemprop="url" rel="index">
+                    <span itemprop="name">权限维持</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h2 class="archive-year" id="archive-year-2020">2020</h2>
-          </div>
-        
-        
 
-        
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81-SSH%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%90%8E%E9%97%A8/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81-SSH%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%90%8E%E9%97%A8/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
 
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81-SSH%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%90%8E%E9%97%A8/" itemprop="url">
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o">本文总阅读量</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
               
-                <span itemprop="name">权限维持-SSH软链接后门</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  765
+                </span>
               
-            </a>
-        
-      </h3>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-07-30T09:30:14+08:00"
-              content="2020-07-30" >
-          07-30
-        </time>
-      </div>
+              
+                <span class="post-meta-divider">|</span>
+              
 
-    </header>
-  </article>
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
+            </div>
+          
 
+          
+              <div class="post-description">
+                  noob-sec安全小白团,小白学习基地,教你渗透测试如何从入门到放弃。
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="01-后门命令"><a href="#01-后门命令" class="headerlink" title="01 后门命令"></a>01 后门命令</h1><p>&emsp;&emsp;经典后门：对sshd建立软链接，即可使用任意密码登录。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1、创建后门</span><br><span class="line">ln -sf /usr/sbin/sshd /路径名/su; /路径名/su -oPort=端口号</span><br><span class="line"></span><br><span class="line">2、任意密码登</span><br><span class="line">ssh 用户名@x.x.x.x -p 端口号</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+<h1 id="02-原理"><a href="#02-原理" class="headerlink" title="02 原理"></a>02 原理</h1><p>&emsp;&emsp;在sshd服务配置启用PAM认证的前提下，PAM配置文件中控制标志为sufficient时，只要pam_rootok模块检测uid为0（root）即可成功认证登录。</p>
+<p>&emsp;&emsp;通俗点来说，一是sshd服务启用PAM认证机制，在/etc/ssh/sshd_config文件中，设置UsePAM 为yes。如果不启用PAM，系统严格验证用户密码，不能建立后门。</p>
+<p>&emsp;&emsp;二是在/etc/pam.d/目录下，对应文件里包含”auth sufficient pam_rootok.so”配置，只要PAM配置文件中包含此配置即可SSH任意密码登录。</p>
+<p>&emsp;&emsp;对比一下/etc/pam.d/sshd配置文件和/etc/pam.d/su配置文件，不难发现，前者没有包含如上配置，而后者包含该配置。</p>
+<div align="center">
+    <img src="/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81-SSH%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%90%8E%E9%97%A8/1.jpg" class>
+</div>
+
+
+
+<p>&emsp;&emsp;直接启动/usr/sbin/sshd,默认使用/etc/pam.d/sshd的pam配置文件，因而不能建立任意密码登录的后门。</p>
+<p>&emsp;&emsp;而通过软链接的方式，实质上PAM认证是通过软链接的文件名（如：/tmp/su,/home/su），在/etc/pam.d/目录下寻找对应的PAM配置文件(如：/etc/pam.d/su)。</p>
+<h2 id="sshd-config配置"><a href="#sshd-config配置" class="headerlink" title="sshd_config配置"></a>sshd_config配置</h2><div align="center">
+    <img src="/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81-SSH%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%90%8E%E9%97%A8/2.jpg" class>
+</div>
+
+<h2 id="PAM配置文件"><a href="#PAM配置文件" class="headerlink" title="PAM配置文件"></a>PAM配置文件</h2><div align="center">
+    <img src="/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81-SSH%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%90%8E%E9%97%A8/3.jpg" class>
+</div>
+
+
+
+
+
+
+<h1 id="03-利用"><a href="#03-利用" class="headerlink" title="03 利用"></a>03 利用</h1><p>&emsp;&emsp;使用命令创建后门；通过前后对比，可以看到开启了12345端口并处于监听状态。</p>
+<div align="center">
+    <img src="/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81-SSH%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%90%8E%E9%97%A8/4.jpg" class>
+</div>
+
+
+
+<p>&emsp;&emsp;在cmder中连接ssh，输入任意密码，成功登录。</p>
+<div align="center">
+    <img src="/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81-SSH%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%90%8E%E9%97%A8/5.jpg" class>
+</div>
+
+
+<p>&emsp;&emsp;软链接的路径不是绝对的，你可以任意设置，也可以使用除su以外的文件名，只要/etc/pam.d/目录下能找到对应的文件，且该文件中包含”auth sufficient pam_rootok.so”配置即可。（不懂的再看看原理，不再赘述）</p>
+<div align="center">
+    <img src="/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81-SSH%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%90%8E%E9%97%A8/6.jpg" class>
+</div>
+
+
+<p>&emsp;&emsp;可以看到，在/etc/pam.d/目录下，还有以上文件包含了该配置，这些文件名都可以用来创建后门。我们甚至还可以创建一个包含该配置的文件到/etc/pam.d/目录下来创建后门。</p>
+<div align="center">
+    <img src="/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81-SSH%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%90%8E%E9%97%A8/7.jpg" class>
+</div>
+
+
+<p>&emsp;&emsp;当然，我们还可以使用其他用户来登录。</p>
+<div align="center">
+    <img src="/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81-SSH%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%90%8E%E9%97%A8/8.jpg" class>
+</div>
+
+
+
+
+
+<h1 id="04-检测防御"><a href="#04-检测防御" class="headerlink" title="04 检测防御"></a>04 检测防御</h1><p>&emsp;&emsp;这类后门会开启监听端口，我们可以先查看/etc/pam.d/目录下有哪些文件包含该配置，然后通过管道符找到异常端口及进程，再通过进程找到异常文件，杀掉进程，不启用PAM认证即可。</p>
+<div align="center">
+    <img src="/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81-SSH%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%90%8E%E9%97%A8/9.jpg" class>
+</div>
+
+
+
+
+
+<h1 id="05-免责声明"><a href="#05-免责声明" class="headerlink" title="05 免责声明"></a>05 免责声明</h1><p>&emsp;&emsp;安全小白团是帮助用户了解信息安全技术、安全漏洞相关信息的微信公众号。安全小白团提供的程序(方法)可能带有攻击性，仅供安全研究与教学之用，用户将其信息做其他用途，由用户承担全部法律及连带责任，安全小白团不承担任何法律及连带责任。</p>
+<div align="center">
+    <img src="/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81-SSH%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%90%8E%E9%97%A8/10.gif" class>
+</div>
 
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E4%B9%8Bjs%E6%96%87%E4%BB%B6/" itemprop="url">
-              
-                <span itemprop="name">信息收集之js文件</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-07-08T11:14:32+08:00"
-              content="2020-07-08" >
-          07-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/XSS-%E7%AE%80%E4%BB%8B-1/" itemprop="url">
-              
-                <span itemprop="name">XSS-简介(1)</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-07-08T11:05:45+08:00"
-              content="2020-07-08" >
-          07-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    安全小白团
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://noob-sec.github.io/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81-SSH%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%90%8E%E9%97%A8/" title="权限维持-SSH软链接后门">https://noob-sec.github.io/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81-SSH%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%90%8E%E9%97%A8/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+<!--谷歌广告-->
+
+<div class="adsense-contain">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Next评论广告 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6744915718473679"
+     data-ad-slot="1561774433"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97/" rel="tag"><i class="fa fa-tag"></i> 红蓝对抗</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E4%B9%8Bjs%E6%96%87%E4%BB%B6/" rel="next" title="信息收集之js文件">
+                <i class="fa fa-chevron-left"></i> 信息收集之js文件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -462,6 +661,45 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <!--评论广告-->
+      <div class="adsense-contain">
+         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Next评论广告 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6744915718473679"
+     data-ad-slot="1561774433"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+      </div>
+      
+        <div id="gitment-container"></div>
+      
+      <!--评论广告-->
+      <div class="adsense-contain">
+         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Next评论广告 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6744915718473679"
+     data-ad-slot="1561774433"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+      </div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -482,8 +720,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -557,6 +804,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#01-后门命令"><span class="nav-number">1.</span> <span class="nav-text">01 后门命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#02-原理"><span class="nav-number">2.</span> <span class="nav-text">02 原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#sshd-config配置"><span class="nav-number">2.1.</span> <span class="nav-text">sshd_config配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PAM配置文件"><span class="nav-number">2.2.</span> <span class="nav-text">PAM配置文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#03-利用"><span class="nav-number">3.</span> <span class="nav-text">03 利用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#04-检测防御"><span class="nav-number">4.</span> <span class="nav-text">04 检测防御</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#05-免责声明"><span class="nav-number">5.</span> <span class="nav-text">05 免责声明</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -737,6 +1000,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -788,6 +1055,30 @@
       </style>
     
 
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'noob-sec',
+            repo: 'noob-sec.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '17570a46b126a4b8f596cdf9453c2cc9718acafc',
+            
+                client_id: '2597c4baaee8f21ace7e'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
     
 
 
